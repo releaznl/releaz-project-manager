@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Project;
 use common\models\Customer;
+use common\models\User;
 
 use frontend\models\NewProjectForm;
 
@@ -59,49 +60,20 @@ class ProjectController extends FrontendController
      */
     public function actionCreate()
     {
-    	if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-    		Yii::$app->response->format = Response::FORMAT_JSON;
-    		return ActiveForm::validate($model);
-    	}
-    	 
     	$model = new NewProjectForm();
-    	 
-    	return $this->render('create', ['model' => $model]);
+    	$model->new_user = true;
+    	//$model = new Project();
+    	//$user = new User();
+    	//$customer = new Customer();
     	
-//         $model = new Project();
-//         $model->projectmanager_id = Yii::$app->user->id;
-        
-//         $createCustomer = true;
-        
-// //         $customer = new Customer();
-        
-//         if ($model->load(Yii::$app->request->post())) {
-            
-//             $model->deleted = 0;
-//             $model->creator_id = Yii::$app->user->id;
-//             $model->updater_id = Yii::$app->user->id;
-            
-//             $model->save();
-            
-// //                $customer->save();
-            
-//             return $this->redirect(['view', 'id' => $model->project_id]);
-//         } else {
-//             return $this->render('create', [
-//                 'model' => $model,
-//             ]);
-//         }
-    }
-    
-    public function actionNew() {
     	
-    	if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-    		Yii::$app->response->format = Response::FORMAT_JSON;
-    		return ActiveForm::validate($model);
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+	    	return $this->redirect('view', ['model' => $model->project_id]);
+    	} else {
+    		return $this->render('create', [
+    			'model' => $model,
+    		]);
     	}
-    	
-    	$model = new NewProjectForm();
-    	
     	return $this->render('create', ['model' => $model]);
     }
 

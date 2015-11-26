@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\behaviours\TimestampBehaviour;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -62,8 +63,6 @@ class CustomerController extends FrontendController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        
-        
     }
 
     /**

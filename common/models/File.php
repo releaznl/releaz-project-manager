@@ -4,6 +4,10 @@ namespace common\models;
 
 use Yii;
 
+use \yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
+
 /**
  * This is the model class for table "file".
  *
@@ -23,8 +27,21 @@ use Yii;
  * @property User $creator
  * @property User $updater
  */
-class File extends \yii\db\ActiveRecord
+class File extends ActiveRecord
 {
+	public function behaviors() {
+		return [
+				[
+						'class' => TimestampBehavior::className(),
+						'attributes' => [
+								ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_added',
+								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
+						],
+						'value' =>  new Expression('NOW()'),
+				],
+		];
+	}
+	
     /**
      * @inheritdoc
      */

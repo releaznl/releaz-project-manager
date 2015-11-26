@@ -4,6 +4,11 @@ namespace common\models;
 
 use Yii;
 
+use yii\db\Expression;
+use yii\db\ActiveRecord;
+
+use yii\behaviors\TimestampBehavior;
+
 use common\models\NonDeletedActiveRecord;
 
 /**
@@ -26,6 +31,19 @@ use common\models\NonDeletedActiveRecord;
  */
 class Functionality extends NonDeletedActiveRecord
 {
+	public function behaviors() {
+		return [ 
+				[
+        				'class' => TimestampBehavior::className(),
+        				'attributes' => [
+        						ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_added',
+        						ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
+        				],
+        				'value' =>  new Expression('NOW()'),
+				],
+		];
+	}
+	
     /**
      * @inheritdoc
      */

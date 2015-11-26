@@ -67,19 +67,20 @@ class SignupForm extends Model
             $user->setPassword($this->password);
             $user->generateAuthKey();
             
-            $customer = new Customer();
-            $customer->name = $this->name;
-            $customer->location = $this->location;
-            $customer->address = $this->address;
-            $customer->zip_code = $this->zip_code;
-            $customer->phone_number = $this->phone_number;
-            $customer->website = $this->website;
-            $customer->kvk = $this->kvk;
-            $customer->btw = $this->btw;
-            $customer->email_address = $this->email;
-            $customer->description = $this->description;
-            
             if ($user->save()) {
+	            $customer = new Customer();
+	            
+	            $customer->name = $this->name;
+	            $customer->location = $this->location;
+	            $customer->address = $this->address;
+	            $customer->zip_code = $this->zip_code;
+	            $customer->phone_number = $this->phone_number;
+	            $customer->website = $this->website;
+	            $customer->kvk = $this->kvk;
+	            $customer->btw = $this->btw;
+	            $customer->email_address = $this->email;
+	            $customer->description = $this->description;
+	            
                 $customer->user_id = $user->id;
                 
                 if ($customer->save(false)) {

@@ -15,12 +15,38 @@ use yii\web\NotFoundHttpException;
 
 use yii\filters\VerbFilter;
 
+use yii\behaviors\TimestampBehavior;
+
+use yii\db\ActiveRecord;
+
+use yii\db\Expression;
+
 /**
  * FunctionalityController implements the CRUD actions for Functionality model.
  */
 class FunctionalityController extends FrontendController
 {
 
+	public function behaviors()
+	{
+		return [
+			'timestamp' => [
+				'class' => TimestampBehavior::className(),
+				'attributes' => [
+					ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_created',
+					ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
+				],
+				'value' => new Expression('NOW()'),
+			],
+			'verbs' => [
+					'class' => VerbFilter::className(),
+					'actions' => [
+						'delete' => ['post'],
+					],
+			],
+		];
+	}
+	
     /**
      * Lists all Functionality models.
      * @return mixed

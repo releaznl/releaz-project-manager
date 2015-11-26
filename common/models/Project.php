@@ -6,6 +6,10 @@ use Yii;
 
 use common\models\NonDeletedActiveRecord;
 
+use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
+
 /**
  * This is the model class for table "project".
  *
@@ -28,6 +32,19 @@ use common\models\NonDeletedActiveRecord;
  */
 class Project extends NonDeletedActiveRecord
 {
+	public function behaviors() {
+		return [
+				[
+						'class' => TimestampBehavior::className(),
+						'attributes' => [
+								ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_added',
+								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
+						],
+						'value' =>  new Expression('NOW()'),
+				],
+		];
+	}
+	
     /**
      * @inheritdoc
      */

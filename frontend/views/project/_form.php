@@ -14,7 +14,7 @@ use common\models\User;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(); $users = User::find()->all() ?>
+    <?php $form = ActiveForm::begin(['enableAjaxValidation' => false]); $users = User::find()->all() ?>
 
     <?= $form->field($model, 'description')->textInput() ?>
 
