@@ -32,6 +32,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Project extends NonDeletedActiveRecord
 {
+	
 	public function behaviors() {
 		return [
 				[
@@ -59,7 +60,7 @@ class Project extends NonDeletedActiveRecord
     public function rules()
     {
         return [
-            [['description', 'deleted', 'creator_id', 'client_id', 'projectmanager_id', 'updater_id'], 'required'],
+            [['description', 'deleted', 'creator_id', 'projectmanager_id', 'updater_id'], 'required'],
             [['description'], 'string'],
             [['datetime_added', 'datetime_updated'], 'safe'],
             [['deleted', 'creator_id', 'client_id', 'projectmanager_id', 'updater_id'], 'integer']
@@ -72,15 +73,15 @@ class Project extends NonDeletedActiveRecord
     public function attributeLabels()
     {
         return [
-            'project_id' => 'Project ID',
-            'description' => 'Description',
-            'datetime_added' => 'Datetime Added',
-            'deleted' => 'Deleted',
-            'creator_id' => 'Creator ID',
-            'client_id' => 'Client ID',
-            'projectmanager_id' => 'Projectmanager ID',
-            'datetime_updated' => 'Datetime Updated',
-            'updater_id' => 'Updater ID',
+            'project_id' => Yii::t('app', 'Project ID'),
+            'description' => Yii::t('app', 'Description'),
+            'datetime_added' => Yii::t('app', 'Datetime Added'),
+            'deleted' => Yii::t('app', 'Deleted'),
+            'creator_id' => Yii::t('app', 'Creator ID'),
+            'client_id' => Yii::t('app', 'Client ID'),
+            'projectmanager_id' => Yii::t('app', 'Projectmanager ID'),
+            'datetime_updated' => Yii::t('app', 'Datetime Updated'),
+            'updater_id' => Yii::t('app', 'Updater ID'),
         ];
     }
     
@@ -130,7 +131,7 @@ class Project extends NonDeletedActiveRecord
      */
     public function getClient()
     {
-        return $this->hasOne(User::className(), ['id' => 'client_id']);
+        return $this->hasOne(Customer::className(), ['customer_id' => 'client_id']);
     }
 
     /**

@@ -70,16 +70,16 @@ class File extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'file_id' => 'File ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'datetime_added' => 'Datetime Added',
-            'deleted' => 'Deleted',
-            'creator_id' => 'Creator ID',
-            'todo_id' => 'Todo ID',
-            'project_id' => 'Project ID',
-            'datetime_updated' => 'Datetime Updated',
-            'updater_id' => 'Updater ID',
+            'file_id' => Yii::t('app','File ID'),
+            'name' => Yii::t('app','Name'),
+            'description' => Yii::t('app','Description'),
+            'datetime_added' => Yii::t('app','Datetime Added'),
+            'deleted' => Yii::t('app','Deleted'),
+            'creator_id' => Yii::t('app','Creator ID'),
+            'todo_id' => Yii::t('app','Todo ID'),
+            'project_id' => Yii::t('app','Project ID'),
+            'datetime_updated' => Yii::t('app','Datetime Updated'),
+            'updater_id' => Yii::t('app','Updater ID'),
         ];
     }
 

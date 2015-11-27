@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = $this->title = Yii::t('app', 'Project management application');
 ?>
 <div class="site-index">
 

@@ -73,17 +73,17 @@ class Functionality extends NonDeletedActiveRecord
     public function attributeLabels()
     {
         return [
-            'functionality_id' => 'Functionality ID',
-            'description' => 'Description',
-            'datetime_added' => 'Datetime Added',
-            'deleted' => 'Deleted',
-            'project_id' => 'Project ID',
-            'name' => 'Name',
-            'creator_id' => 'Creator ID',
-            'datetime_updated' => 'Datetime Updated',
-            'updater_id' => 'Updater ID',
-        	'amount' => 'Amount',
-        	'price' => 'Price',
+            'functionality_id' => Yii::t('app','Functionality ID'),
+            'description' => Yii::t('app','Description'),
+            'datetime_added' => Yii::t('app','Datetime Added'),
+            'deleted' => Yii::t('app','Deleted'),
+            'project_id' => Yii::t('app','Project ID'),
+            'name' => Yii::t('app','Name'),
+            'creator_id' => Yii::t('app','Creator ID'),
+            'datetime_updated' => Yii::t('app','Datetime Updated'),
+            'updater_id' => Yii::t('app','Updater ID'),
+        	'amount' => Yii::t('app','Amount'),
+        	'price' => Yii::t('app','Price'),
         ];
     }
     

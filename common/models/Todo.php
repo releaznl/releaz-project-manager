@@ -76,16 +76,16 @@ class Todo extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'todo_id' => 'Todo ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'datetime_added' => 'Datetime Added',
-            'deleted' => 'Deleted',
-            'status_id' => 'Status ID',
-            'creator_id' => 'Creator ID',
-            'functionality_id' => 'Functionality ID',
-            'datetime_updated' => 'Datetime Updated',
-            'updater_id' => 'Updater ID',
+            'todo_id' => Yii::t('app','Todo ID'),
+            'name' => Yii::t('app','Name'),
+            'description' => Yii::t('app','Description'),
+            'datetime_added' => Yii::t('app','Datetime Added'),
+            'deleted' => Yii::t('app','Deleted'),
+            'status_id' => Yii::t('app','Status ID'),
+            'creator_id' => Yii::t('app','Creator ID'),
+            'functionality_id' => Yii::t('app','Functionality ID'),
+            'datetime_updated' => Yii::t('app','Datetime Updated'),
+            'updater_id' => Yii::t('app','Updater ID'),
         ];
     }
 

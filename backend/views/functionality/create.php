@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Functionality */
 
-$this->title = 'Create Functionality';
-$this->params['breadcrumbs'][] = ['label' => 'Functionalities', 'url' => ['index']];
+$this->title = Yii::t('app','Create Functionality');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Functionalities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="functionality-create">

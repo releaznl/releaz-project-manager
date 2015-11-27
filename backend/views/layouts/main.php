@@ -28,26 +28,26 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => Yii::t('app','My Company'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Customers', 'url' => ['/customer/index']],
-        ['label' => 'Users', 'url' => ['/user/index']],
-        ['label' => 'Files', 'url' => ['/file/index']],
-        ['label' => 'Projects', 'url' => ['/project/index']],
-        ['label' => 'Functionalities', 'url' => ['/functionality/index']],
-        ['label' => 'Todos', 'url' => ['/todo/index']],
+        ['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
+        ['label' => Yii::t('app','Customers'), 'url' => ['/customer/index']],
+        ['label' => Yii::t('app','Users'), 'url' => ['/user/index']],
+        ['label' => Yii::t('app','Files'), 'url' => ['/file/index']],
+        ['label' => Yii::t('app','Projects'), 'url' => ['/project/index']],
+        ['label' => Yii::t('app','Functionalities'), 'url' => ['/functionality/index']],
+        ['label' => Yii::t('app','Todos'), 'url' => ['/todo/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('app','Login'), 'url' => ['/site/login']];
     } else {
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'label' => Yii::t('app','Logout (') . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];

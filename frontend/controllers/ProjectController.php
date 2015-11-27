@@ -60,21 +60,62 @@ class ProjectController extends FrontendController
      */
     public function actionCreate()
     {
-    	$model = new NewProjectForm();
-    	$model->new_user = true;
-    	//$model = new Project();
-    	//$user = new User();
-    	//$customer = new Customer();
+    	//$model = new NewProjectForm();
+    	//$model->new_user = true;
+    	$model = new Project();
+    	$user = new User();
+    	$customer = new Customer();
+    	//$customer->scenario = 'createProject';
     	
-    	
-    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
-	    	return $this->redirect('view', ['model' => $model->project_id]);
+    	if ($model->load(Yii::$app->request->post()) && $customer->load(Yii::$app->request->post()) && $this->saveProject($model, $customer)) {
+    		return $this->redirect(['view', 'id' => $model->project_id]);
     	} else {
     		return $this->render('create', [
+    		
     			'model' => $model,
+    			'user' => $user,
+    			'customer' => $customer,
     		]);
     	}
-    	return $this->render('create', ['model' => $model]);
+    	return $this->render('create', [
+    			'model' => $model,
+    			'user' => $user,
+    			'customer' => $customer,
+    	]);
+    }
+    
+    public function saveProject($model, $customer) {
+    	$model->updater_id = Yii::$app->user->id;
+    	
+    	if (empty($model->client_id)) {
+    		
+    		if (!empty($customer->name)) {
+    			// Save the project
+    			
+    			$user = new User();
+    			$user->username = $customer->email_address;
+    			$user->email = $user->username;
+    			$user->setPassword(Yii::$app->security->generateRandomString(10));
+    		
+    			Yii::trace('User saved', 'ProjectController.saveProject()');
+    			
+    			$user->save();
+    			$customer->user_id = $user->id;
+    			
+    			if ($customer->save(false)) {
+    				// We can save the contact
+    				$model->client_id = $customer->customer_id;
+    				$model->creator_id = Yii::$app->user->id;
+    				//var_dump($model->attributes); exit;
+    				return $model->save(false);
+    	
+    			} else {
+    				\Yii::$app->getSession()->setFlash('error', 'Could not save contact, please re-enter the fields');
+    				return false;
+    			}
+    		}
+    	} 
+    	return $model->save();
     }
 
     /**

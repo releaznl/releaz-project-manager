@@ -41,9 +41,9 @@ class UserTodo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'todo_id' => 'Todo ID',
-            'user_id' => 'User ID',
-            'user_todo_id' => 'User Todo ID',
+            'todo_id' => Yii::t('app','Todo ID'),
+            'user_id' => Yii::t('app','User ID'),
+            'user_todo_id' => Yii::t('app','User Todo ID'),
         ];
     }
 

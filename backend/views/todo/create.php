@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Todo */
 
-$this->title = 'Create Todo';
-$this->params['breadcrumbs'][] = ['label' => 'Todos', 'url' => ['index']];
+$this->title = Yii::t('app','Create Todo');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Todos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="todo-create">

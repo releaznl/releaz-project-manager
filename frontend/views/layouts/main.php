@@ -44,16 +44,16 @@ AppAsset::register($this);
 //         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('app','Signup'), 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => Yii::t('app','Login'), 'url' => ['/site/login']];
     } else {
         $menuItems[] = 
         [
-        	'label' => 'Projects',
+        	'label' => Yii::t('app','Projects'),
         	'url' => ['/project/index'],
         ];
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'label' => Yii::t('app','Logout (') . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post'],
         ];

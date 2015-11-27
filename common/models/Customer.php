@@ -39,11 +39,18 @@ class Customer extends \yii\db\ActiveRecord
     {
         
         return [
-            [['customer_id', 'user_id', 'name', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'email_address', 'description'], 'required'],
+            [['customer_id', 'address', 'user_id', 'name', 'zip_code', 'email_address'], 'required'],
             [['customer_id', 'user_id'], 'integer'],
             [['description'], 'string'],
+        	[['email_address'], 'email'],
             [['name', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'email_address'], 'string', 'max' => 128]
         ];
+    }
+    
+    public function scenarios() {
+    	$scenarios = parent::scenarios();
+    	$scenarios['createProject'] = [];
+    	return $scenarios;
     }
 
     /**
@@ -52,18 +59,18 @@ class Customer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'customer_id' => 'Customer ID',
-            'user_id' => 'User ID',
-            'name' => 'Name',
-            'address' => 'Address',
-            'zip_code' => 'Zip Code',
-            'location' => 'Location',
-            'phone_number' => 'Phone Number',
-            'website' => 'Website',
-            'kvk' => 'Kvk',
-            'btw' => 'Btw',
-            'email_address' => 'Email Address',
-            'description' => 'Description',
+            'customer_id' => Yii::t('app','Customer ID'),
+            'user_id' => Yii::t('app','User ID'),
+            'name' => Yii::t('app','Name'),
+            'address' => Yii::t('app','Address'),
+            'zip_code' => Yii::t('app','Zip Code'),
+            'location' => Yii::t('app','Location'),
+            'phone_number' => Yii::t('app','Phone Number'),
+            'website' => Yii::t('app','Website'),
+            'kvk' => Yii::t('app','Kvk'),
+            'btw' => Yii::t('app','Btw'),
+            'email_address' => Yii::t('app','Email Address'),
+            'description' => Yii::t('app','Description'),
         ];
     }
 

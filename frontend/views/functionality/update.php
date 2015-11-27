@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Functionality */
 
-$this->title = 'Update Functionality: ' . ' ' . $model->name;
+$this->title = Yii::t('app','Update Functionality: ') . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Functionalities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->functionality_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="functionality-update">
 

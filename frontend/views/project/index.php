@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Projects';
+$this->title = Yii::t('app','Projects');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= (\Yii::$app->user->can('createProject')) ? Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) : Html::a(''); ?>
+        <?= (\Yii::$app->user->can('createProject')) ? Html::a(Yii::t('app','Create Project'), ['create'], ['class' => 'btn btn-success']) : Html::a(''); ?>
     </p>
 
     <?= GridView::widget([
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'datetime_added',
             //'deleted',
             'creator.username',
-            'client.username',
+            'client.name',
             'projectmanager.username',
             'datetime_updated',
             'updater.username',

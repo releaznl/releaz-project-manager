@@ -33,6 +33,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return '{{%user}}';
     }
+    
+    public function scenarios() {
+    	$scenarios = parent::scenarios();
+    	$scenarios['createProject'] = [];
+    	return $scenarios;
+    }
 
     /**
      * @inheritdoc
