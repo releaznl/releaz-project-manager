@@ -15,18 +15,21 @@ use frontend\models\NewProjectForm;
 
 $this->registerJs(
 		'
+		$("#newprojectform").data(\'yiiActiveForm\').submitting = true;
+		$("#newprojectform").yiiActiveForm(\'validate\');
+		
 		function newContact()
 		{
-			$("#newprojectform-new_user").val(true);
-			$("#existing-user").hide();
-			$("#new-user").show();
+			$(\'#newprojectform-new_user\').val(true);
+			$(\'#existing-user\').hide();
+			$(\'#new-user\').show();
 		}
 
 		function existingContact()
 		{
-			$("#newprojectform-new_user").val(false);
-			$("#new-user").hide();
-			$("#existing-user").show();
+			$(\'#newprojectform-new_user\').val(false);
+			$(\'#new-user\').hide();
+			$(\'#existing-user\').show();
 		}
 	'
 		, View::POS_HEAD);
@@ -83,8 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		    <?= $form->field($model, 'email_address')->textInput(['maxlength' => true]) ?>
 		
 		    <?= $form->field($model, 'description')->textInput() ?>
-		    
-		    <?= $form->field($model, 'new_user')->hiddenInput() ?>
 		    
 	    </fieldset>
     </div>

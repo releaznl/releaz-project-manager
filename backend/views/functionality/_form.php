@@ -19,6 +19,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'description')->textInput() ?>
+    
+    <?= $form->field($model, 'amount')->textInput() ?>
+    
+    <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(Project::find()->all(), 'project_id', 'description')) ?>
     

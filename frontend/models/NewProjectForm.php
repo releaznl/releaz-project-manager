@@ -54,13 +54,13 @@ class NewProjectForm extends Model
 				
 			[['name', 'password', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'description', 'email_address'], 'required', 'when' => function($model) {
 				return $model->new_user == true;
-			}, 'enableClientValidation' => true, 
+			}, 'enableClientValidation' => false, 
 			'whenClient' => "function (attribute, value) { return $('#newprojectform-new_user').val(); }"
 			],
 			
 			[['client_id'], 'required', 'when' => function($model) {
 				return $model->new_user == false;
-			}, 'enableClientValidation' => true,
+			}, 'enableClientValidation' => false,
 			'whenClient' => "function (attribute, value) { return !$('#newprojectform-new_user').val(); }"
 			],
 		];

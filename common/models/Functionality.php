@@ -58,10 +58,11 @@ class Functionality extends NonDeletedActiveRecord
     public function rules()
     {
         return [
-            [['description', 'deleted', 'project_id', 'name', 'creator_id', 'updater_id'], 'required'],
+            [['description', 'deleted', 'project_id', 'name', 'creator_id', 'updater_id', 'amount', 'price'], 'required'],
             [['description'], 'string'],
+        	[['price'], 'match', 'pattern' => '/^[0-9]{0,1}(\.[0-9]{0,2})?$/', 'message' => 'Select a price from 0.01 to 9999.99'],
             //[['datetime_added', 'datetime_updated'], 'safe'],
-            [['project_id', 'creator_id', 'updater_id'], 'integer'],
+            [['project_id', 'creator_id', 'updater_id', 'amount'], 'integer'],
             [['name'], 'string', 'max' => 128]
         ];
     }
@@ -81,6 +82,8 @@ class Functionality extends NonDeletedActiveRecord
             'creator_id' => 'Creator ID',
             'datetime_updated' => 'Datetime Updated',
             'updater_id' => 'Updater ID',
+        	'amount' => 'Amount',
+        	'price' => 'Price',
         ];
     }
     
