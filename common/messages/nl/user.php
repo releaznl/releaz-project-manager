@@ -17,5 +17,23 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'New user' => 'Nieuwe gebruiker',
+    'Address' => 'Adres',
+    'Btw' => 'BTW',
+    'Create User' => 'Gebruiker Aanmaken',
+    'Creator' => 'Aanmaker',
+    'Customer ID' => 'Client ID',
+    'Description' => 'Beschrijving',
+    'Email Address' => 'Email Adres',
+    'Existing user' => 'Bestaande Gebruiker',
+    'Kvk' => 'KVK',
+    'Location' => 'Locatie',
+    'Name' => 'Naam',
+    'New User' => 'Nieuwe Gebruiker',
+    'Phone Number' => 'Telefoonnummer',
+    'Project manager' => 'Projectmanager',
+    'Updater' => 'Wijziger',
+    'User ID' => 'Gebruikers ID',
+    'Users' => 'Gebruikers',
+    'Website' => 'Webstie',
+    'Zip Code' => 'Postcode',
 ];

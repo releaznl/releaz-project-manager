@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Functionality */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Functionalities'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('functionality','Functionalities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="functionality-view">
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $model->functionality_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app','Delete') ['delete', 'id' => $model->functionality_id], [
+        <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->functionality_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->functionality_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app','Are you sure you want to delete this item?'),
@@ -36,13 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'project_id',
             //'creator_id',
             [
-                'label' => Yii::t('app','Creator'),
+                'label' => Yii::t('user','Creator'),
                 'value' => $model->creator->username,
             ],
             'datetime_updated:datetime',
             //'updater_id',
             [
-                'label' => Yii::t('app','Updater'),
+                'label' => Yii::t('user','Updater'),
                 'value' => $model->updater->username,
             ],
             'deleted:boolean',

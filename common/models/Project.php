@@ -38,7 +38,7 @@ class Project extends NonDeletedActiveRecord
 				[
 						'class' => TimestampBehavior::className(),
 						'attributes' => [
-								ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_added',
+								ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
 								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
 						],
 						'value' =>  new Expression('NOW()'),
@@ -73,15 +73,15 @@ class Project extends NonDeletedActiveRecord
     public function attributeLabels()
     {
         return [
-            'project_id' => Yii::t('app', 'Project ID'),
-            'description' => Yii::t('app', 'Description'),
-            'datetime_added' => Yii::t('app', 'Datetime Added'),
-            'deleted' => Yii::t('app', 'Deleted'),
-            'creator_id' => Yii::t('app', 'Creator ID'),
-            'client_id' => Yii::t('app', 'Client ID'),
-            'projectmanager_id' => Yii::t('app', 'Projectmanager ID'),
-            'datetime_updated' => Yii::t('app', 'Datetime Updated'),
-            'updater_id' => Yii::t('app', 'Updater ID'),
+            'project_id' => Yii::t('project', 'Project ID'),
+            'description' => Yii::t('project', 'Description'),
+            'datetime_added' => Yii::t('project', 'Datetime Added'),
+            'deleted' => Yii::t('project', 'Deleted'),
+            'creator_id' => Yii::t('project', 'Creator ID'),
+            'client_id' => Yii::t('project', 'Client ID'),
+            'projectmanager_id' => Yii::t('project', 'Projectmanager ID'),
+            'datetime_updated' => Yii::t('project', 'Datetime Updated'),
+            'updater_id' => Yii::t('project', 'Updater ID'),
         ];
     }
     

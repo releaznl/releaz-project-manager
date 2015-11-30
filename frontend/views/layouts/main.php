@@ -30,14 +30,14 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => Yii::t('navbar', 'My Company'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => Yii::t('navbar', 'Home'), 'url' => ['/site/index']],
 //         ['label' => 'Your info', 'url' => ['/customer/view']],
 //         ['label' => 'Your projects', 'url' => ['/project/index']],
 //         ['label' => 'About', 'url' => ['/site/about']],
@@ -49,11 +49,11 @@ AppAsset::register($this);
     } else {
         $menuItems[] = 
         [
-        	'label' => Yii::t('app','Projects'),
+        	'label' => Yii::t('navbar','Projects'),
         	'url' => ['/project/index'],
         ];
         $menuItems[] = [
-            'label' => Yii::t('app','Logout (') . Yii::$app->user->identity->username . ')',
+            'label' => Yii::t('navbar','Logout (') . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post'],
         ];

@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::t('app','My Company'),
+        'brandLabel' => Yii::t('common','My Company'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -44,10 +44,10 @@ AppAsset::register($this);
         ['label' => Yii::t('app','Todos'), 'url' => ['/todo/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app','Login'), 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('login','Login'), 'url' => ['/site/login']];
     } else {
         $menuItems[] = [
-            'label' => Yii::t('app','Logout (') . Yii::$app->user->identity->username . ')',
+            'label' => Yii::t('logout','Logout (') . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];

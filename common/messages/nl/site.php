@@ -17,5 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Signup' => 'Inschrijven',
+    'Backend projectmanager application' => 'Backend projectmanager applicatie',
+    'If you forgot your password you can' => 'Als je je wachtwoord bent vergeten kan je',
+    'Login' => 'Log in',
+    'Please fill out the following fields to signup:' => '',
+    'Project management application' => 'Projectmanager applicatie',
+    'Save' => 'Opslaan',
+    'Send' => 'Verzenden',
+    'Signup' => 'Aanmelden',
+    'reset it' => 'het resetten',
 ];

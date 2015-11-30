@@ -36,7 +36,7 @@ class Functionality extends NonDeletedActiveRecord
 				[
         				'class' => TimestampBehavior::className(),
         				'attributes' => [
-        						ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_added',
+        						ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
         						ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
         				],
         				'value' =>  new Expression('NOW()'),
@@ -60,7 +60,7 @@ class Functionality extends NonDeletedActiveRecord
         return [
             [['description', 'deleted', 'project_id', 'name', 'creator_id', 'updater_id', 'amount', 'price'], 'required'],
             [['description'], 'string'],
-        	[['price'], 'match', 'pattern' => '/^[0-9]{0,1}(\.[0-9]{0,2})?$/', 'message' => 'Select a price from 0.01 to 9999.99'],
+        	[['price'], 'match', 'pattern' => '/^[0-9]{0,4}(\,[0-9]{0,2})?$/', 'message' => 'Select a price from 0,01 to 9999,99'],
             //[['datetime_added', 'datetime_updated'], 'safe'],
             [['project_id', 'creator_id', 'updater_id', 'amount'], 'integer'],
             [['name'], 'string', 'max' => 128]
@@ -73,17 +73,17 @@ class Functionality extends NonDeletedActiveRecord
     public function attributeLabels()
     {
         return [
-            'functionality_id' => Yii::t('app','Functionality ID'),
-            'description' => Yii::t('app','Description'),
-            'datetime_added' => Yii::t('app','Datetime Added'),
-            'deleted' => Yii::t('app','Deleted'),
-            'project_id' => Yii::t('app','Project ID'),
-            'name' => Yii::t('app','Name'),
-            'creator_id' => Yii::t('app','Creator ID'),
-            'datetime_updated' => Yii::t('app','Datetime Updated'),
-            'updater_id' => Yii::t('app','Updater ID'),
-        	'amount' => Yii::t('app','Amount'),
-        	'price' => Yii::t('app','Price'),
+            'functionality_id' => Yii::t('functionality','Functionality ID'),
+            'description' => Yii::t('functionality','Description'),
+            'datetime_added' => Yii::t('functionality','Datetime Added'),
+            'deleted' => Yii::t('functionality','Deleted'),
+            'project_id' => Yii::t('functionality','Project ID'),
+            'name' => Yii::t('functionality','Name'),
+            'creator_id' => Yii::t('functionality','Creator ID'),
+            'datetime_updated' => Yii::t('functionality','Datetime Updated'),
+            'updater_id' => Yii::t('functionality','Updater ID'),
+        	'amount' => Yii::t('functionality','Amount'),
+        	'price' => Yii::t('functionality','Price'),
         ];
     }
     

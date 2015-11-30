@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Todo */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Todos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('todo','Todos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="todo-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $model->todo_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app','Delete'), ['delete', 'id' => $model->todo_id], [
+        <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->todo_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->todo_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app','Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('common','Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -33,17 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             // 'functionality_id',
             [
-                'label' => Yii::t('app','Functionality'),
+                'label' => Yii::t('functionality','Functionality'),
                 'value' => $model->functionality->name,
             ],
             'datetime_added:datetime',
             [
-                'label' => Yii::t('app','Creator'),
+                'label' => Yii::t('user','Creator'),
                 'value' => $model->creator->username,
             ],
             'datetime_updated:DateTime',
             [
-                'label' => Yii::t('app','Updater'),
+                'label' => Yii::t('user','Updater'),
                 'value' => $model->updater->username,
             ],
             'status_id',

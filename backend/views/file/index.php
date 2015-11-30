@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app','Files');
+$this->title = Yii::t('file','Files');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app','Create File'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('file','Create File'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

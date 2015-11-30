@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = Yii::t('app','Create Project');
+$this->title = Yii::t('project','Create Project');
 ?>
 <div class="project-create">
 

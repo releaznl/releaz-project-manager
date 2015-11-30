@@ -12,7 +12,7 @@ use common\models\User;
 /* @var $model common\models\Project */
 
 $this->title = $model->project_id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Projects'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('project','Projects'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $users = User::find()->all();
@@ -22,11 +22,11 @@ $users = User::find()->all();
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $model->project_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app','Delete'), ['delete', 'id' => $model->project_id], [
+        <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->project_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->project_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app','Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('common','Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -40,26 +40,26 @@ $users = User::find()->all();
             'datetime_added:datetime',
             'deleted:boolean',
             [
-                'label' => 'Creator', 
+                'label' => Yii::t('user','Creator'), 
                 'value' => $model->creator->username,
             ],
             [
-                'label' => 'Client',
-                'value' => $model->client->username,
+                'label' => Yii::t('customer','Client'),
+                'value' => $model->client->name,
             ],
             [
-                'label' => 'Project manager',
+                'label' => Yii::t('user','Project manager'),
                 'value' => $model->projectmanager->username,
             ],
             'datetime_updated:datetime',
             [
-                'label' => 'Updater',
+                'label' => Yii::t('user','Updater'),
                 'value' => $model->updater->username,
             ],
         ],
     ]) ?>
     
-    <h2><?Yii::t('app','Functionalities for this project')?></h2>
+    <h2><?Yii::t('project','Functionalities for this project')?></h2>
     
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([

@@ -17,5 +17,25 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Add functionality' => 'Functionaliteit toevoegen',
+    'Client' => 'Client',
+    'Client ID' => 'Client ID',
     'Create Project' => 'Project aanmaken',
+    'Creator' => 'Aanmaker',
+    'Creator ID' => 'Aanmaker ID',
+    'Datetime Added' => 'Moment Aangemaakt',
+    'Datetime Updated' => 'Moment Geupdate',
+    'Deleted' => 'Verwijdert',
+    'Description' => 'Beschrijving',
+    'Existing user' => 'Bestaande Gebruiker',
+    'Project' => 'Project',
+    'Project ID' => 'Project ID',
+    'Projectmanager' => 'Projectmanager',
+    'Projectmanager ID' => '',
+    'Projects' => 'Projecten',
+    'Select a client' => 'Selecteer een client',
+    'Select a projectmanager' => 'Selecteer een projectmanager',
+    'Update Project: ' => 'Update Project',
+    'Updater' => 'Updater',
+    'Updater ID' => 'Updater ID',
 ];

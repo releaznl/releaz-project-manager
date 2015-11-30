@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $model->functionality_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app','Delete'), ['delete', 'id' => $model->functionality_id], [
+        <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->functionality_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->functionality_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app','Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('common','Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -34,19 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
             //'deleted',
             //'project_id',
         	[
-        		'label' => 'Project',
+        		'label' => Yii::t('project','Project'),
         		'value' => $model->project->description,
     		],
             'name',
             //'creator_id',
         	[
-        		'label' => 'Creator',
+        		'label' => Yii::t('user','Creator'),
         		'value' => $model->creator->username,
     		],
             'datetime_updated',
             //'updater_id',
         	[
-        		'label' => 'Updater',
+        		'label' => Yii::t('user','Updater'),
         		'value' => $model->updater->username,
     		], 
         ],

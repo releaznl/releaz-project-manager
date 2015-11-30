@@ -35,7 +35,7 @@ class Todo extends ActiveRecord
 				[
 						'class' => TimestampBehavior::className(),
 						'attributes' => [
-								ActiveRecord::EVENT_BEFORE_INSERT => 'datetime_added',
+								ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
 								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
 						],
 						'value' =>  new Expression('NOW()'),
@@ -76,16 +76,16 @@ class Todo extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'todo_id' => Yii::t('app','Todo ID'),
-            'name' => Yii::t('app','Name'),
-            'description' => Yii::t('app','Description'),
-            'datetime_added' => Yii::t('app','Datetime Added'),
-            'deleted' => Yii::t('app','Deleted'),
-            'status_id' => Yii::t('app','Status ID'),
-            'creator_id' => Yii::t('app','Creator ID'),
-            'functionality_id' => Yii::t('app','Functionality ID'),
-            'datetime_updated' => Yii::t('app','Datetime Updated'),
-            'updater_id' => Yii::t('app','Updater ID'),
+            'todo_id' => Yii::t('todo','Todo ID'),
+            'name' => Yii::t('todo','Name'),
+            'description' => Yii::t('todo','Description'),
+            'datetime_added' => Yii::t('todo','Datetime Added'),
+            'deleted' => Yii::t('todo','Deleted'),
+            'status_id' => Yii::t('todo','Status ID'),
+            'creator_id' => Yii::t('todo','Creator ID'),
+            'functionality_id' => Yii::t('todo','Functionality ID'),
+            'datetime_updated' => Yii::t('todo','Datetime Updated'),
+            'updater_id' => Yii::t('todo','Updater ID'),
         ];
     }
 
