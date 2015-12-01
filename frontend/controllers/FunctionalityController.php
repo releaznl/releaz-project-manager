@@ -8,6 +8,8 @@ use common\models\Functionality;
 
 use frontend\components\web\FrontendController;
 
+use yii\base\Model;
+
 use yii\data\ActiveDataProvider;
 
 use yii\web\Controller;
@@ -81,21 +83,77 @@ class FunctionalityController extends FrontendController
      */
     public function actionCreate($pid)
     {
-        $model = new Functionality();
-        $model->deleted = false;
-        $model->project_id = $pid;
-        $model->updater_id = Yii::$app->user->id;
-        $model->creator_id = Yii::$app->user->id;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
+    	//$count = count(Yii::$app->request->post('Functionality', []));
+    	$functionalities = [new Functionality()];
+    	
+    	if (Yii::$app->request->isPost) {
+    		$functionalitydata = Yii::$app->request->post('Functionality', []);
+    		$count = count($functionalitydata);
+    		
+    		for ($i = 1; $i < $count; $i++) {
+    			$functionalities[] = new Functionality();
+    		}
+    		
+    		$functionality = reset($functionalities);
+    		foreach ($functionalitydata as $data) {
+    			$functionality->load($data, '');
+    			$functionality->project_id = $pid;
+    			$functionality->creator_id = Yii::$app->user->id;
+    			$functionality->updater_id = Yii::$app->user->id;
+    			$functionality->deleted = false;
+    			$functionality = next($functionalities);
+    		}
+    		
+    		$valid = true;
+    		foreach ($functionalities as $functionality) {
+    			$valid = $functionality->validate() && $valid;
+    		}
+    		
+    		if ($valid) {
+    			$success = true;
+    			foreach($functionalities as $functionality) {
+    				if (!$functionality->save()) {
+    					$success = false;
+    					break;
+    				}
+    			}
+    			
+    			if ($success) {
+    				return $this->redirect(['project/view', 'id' => $pid]);
+    			}
+    		}
+    	}
+    	
+    	
+    	return $this->render('create', ['models' => $functionalities]);
+    	
+        //$models[0] = new Functionality($pid);
         
-            return $this->redirect(['view', 'id' => $model->functionality_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+//         if (Yii::$app->request->isPost) {
+//         	$functionalityData = Yii::$app->request->post('Functionality', []);
+//         	$numLines = count($data);
+        	 
+//         	for ($i = 1; $i < $numLines; $i++) {
+//         		$functionalityModels = new Functionality();
+//         	}
+        	
+//         	$model->load(Yii::$app->request->post());
+//         	$valid = $model->validate();
+        	
+//         	$functionalityModel = reset($functionalityModels);
+//         	foreach ($functionalityData as $data) {
+//         		$functionalityModel->load($data, '');
+//         	}
+//         }
+        
+//         if ($models[0]->load(Yii::$app->request->post()) && $model->save()) {
+        
+//             return $this->redirect(['view', 'id' => $model->functionality_id]);
+//         } else {
+//             return $this->render('create', [
+//                 'models' => $models,
+//             ]);
+//         }
     }
 
     /**
