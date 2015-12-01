@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="project-create">
     
 
-	    <?php $form = ActiveForm::begin(); $users = User::find()->all(); $customers = Customer::find()->all(); ?>
+	    <?php $form = ActiveForm::begin(); $users = User::getProjectManagers(); $customers = Customer::find()->all(); ?>
 	
 	    <?= $form->field($model, 'description')->textInput() ?>
 	    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>

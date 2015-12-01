@@ -38,5 +38,5 @@ return [
     'Update Project: ' => 'Update Project',
     'Updater' => 'Updater',
     'Updater ID' => 'Updater ID',
-    'Functionalities for this project' => 'Funtionaliteiten',
+    'Functionalities for this project' => 'Functionaliteiten voor dit project',
 ];

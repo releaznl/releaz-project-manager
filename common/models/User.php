@@ -126,6 +126,28 @@ class User extends ActiveRecord implements IdentityInterface
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
+    
+    public function getProjectmanagers() {
+    	
+    	$tmp = User::find()->all();
+    	$result = array();
+    	
+    	foreach ($tmp as $user) {
+    		if ($user->can('createProject')) {
+    			$result[] = $user;
+    		}
+    	}
+    	
+    	return $result;
+    }
+    
+    public function getAdmins() {
+    	return null;
+    }
+    
+    public function getClients() {
+    	return null;
+    }
 
     /**
      * @inheritdoc

@@ -123,37 +123,7 @@ class FunctionalityController extends FrontendController
     			}
     		}
     	}
-    	
-    	
     	return $this->render('create', ['models' => $functionalities]);
-    	
-        //$models[0] = new Functionality($pid);
-        
-//         if (Yii::$app->request->isPost) {
-//         	$functionalityData = Yii::$app->request->post('Functionality', []);
-//         	$numLines = count($data);
-        	 
-//         	for ($i = 1; $i < $numLines; $i++) {
-//         		$functionalityModels = new Functionality();
-//         	}
-        	
-//         	$model->load(Yii::$app->request->post());
-//         	$valid = $model->validate();
-        	
-//         	$functionalityModel = reset($functionalityModels);
-//         	foreach ($functionalityData as $data) {
-//         		$functionalityModel->load($data, '');
-//         	}
-//         }
-        
-//         if ($models[0]->load(Yii::$app->request->post()) && $model->save()) {
-        
-//             return $this->redirect(['view', 'id' => $model->functionality_id]);
-//         } else {
-//             return $this->render('create', [
-//                 'models' => $models,
-//             ]);
-//         }
     }
 
     /**
@@ -164,7 +134,8 @@ class FunctionalityController extends FrontendController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+    	$model = $this->findModel($id);
+        //$models = $this->findModels($model->project_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->functionality_id]);
@@ -202,5 +173,13 @@ class FunctionalityController extends FrontendController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    protected function findModels($pid) {
+    	if (($models = Functionality::findAll(['project_id' => $pid])) != null) {
+    		return $models;
+    	} else {
+    		throw new NotFoundHttpException('The requested page does not exist.');
+    	}
     }
 }

@@ -9,6 +9,11 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+    	'urlmanager' => [
+    		'enablePrettyUrl' => true,
+    		'showScriptName' => false,
+    		'class' => 'yii/web/UrlManager',
+    	],
     	'i18n' => [
     		'translations' => [
     			'functionality' => [
