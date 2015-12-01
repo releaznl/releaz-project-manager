@@ -21,7 +21,7 @@ return [
     'Btw' => 'BTW',
     'Create User' => 'Gebruiker Aanmaken',
     'Creator' => 'Aanmaker',
-    'Customer ID' => 'Client ID',
+    'Customer ID' => 'Klant',
     'Description' => 'Beschrijving',
     'Email Address' => 'Email Adres',
     'Existing user' => 'Bestaande Gebruiker',

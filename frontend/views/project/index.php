@@ -23,13 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'description',
-            'datetime_added',
-            //'deleted',
-            'creator.username',
-            'client.name',
-            'projectmanager.username',
-            'datetime_updated',
-            'updater.username',
+            [
+                'attribute' => 'client_id',
+                'value' => 'client.name',
+            ],
+            [
+                'attribute' => 'projectmanager_id',
+                'value' => 'projectmanager.username',
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

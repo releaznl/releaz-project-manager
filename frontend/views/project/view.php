@@ -12,13 +12,13 @@ use common\models\Functionality;
 /* @var $this yii\web\View */
 /* @var $model common\models\Project */
 
-$this->title = $model->project_id;
+$this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('project','Projects'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-view">
 
-    <h1><?= Html::encode($this->title); $users = User::find()->all(); ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
 
     <p>
         <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('common','Update'), ['update', 'id' => $model->project_id], ['class' => 'btn btn-primary']) : Html::a('') ?>
@@ -34,18 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            //'project_id',
-            'description',
-            'datetime_added:datetime',
-            //'creator_id',
+        'attributes' => [                      
             [
-                'label' => Yii::t('project','Creator'),
-                'value' => $model->creator->username,
-            ],
-            // 'client_id',
-            [
-                'label' => Yii::t('project','Client'),
+                'attribute' => 'client_id', //Yii::t('project','Client'),
                 'value' => $model->client->name,
             ],
             // 'projectmanager_id',
@@ -53,6 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('project','Projectmanager'),
                 'value' => $model->projectmanager->username,
             ],
+            [
+                'label' => Yii::t('project','Creator'),
+                'value' => $model->creator->username,
+            ],
+            'datetime_added:datetime',  
             'datetime_updated:datetime',
             [
                 'label' => Yii::t('project','Updater'),
@@ -62,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     
-    <h2><? Yii::t('project','Functionalities for this project') ?></h2>
+    <h2><?= Yii::t('project','Functionalities for this project') ?></h2>
     
 	<?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([
@@ -73,11 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
             'name',
             'description',
-            'datetime_added:datetime',
-            'creator.username',
-            'datetime_updated:datetime',
-            'updater.username',
-            'deleted:boolean',
+            'amount',
+            'price',            
             
             ['class' => 'yii\grid\ActionColumn',
             	'controller' => 'functionality']

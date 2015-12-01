@@ -19,7 +19,7 @@
 return [
     'Add functionality' => 'Functionaliteit toevoegen',
     'Client' => 'Client',
-    'Client ID' => 'Client ID',
+    'Client ID' => 'Klant',
     'Create Project' => 'Project aanmaken',
     'Creator' => 'Aanmaker',
     'Creator ID' => 'Aanmaker ID',
@@ -31,11 +31,12 @@ return [
     'Project' => 'Project',
     'Project ID' => 'Project ID',
     'Projectmanager' => 'Projectmanager',
-    'Projectmanager ID' => '',
+    'Projectmanager ID' => 'Projectmanager',
     'Projects' => 'Projecten',
     'Select a client' => 'Selecteer een client',
     'Select a projectmanager' => 'Selecteer een projectmanager',
     'Update Project: ' => 'Update Project',
     'Updater' => 'Updater',
     'Updater ID' => 'Updater ID',
+    'Functionalities for this project' => 'Funtionaliteiten',
 ];

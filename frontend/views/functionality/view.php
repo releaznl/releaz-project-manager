@@ -28,27 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'functionality_id',
-            'description',
-            'datetime_added',
-            //'deleted',
-            //'project_id',
-        	[
-        		'label' => Yii::t('project','Project'),
-        		'value' => $model->project->description,
-    		],
             'name',
-            //'creator_id',
+            'description',                        
+        	[
+        		'attribute' => 'project_id', 
+                        'format' => 'raw',
+        		'value' => Html::a($model->project->description, ['project/view', 'id' => $model->project_id]),
+    		],
         	[
         		'label' => Yii::t('user','Creator'),
         		'value' => $model->creator->username,
-    		],
-            'datetime_updated',
-            //'updater_id',
-        	[
-        		'label' => Yii::t('user','Updater'),
-        		'value' => $model->updater->username,
-    		], 
+    		],            
         ],
     ]) ?>
 
