@@ -60,12 +60,9 @@ class ProjectController extends FrontendController
      */
     public function actionCreate()
     {
-    	//$model = new NewProjectForm();
-    	//$model->new_user = true;
     	$model = new Project();
     	$user = new User();
     	$customer = new Customer();
-    	//$customer->scenario = 'createProject';
     	
     	if ($model->load(Yii::$app->request->post()) && $customer->load(Yii::$app->request->post()) && $this->saveProject($model, $customer)) {
     		return $this->redirect(['view', 'id' => $model->project_id]);
@@ -93,7 +90,8 @@ class ProjectController extends FrontendController
     		
     		if (!empty($customer->name)) {
     			// Save the project
-    			
+
+    			Yii::$app->session->addFlash('danger', Yii::t('common', 'Client check.'));
     			$user = new User();
     			$user->username = $customer->email_address;
     			$user->email = $user->username;
@@ -111,13 +109,14 @@ class ProjectController extends FrontendController
     				return $model->save(false);
     	
     			} else {
-    				\Yii::$app->getSession()->setFlash('error', 'Could not save contact, please re-enter the fields');
     				return false;
     			}
     		}
-    	} 
-    	//var_dump($model->attributes); exit;
-    	return $model->save(false);
+    	} else {
+	    	return $model->save(false);
+    	}
+    	return false;
+    	//Yii::$app->session->addFlash('danger', Yii::t('common', 'An error occured. Please try again.'));
     }
 
     /**
@@ -129,12 +128,16 @@ class ProjectController extends FrontendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $customer = new Customer();
+        $user = new User();
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $customer->load(Yii::$app->request->post()) && $this->saveProject($model, $customer)) {
         	return $this->redirect(['view', 'id' => $model->project_id]);
         } else {
         	return $this->render('update', [
         			'model' => $model,
+        			'customer' => $customer,
+        			'user' => $user,
         	]);
         }
     }

@@ -46,32 +46,32 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <?= $form->field($model, 'description')->textInput() ?>
 	    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>
 	    
-    <div id="existing-user" style="display:none;">
+    <div id="existing-user">
     	<fieldset>
     		<legend><?= Yii::t('project','Existing user') ?></legend>
 	    		<?= Html::button(Yii::t('user', 'New User'), ['onClick' => 'js:newContact()', 'class' => 'btn btn-default']) ?>
 	    		
 	    		<br>
     			
-    			<?= $form->field($model, 'client_id')->dropDownList(ArrayHelper::map($customers, 'customer_id', 'name'), ['prompt' => Yii::t('app','Select a client')]) ?>
+    			<?= $form->field($model, 'client_id')->dropDownList(ArrayHelper::map($customers, 'customer_id', 'name'), ['prompt' => Yii::t('app','Select a client'), 'enableClientValidation' => false]) ?>
     	</fieldset>
     </div>
 	    
-    <div id="new-user">
+    <div id="new-user" style="display:none;">
 	    <fieldset>
 	    	<legend><?= 'New user' ?></legend>
 	    	<?= Html::button(Yii::t('user', 'Existing user'), ['onClick' => 'js:existingContact()', 'class' => 'btn btn-default']) ?>
 	    	
-	    	<?= $form->field($customer, 'name')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'address')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'zip_code')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'location')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'phone_number')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'website')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'kvk')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'btw')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'email_address')->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'description')->textInput() ?>
+	    	<?= $form->field($customer, 'name', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'address', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'zip_code', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'location', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'phone_number', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'website', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'kvk', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'btw', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'email_address', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'description', ['enableClientValidation' => false])->textInput() ?>
 		    
 	    </fieldset>
     </div>

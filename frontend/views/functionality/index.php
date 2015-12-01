@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('funcitonality','Functionalities');
+$this->title = Yii::t('functionality','Functionalities');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="functionality-index">
