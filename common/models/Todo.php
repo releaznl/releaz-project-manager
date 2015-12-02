@@ -30,16 +30,20 @@ use yii\behaviors\TimestampBehavior;
  */
 class Todo extends ActiveRecord
 {
+	const STATUS_NOT_STARTED = 0;
+	const STATUS_WORKING_ON = 1;
+	const STATUS_DONE = 2;
+	
 	public function behaviors() {
 		return [
-				[
-						'class' => TimestampBehavior::className(),
-						'attributes' => [
-								ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
-								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
-						],
-						'value' =>  new Expression('NOW()'),
+			[
+				'class' => TimestampBehavior::className(),
+				'attributes' => [
+						ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
+						ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
 				],
+				'value' =>  new Expression('NOW()'),
+			],
 		];
 	}
 	
@@ -49,6 +53,21 @@ class Todo extends ActiveRecord
     public static function tableName()
     {
         return 'todo';
+    }
+    
+    /**
+     * Finds all the non-deleted records.
+     */
+    public static function find() {
+    	return parent::find()->where(['deleted' => FALSE]);
+    }
+    
+    public static function statusses() {
+    	return [
+    			self::STATUS_NOT_STARTED => Yii::t('todo', 'Not yet started'),
+    			self::STATUS_WORKING_ON => Yii::t('todo', 'Begun'),
+    			self::STATUS_DONE => Yii::t('todo', 'Done'),
+    	];
     }
 
     /**

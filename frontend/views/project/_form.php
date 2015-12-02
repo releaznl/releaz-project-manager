@@ -1,5 +1,4 @@
 
-
 <?php
 
 use yii\helpers\Html;
@@ -14,10 +13,8 @@ use frontend\models\NewProjectForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Project */
-
 $this->registerJs(
 		'
-		
 		function newContact()
 		{
 			$(\'#newprojectform-new_user\').val(true);
@@ -31,8 +28,16 @@ $this->registerJs(
 			$(\'#new-user\').hide();
 			$(\'#existing-user\').show();
 		}
+		
+		function checkIfUpdating() {
+			if ($(\'#project-client_id\').val()) {
+				existingContact();
+			}
+		}
 	'
 		, View::POS_HEAD);
+		
+$this->registerJs('$("document").ready(checkIfUpdating());');
 
 $this->title = Yii::t('project', 'Create Project');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('project', 'Projects'), 'url' => ['index']];
@@ -46,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <?= $form->field($model, 'description')->textInput() ?>
 	    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>
 	    
-    <div id="existing-user">
+    <div id="existing-user" style="display:none;">
     	<fieldset>
     		<legend><?= Yii::t('project','Existing user') ?></legend>
 	    		<?= Html::button(Yii::t('user', 'New User'), ['onClick' => 'js:newContact()', 'class' => 'btn btn-default']) ?>
@@ -57,9 +62,9 @@ $this->params['breadcrumbs'][] = $this->title;
     	</fieldset>
     </div>
 	    
-    <div id="new-user" style="display:none;">
+    <div id="new-user">
 	    <fieldset>
-	    	<legend><?= 'New user' ?></legend>
+	    	<legend><?= Yii::t('user', 'New user') ?></legend>
 	    	<?= Html::button(Yii::t('user', 'Existing user'), ['onClick' => 'js:existingContact()', 'class' => 'btn btn-default']) ?>
 	    	
 	    	<?= $form->field($customer, 'name', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>

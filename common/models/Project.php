@@ -9,6 +9,7 @@ use common\models\NonDeletedActiveRecord;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\Behavior;
 
 /**
  * This is the model class for table "project".
@@ -32,6 +33,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Project extends NonDeletedActiveRecord
 {
+	const STATUS_NOT_STARTED = 0;
+	const STATUS_WORKING_ON = 1;
+	const STATUS_DONE = 2;
 	
 	public function behaviors() {
 		return [
@@ -43,6 +47,14 @@ class Project extends NonDeletedActiveRecord
 						],
 						'value' =>  new Expression('NOW()'),
 				],
+		];
+	}
+	
+	public static function statusses() {
+		return [
+				self::STATUS_NOT_STARTED => Yii::t('project', 'Not yet started'),
+				self::STATUS_WORKING_ON => Yii::t('project', 'Begun'),
+				self::STATUS_DONE => Yii::t('project', 'Done'),
 		];
 	}
 	

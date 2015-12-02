@@ -98,9 +98,11 @@ class TodoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+    	$model = $this->findModel($id);
+    	$project_id = $model->functionality_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['functionality/view', 'id' => $project_id]);
     }
 
     /**

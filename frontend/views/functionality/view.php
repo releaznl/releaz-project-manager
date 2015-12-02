@@ -1,7 +1,10 @@
 <?php
 
+use common\models\Todo;
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Functionality */
@@ -41,5 +44,33 @@ $this->params['breadcrumbs'][] = $this->title;
     		],            
         ],
     ]) ?>
+    
+    <?= 
+    	$this->render('../todo/_form', ['model' => $todo]);
+    ?>
+    
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            [
+            	'class' => 'yii\grid\SerialColumn',
+    		],
+
+        	'name',
+            'description',
+        	[
+        		'attribute' => 'status_id',
+        		'format' => 'raw',
+        		'value' => function ($model) {
+        			return Todo::statusses()[$model->status_id];
+    			} ,
+    		],
+
+            [
+            	'class' => 'yii\grid\ActionColumn',
+            	'controller' => 'todo',
+    		],
+        ],
+    ]); ?>
 
 </div>

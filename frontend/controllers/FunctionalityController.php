@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 
 use common\models\Functionality;
+use common\models\Todo;
 
 use frontend\components\web\FrontendController;
 
@@ -71,8 +72,29 @@ class FunctionalityController extends FrontendController
      */
     public function actionView($id)
     {
+  		$todo = new Todo();
+    	$todo->creator_id = Yii::$app->user->id;
+    	$todo->updater_id = Yii::$app->user->id;
+    	$todo->deleted = false;
+    	$todo->functionality_id = $id;
+    		
+    	if ($todo->load(Yii::$app->request->post()) && $todo->save(false)) {
+    		\Yii::$app->getSession()->setFlash('success', Yii::t('todo', 'Todo saved'));
+    		$todo = new Todo();
+    		$todo->creator_id = Yii::$app->user->id;
+    		$todo->updater_id = Yii::$app->user->id;
+    		$todo->deleted = false;
+    		$todo->functionality_id = $id;
+    	}
+    	
+    	$dataProvider = new ActiveDataProvider([
+    			'query' => Todo::find()->andWhere(['or', ['functionality_id' => $id]]),
+    	]);
+    	
         return $this->render('view', [
             'model' => $this->findModel($id),
+        	'dataProvider' => $dataProvider,
+        	'todo' => $todo,
         ]);
     }
 

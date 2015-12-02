@@ -70,7 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     public function can($permissionName) {
-    	return Yii::$app->authManager->checkAccess(Yii::$app->user->user_id, $permissionName);
+    	return Yii::$app->authManager->checkAccess($this->id, $permissionName);
     }
 
     /**
@@ -127,26 +127,29 @@ class User extends ActiveRecord implements IdentityInterface
         return $timestamp + $expire >= time();
     }
     
-    public function getProjectmanagers() {
-    	
+    public static function getProjectmanagers() {
+    	return self::getUsersWithPermission('createProject');
+    }
+    
+    private static function getUsersWithPermission($permission) {
     	$tmp = User::find()->all();
     	$result = array();
-    	
-    	foreach ($tmp as $user) {
-    		if ($user->can('createProject')) {
-    			$result[] = $user;
+    	 
+    	foreach ($tmp as $checkedUser) {
+    		if ($checkedUser->can($permission)) {
+    			$result[] = $checkedUser;
     		}
     	}
-    	
+    	 
     	return $result;
     }
     
     public function getAdmins() {
-    	return null;
+    	return self::getUsersWithPermission('maintainBackend');
     }
     
     public function getClients() {
-    	return null;
+    	return array();
     }
 
     /**

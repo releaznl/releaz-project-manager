@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Todo;
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -28,16 +30,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'todo_id',
+            //'todo_id',
             'name',
             'description',
-            'datetime_added',
-            'deleted',
-            'status_id',
-            'creator_id',
-            'functionality_id',
-            'datetime_updated',
-            'updater_id',
+        	[
+        		'attribute' => 'status_id',
+        		'format' => 'raw',
+        		'value' => Todo::statusses()[$model->status_id],
+    		],
+        	[
+        		'attribute' => 'functionality_id',
+        		'format' => 'raw',
+        		'value' => html::a($model->functionality->name, ['functionality/view', 'id' => $model->functionality_id]),
+    		],
+        	[
+        		'attribute' => 'creator_id',
+        		'format' => 'raw',
+        		'value' => $model->creator->username,
+    		],
+            'datetime_added:datetime',
+            //'deleted',
+        	[
+        		'attribute' => 'updater_id',
+        		'formate' => 'raw',
+        		'value' => $model->updater->username,
+    		],
+            'datetime_updated:datetime',
         ],
     ]) ?>
 
