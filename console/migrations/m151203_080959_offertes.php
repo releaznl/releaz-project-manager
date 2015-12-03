@@ -10,11 +10,11 @@ class m151203_080959_offertes extends Migration
 		$this->createTable('bid_category', [
 			'id' => Schema::TYPE_PK,
 			'name' => Schema::TYPE_STRING . '(125) NOT NULL',
-			'order' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+			'ordering' => Schema::TYPE_INTEGER . '(11) NOT NULL',
 			'description' => Schema::TYPE_TEXT,
-			'created_by' => Schema::TYPE_INTEGER . '(11)',
+			'creator_id' => Schema::TYPE_INTEGER . '(11)',
 			'datetime_added' => Schema::TYPE_DATETIME,
-			'updated_by' => Schema::TYPE_INTEGER . '(11)',
+			'updater_id' => Schema::TYPE_INTEGER . '(11)',
 			'datetime_updated' => Schema::TYPE_DATETIME,
 			'deleted' => Schema::TYPE_BOOLEAN,
 		]);
@@ -30,10 +30,10 @@ class m151203_080959_offertes extends Migration
 			'price' => Schema::TYPE_MONEY,		
 			'file_upload' => Schema::TYPE_BOOLEAN,
 			'explanation' => Schema::TYPE_BOOLEAN,
-			'order' => Schema::TYPE_INTEGER . '(11)',
-			'created_by' => Schema::TYPE_INTEGER . '(11)',
+			'ordering' => Schema::TYPE_INTEGER . '(11)',
+			'creator_id' => Schema::TYPE_INTEGER . '(11)',
 			'datetime_added' => Schema::TYPE_DATETIME,
-			'updated_by' => Schema::TYPE_INTEGER . '(11)',
+			'updater_id' => Schema::TYPE_INTEGER . '(11)',
 			'datetime_updated' => Schema::TYPE_DATETIME,
 			'deleted' => Schema::TYPE_BOOLEAN,
 		]);
