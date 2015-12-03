@@ -19,8 +19,8 @@ class m151203_080959_offertes extends Migration
 			'deleted' => Schema::TYPE_BOOLEAN,
 		]);
 		
-		$this->addForeignKey('bid_category_fk1', 'bid_category', 'created_by', 'user', 'id');
-		$this->addForeignKey('bid_category_fk2', 'bid_category', 'updated_by', 'user', 'id');
+		$this->addForeignKey('bid_category_fk1', 'bid_category', 'creator_id', 'user', 'id');
+		$this->addForeignKey('bid_category_fk2', 'bid_category', 'updater_id', 'user', 'id');
 		
 		$this->createTable('bid_part', [
 			'id' => Schema::TYPE_PK,
@@ -38,8 +38,8 @@ class m151203_080959_offertes extends Migration
 			'deleted' => Schema::TYPE_BOOLEAN,
 		]);
 		
-		$this->addForeignKey('bid_part_fk1', 'bid_part', 'created_by', 'user', 'id');
-		$this->addForeignKey('bid_part_fk2', 'bid_part', 'updated_by', 'user', 'id');
+		$this->addForeignKey('bid_part_fk1', 'bid_part', 'creator_id', 'user', 'id');
+		$this->addForeignKey('bid_part_fk2', 'bid_part', 'updater_id', 'user', 'id');
 		
 		$this->addForeignKey('bid_part_fk3', 'bid_part', 'bid_category_id', 'bid_category', 'id');
     }
