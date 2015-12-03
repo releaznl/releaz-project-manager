@@ -37,7 +37,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
     	['label' => Yii::t('app','Bid Categories'), 'url' => ['/bid-category/index']],
-    	['label' => Yii::t('app','Bid Categories'), 'url' => ['/bid-part/index']],
+    	['label' => Yii::t('app','Bid Parts'), 'url' => ['/bid-part/index']],
         ['label' => Yii::t('app','Customers'), 'url' => ['/customer/index']],
         ['label' => Yii::t('app','Users'), 'url' => ['/user/index']],
         ['label' => Yii::t('app','Files'), 'url' => ['/file/index']],

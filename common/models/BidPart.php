@@ -44,7 +44,7 @@ class BidPart extends ReleazActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['bid_category_id', 'file_upload', 'explanation', 'order', 'created_by', 'updated_by', 'deleted'], 'integer'],
+            [['bid_category_id', 'file_upload', 'explanation', 'ordering', 'creator_id', 'updater_id', 'deleted'], 'integer'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['datetime_added', 'datetime_updated'], 'safe'],

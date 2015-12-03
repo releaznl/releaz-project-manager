@@ -34,13 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'price',
             'file_upload:boolean',
-            'explanation',
+            'explanation:boolean',
             'ordering',
             'creator_id',
             'datetime_added:datetime',
             'updater_id',
             'datetime_updated:datetime',
-            'deleted',
+            'deleted:boolean',
         ],
     ]) ?>
 

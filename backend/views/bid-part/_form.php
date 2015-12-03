@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'file_upload')->checkBox() ?>
 
-    <?= $form->field($model, 'explanation')->textInput() ?>
+    <?= $form->field($model, 'explanation')->checkBox() ?>
 
     <?= $form->field($model, 'ordering')->textInput() ?>
 
