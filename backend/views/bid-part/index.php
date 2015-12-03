@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             // 'file_upload',
             'explanation',
-            'order',
+            'ordering',
             // 'creator_id',
             // 'datetime_added',
             // 'updater_id',
