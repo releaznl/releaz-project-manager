@@ -9,6 +9,8 @@ use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 use yii\base\Behavior;
 
+use common\components\db\ReleazActiveRecord;
+
 /**
  * This is the model class for table "file".
  *
@@ -28,20 +30,8 @@ use yii\base\Behavior;
  * @property User $creator
  * @property User $updater
  */
-class File extends ActiveRecord
+class File extends ReleazActiveRecord
 {
-	public function behaviors() {
-		return [
-				[
-						'class' => TimestampBehavior::className(),
-						'attributes' => [
-								ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
-								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
-						],
-						'value' =>  new Expression('NOW()'),
-				],
-		];
-	}
 	
     /**
      * @inheritdoc

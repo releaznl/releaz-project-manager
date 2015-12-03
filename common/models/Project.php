@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\Behavior;
+use common\components\db\ReleazActiveRecord;
 
 /**
  * This is the model class for table "project".
@@ -31,24 +32,13 @@ use yii\behaviors\Behavior;
  * @property User $projectmanager
  * @property User $updater
  */
-class Project extends NonDeletedActiveRecord
+class Project extends ReleazActiveRecord
 {
 	const STATUS_NOT_STARTED = 0;
 	const STATUS_WORKING_ON = 1;
 	const STATUS_DONE = 2;
 	
-	public function behaviors() {
-		return [
-				[
-						'class' => TimestampBehavior::className(),
-						'attributes' => [
-								ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
-								ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
-						],
-						'value' =>  new Expression('NOW()'),
-				],
-		];
-	}
+	
 	
 	public static function statusses() {
 		return [
@@ -72,7 +62,7 @@ class Project extends NonDeletedActiveRecord
     public function rules()
     {
         return [
-            [['description', 'deleted', 'creator_id', 'projectmanager_id', 'updater_id'], 'required'],
+            [['description', 'deleted', 'projectmanager_id'], 'required'],
             [['description'], 'string'],
             [['datetime_added', 'datetime_updated'], 'safe'],
             [['deleted', 'creator_id', 'client_id', 'projectmanager_id', 'updater_id'], 'integer']

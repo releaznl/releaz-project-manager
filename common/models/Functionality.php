@@ -9,7 +9,7 @@ use yii\db\ActiveRecord;
 
 use yii\behaviors\TimestampBehavior;
 
-use common\models\NonDeletedActiveRecord;
+use common\components\db\NonDeletedActiveRecord;
 
 /**
  * This is the model class for table "functionality".
@@ -29,21 +29,8 @@ use common\models\NonDeletedActiveRecord;
  * @property User $updater
  * @property Todo[] $todos
  */
-class Functionality extends NonDeletedActiveRecord
+class Functionality extends ReleazActiveRecord
 {
-	public function behaviors() {
-		return [ 
-				[
-        				'class' => TimestampBehavior::className(),
-        				'attributes' => [
-        						ActiveRecord::EVENT_BEFORE_INSERT => ['datetime_added', 'datetime_updated'],
-        						ActiveRecord::EVENT_BEFORE_UPDATE => 'datetime_updated',
-        				],
-        				'value' =>  new Expression('NOW()'),
-				],
-		];
-	}
-	
     /**
      * @inheritdoc
      */
@@ -87,9 +74,8 @@ class Functionality extends NonDeletedActiveRecord
         ];
     }
     
-    public function delete() {
-        $this->deleted = TRUE;
-        $this->save();
+    public function getTotalPrice() {
+    	return $this->price * $this->amount;
     }
 
     /**
