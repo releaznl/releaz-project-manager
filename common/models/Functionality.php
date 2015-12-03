@@ -9,7 +9,7 @@ use yii\db\ActiveRecord;
 
 use yii\behaviors\TimestampBehavior;
 
-use common\components\db\NonDeletedActiveRecord;
+use common\components\db\ReleazActiveRecord;
 
 /**
  * This is the model class for table "functionality".
@@ -78,6 +78,10 @@ class Functionality extends ReleazActiveRecord
     	return $this->price * $this->amount;
     }
 
+    public function getTodoAmount() {
+    	return Todo::find('deleted = false')->andWhere('functionality_id = ' . $this->functionality_id)->count();
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */

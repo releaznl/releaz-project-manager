@@ -70,7 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'description',
             'amount',
-            'price',            
+            'price',
+        	'totalPrice',
+        	'todoAmount',
             
             ['class' => 'yii\grid\ActionColumn',
             	'controller' => 'functionality']

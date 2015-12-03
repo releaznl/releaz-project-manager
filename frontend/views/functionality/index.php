@@ -24,13 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'functionality_id',
             'description',
+        	[
+        		'name' => Yii::t('functionality','Total Price'),
+        		'value' => $data->getTotalPrice(),
+    		],
             'datetime_added:datetime',
-            // 'deleted',
             'project_id',
             'name',
             'creator_id',
             'datetime_updated:datetime',
             'updater_id',
+            // 'deleted:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
