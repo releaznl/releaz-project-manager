@@ -151,12 +151,12 @@ CREATE TABLE IF NOT EXISTS `file` (
 `file_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `description` blob NOT NULL,
-  `datetime_added` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_added` datetime,
   `deleted` tinyint(1) NOT NULL,
   `creator_id` int(11) NOT NULL,
   `todo_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
-  `datetime_updated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_updated` datetime,
   `updater_id` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -176,12 +176,12 @@ INSERT INTO `file` (`file_id`, `name`, `description`, `datetime_added`, `deleted
 CREATE TABLE IF NOT EXISTS `functionality` (
 `functionality_id` int(11) NOT NULL,
   `description` blob NOT NULL,
-  `datetime_added` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_added` datetime,
   `deleted` tinyint(1) NOT NULL,
   `project_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `creator_id` int(11) NOT NULL,
-  `datetime_updated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_updated` datetime,
   `updater_id` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
@@ -227,12 +227,12 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 CREATE TABLE IF NOT EXISTS `project` (
 `project_id` int(11) NOT NULL,
   `description` blob NOT NULL,
-  `datetime_added` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_added` datetime,
   `deleted` tinyint(1) NOT NULL,
   `creator_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `projectmanager_id` int(11) NOT NULL,
-  `datetime_updated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_updated` datetime ,
   `updater_id` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
@@ -267,12 +267,12 @@ CREATE TABLE IF NOT EXISTS `todo` (
 `todo_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `description` blob NOT NULL,
-  `datetime_added` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_added` datetime,
   `deleted` tinyint(1) NOT NULL,
   `status_id` tinyint(20) NOT NULL,
   `creator_id` int(11) NOT NULL,
   `functionality_id` int(11) NOT NULL,
-  `datetime_updated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime_updated` datetime,
   `updater_id` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 

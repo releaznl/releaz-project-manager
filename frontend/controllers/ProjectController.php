@@ -82,9 +82,6 @@ class ProjectController extends FrontendController
     }
     
     public function saveProject($model, $customer) {
-    	$model->updater_id = Yii::$app->user->id;
-    	$model->creator_id = Yii::$app->user->id;
-    	$model->deleted = false;
     	
     	if (empty($model->client_id)) {
     		

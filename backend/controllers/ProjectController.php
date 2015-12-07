@@ -60,18 +60,8 @@ class ProjectController extends BackendController
     {
     	
         $model = new Project();
-        
-        
 
         if ($model->load(Yii::$app->request->post())) {
-            
-            //$model->datetime_added = time();
-            //$model->deleted = 0;
-         //   //$model->creator_id = Yii::$app->user->id;
-            //$model->datetime_updated = time();
-         //   //$model->updater_id = Yii::$app->user->id;
-         
-            //var_dump($model->attributes); exit;
             
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->project_id]);

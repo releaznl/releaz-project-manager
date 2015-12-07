@@ -55,9 +55,6 @@ class FileController extends BackendController
     {
     	
         $model = new File();
-        $model->creator_id = Yii::$app->user->id;
-        $model->updater_id = Yii::$app->user->id;
-        $model->deleted = false;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->file_id]);

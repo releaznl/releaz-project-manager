@@ -38,7 +38,7 @@ class BidCategory extends ReleazActiveRecord
     public function rules()
     {
         return [
-            [['name', 'ordering'], 'required'],
+            [['name', 'ordering'], 'required', 'message' => Yii::t('common', '{attribute} cannot be blank.')],
             [['creator_id', 'updater_id', 'deleted'], 'integer'],
             [['description'], 'string'],
             [['datetime_added', 'datetime_updated'], 'safe'],
