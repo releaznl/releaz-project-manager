@@ -11,11 +11,11 @@ use Yii;
  */
 class SignupForm extends Model
 {
-    public $username;
+	public $company_name;
     public $email;
     public $password;
+    public $password_repeat;
     
-    public $name;
     public $address;
     public $zip_code;
     public $location;
@@ -31,16 +31,16 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            //['username', 'filter', 'filter' => 'trim'],
+            //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            //['username', 'string', 'min' => 2, 'max' => 255],
             
-            ['name', 'required'],
-            ['name', 'unique', 'targetClass' => '\common\models\Customer', 'message' => 'This company name is already in use.'],
+            //['name', 'required'],
+            //['name', 'unique', 'targetClass' => '\common\models\Customer', 'message' => 'This company name is already in use.'],
             
-            [['address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'description'], 'required'],
+            [['address', 'zip_code', 'description', 'company_name'], 'required'],
             [['description'], 'string'],
-            [['name', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw'], 'string', 'max' => 128],
+            [['address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw'], 'string', 'max' => 128],
             
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
@@ -48,9 +48,16 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+        	['password', 'compare'],
+            [['password', 'password_repeat'], 'required'],
+            [['password', 'password_repeat'], 'string', 'min' => 6],
         ];
+    }
+    
+    public function labels() {
+    	return [
+    			'password_repeat' => 'Repeat password',
+    	];
     }
 
     /**
@@ -62,7 +69,7 @@ class SignupForm extends Model
     {
         if ($this->validate()) {
             $user = new User();
-            $user->username = $this->name;
+            $user->username = $this->email;
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
@@ -70,7 +77,7 @@ class SignupForm extends Model
             if ($user->save()) {
 	            $customer = new Customer();
 	            
-	            $customer->name = $this->name;
+	            $customer->name = $this->company_name;
 	            $customer->location = $this->location;
 	            $customer->address = $this->address;
 	            $customer->zip_code = $this->zip_code;

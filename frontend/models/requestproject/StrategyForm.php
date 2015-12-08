@@ -18,16 +18,9 @@ class StrategyForm extends Model {
 	
 	public function attributeLabels() {
 		return $labels = [
-				'parts' => 'Parts',
-				'worktogether' => 'Work together',
-				'skip' => 'Skip',
 				'selection' => 'Selection',
 		];
 	}
-    
-    public function getSelectedPart() {
-    	return $parts[$selection];
-    }
 	
 // 	public function set0() {
 // 		foreach ($this->class->bidParts as $part) {

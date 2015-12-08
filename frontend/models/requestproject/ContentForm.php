@@ -12,7 +12,7 @@ class ContentForm extends Model {
 	
 	public function rules() {
 		return [
-			[['content'], 'file', 'skipOnEmpty' => false, 'extensions' => 'zip']
+			[['content'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip']
 		];
 	}
 

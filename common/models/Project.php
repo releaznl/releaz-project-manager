@@ -34,17 +34,17 @@ use common\components\db\ReleazActiveRecord;
  */
 class Project extends ReleazActiveRecord
 {
-	const STATUS_NOT_STARTED = 0;
-	const STATUS_WORKING_ON = 1;
-	const STATUS_DONE = 2;
+	const STATUS_REQUESTED = 0;
+	const STATUS_ACCEPTED = 1;
+	const STATUS_FINISHED = 2;
 	
 	
 	
 	public static function statusses() {
 		return [
-				self::STATUS_NOT_STARTED => Yii::t('project', 'Not yet started'),
-				self::STATUS_WORKING_ON => Yii::t('project', 'Begun'),
-				self::STATUS_DONE => Yii::t('project', 'Done'),
+				self::STATUS_REQUESTED => Yii::t('project', 'Requested'),
+				self::STATUS_ACCEPTED => Yii::t('project', 'Accepted'),
+				self::STATUS_FINISHED => Yii::t('project', 'Finished'),
 		];
 	}
 	

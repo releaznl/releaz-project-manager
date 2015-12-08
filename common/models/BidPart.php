@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 
 use common\components\db\ReleazActiveRecord;
+use common\models\Functionality;
 
 /**
  * This is the model class for table "bid_part".

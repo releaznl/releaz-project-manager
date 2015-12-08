@@ -12,14 +12,16 @@ use yii\helpers\HTML;
 <p><?php echo $category->description ?></p>
 
 <p>
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin() ?>
     
     <?php echo $form->field($model, 'deadline')->widget(\yii\jui\DatePicker::classname(), [
-    		'language' => 'nl']); ?>
+    		'language' => 'nl',
+    		'dateFormat' => 'MM/dd/yyyy',
+    ]); ?>
     
-    <?php echo $form->field($model, 'noDeadline')->checkBox(); ?>
+    <?php echo $form->field($model, 'hasDeadline')->checkBox(); ?>
     
-	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
+	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']); ?>
 	
-	<?php ActiveForm::end() ?>
+	<?php ActiveForm::end(); ?>
 </p>

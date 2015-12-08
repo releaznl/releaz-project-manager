@@ -8,18 +8,19 @@ use common\models\BidPart;
 
 class HostingForm extends Model {
 
-	public $hostingInfo;
-	public $selectedOption;
+	public $information;
+	public $selectedBidPart;
 	
 	public function rules() {
 		return [		
-			[['selectedOption'], 'required'],
+			[['selectedBidPart'], 'required'],
+			[['information'], 'safe'],
 		];
 	}
 
 	public function attributeLabels() {
 		return $labels = [
-				'hostingInfo' => 'Hosting informatie'
+				'information' => 'Hosting informatie'
 		];
 	}
 }
