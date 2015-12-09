@@ -16,6 +16,10 @@ class PlanningForm extends Model {
 			[['deadline', 'hasDeadline'], 'safe'],
 		];
 	}
+	
+	public function saveAsFunctionality($project_id) {
+		
+	}
 
 	public function attributeLabels() {
 		return $labels = [

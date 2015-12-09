@@ -101,4 +101,22 @@ class BidPart extends ReleazActiveRecord
     {
         return $this->hasOne(BidCategory::className(), ['id' => 'bid_category_id']);
     }
+    
+    public function saveAsFunctionality($project_id) {
+    		
+    	$functionality = new Functionality();
+    	
+    	$functionality->project_id = $project_id;
+    	$functionality->name = $this->name;
+    	$functionality->price = round($this->price, 2);
+    	$functionality->amount = 1;
+    	$functionality->description = $this->description;
+    	$functionality->deleted = false;
+    	
+    	if (!$functionality->validate()) {
+    		return false;
+    	} else {
+    		return $functionality->save();
+    	}
+    }
 }

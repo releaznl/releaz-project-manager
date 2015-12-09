@@ -142,25 +142,18 @@ class RequestProjectController extends \yii\web\Controller
     	]);
     }
     
-    public function generateProject() {
-//     	if (!Yii::$app->session->has('part1')
-//     			 || !Yii::$app->session->has('part2')
-//     			 || !Yii::$app->session->has('part3')
-//     			 || !Yii::$app->session->has('part4')
-//     			 || !Yii::$app->session->has('part5')) {
-//     			 	Yii::$app->session->setFlash('unfinishedProcess', 'You do not have entered everything, please check if you have entered everything correctly');
-//     			 	return $this->redirect('/request-project/step-1');
-//     	}
+    private function generateProject() {
     	
-    	$strategy = Yii::$app->session->get('part1');
-    	$design = Yii::$app->session->get('part2');
-    	$planning = Yii::$app->session->get('part3');
-    	$hosting = Yii::$app->session->get('part4');
-    	$content = Yii::$app->session->get('part5');
+    	// Get the Parts
+    	$parts = array();
     	
-    	$parts = BidPart::find($strategy->selectedBidPart . ', ' . $hosting->selectedBidPart)->all();
+    	$parts[0] = Yii::$app->session->get('part1');
+    	$parts[1] = Yii::$app->session->get('part2');
+    	$parts[2] = Yii::$app->session->get('part3');
+    	$parts[3] = Yii::$app->session->get('part4');
+    	$parts[4] = Yii::$app->session->get('part5');
     	
-    	
+    	// Create Project
     	$project = new Project();
     	$customer = Customer::find()->where(['user_id' => Yii::$app->user->id])->one();
     	
@@ -169,21 +162,45 @@ class RequestProjectController extends \yii\web\Controller
     	$project->status = 0;
     	$project->name = $customer->name;
     	$project->deleted = 0;
-    	$project->description = 'Doel van de website: '. $design->goal;
+    	$project->description = 'Doel van de website: ' . $parts[1]->goal;
     	
     	$project->save();
     	
     	
-    	$functionality1 = new Functionality();
     	
-    	$functionality1->project_id = $project->id;
-//     	$functionality1->description = 
+    	foreach ($parts as $part) {
+    		$this->saveAsFunctionalities($part, $project->project_id);
+    	}
     	
+    	// Unset all steps
+//     	Yii::$app->session->remove('part1');
+//     	Yii::$app->session->remove('part2');
+//     	Yii::$app->session->remove('part3');
+//     	Yii::$app->session->remove('part4');
+//     	Yii::$app->session->remove('part5');
     	
     	return $project;
     }
     
     public function actionCompletion() {
     	return $this->render('completion');
+    }
+    
+    private function saveAsFunctionalities($part, $project_id) {
+    	foreach($part->attributes as $key => $attribute) {
+    		$bidpart = BidPart::find(['attribute_name' => $key])->one();
+    		
+    		$functionality = new Functionality();
+    		
+    		$functionality->name = $bidpart->name;
+    		$functionality->description = $attribute;
+    		$functionality->project_id = $project_id;
+    		$functionality->deleted = 0;
+    		$functionality->amount = 1;
+    		$functionality->price = round($bidpart->price, 2);
+    		
+    		$functionality->save();
+//     		var_dump($functionality->getErrors()); exit;
+    	}
     }
 }

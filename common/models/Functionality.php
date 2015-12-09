@@ -47,7 +47,7 @@ class Functionality extends ReleazActiveRecord
         return [
             [['description', 'project_id', 'name', 'amount', 'price'], 'required'],
             [['description'], 'string'],
-        	[['price'], 'match', 'pattern' => '/^[0-9]{0,4}(\,[0-9]{0,2})?$/', 'message' => 'Select a price from 0,01 to 9999,99'],
+        	[['price'], 'match', 'pattern' => '/^[0-9]{0,9}(\,[0-9]{0,4})?$/', 'message' => 'Select a price from 0,01 to 999999999,9999'],
             [['project_id', 'creator_id', 'updater_id', 'amount'], 'integer'],
             [['name'], 'string', 'max' => 128]
         ];

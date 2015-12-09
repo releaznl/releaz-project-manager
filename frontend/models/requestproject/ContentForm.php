@@ -15,6 +15,10 @@ class ContentForm extends Model {
 			[['content'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip']
 		];
 	}
+	
+	public function saveAsFunctionality($project_id) {
+	
+	}
 
 	public function attributeLabels() {
 		return $labels = [

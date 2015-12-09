@@ -22,6 +22,14 @@ class StrategyForm extends Model {
 		];
 	}
 	
+	public function saveAsFunctionality($project_id) {
+		if ($project_id === null || !$this->validate()) {
+			return false;
+		} else {
+			return BidPart::find($this->selection)->one()->saveAsFunctionality($project_id);
+		}
+	}
+	
 // 	public function set0() {
 // 		foreach ($this->class->bidParts as $part) {
 // 			parent::__set( $part->attribute_name, 0);

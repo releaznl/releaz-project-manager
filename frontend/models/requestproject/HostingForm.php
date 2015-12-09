@@ -17,6 +17,10 @@ class HostingForm extends Model {
 			[['information'], 'safe'],
 		];
 	}
+	
+	public function saveAsFunctionality($project_id) {
+	
+	}
 
 	public function attributeLabels() {
 		return $labels = [
