@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 
 use common\models\User;
 use common\models\Functionality;
+use common\models\File;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Project */
@@ -73,6 +74,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
         	'totalPrice',
         	'todoAmount',
+            
+            ['class' => 'yii\grid\ActionColumn',
+            	'controller' => 'functionality']
+        ]
+    ]);
+    
+    ?>
+    
+    <h2><?= Yii::t('project','Files for this project') ?></h2>
+    
+    <?= GridView::widget([
+        'dataProvider' => new ActiveDataProvider([
+            'query' => File::findNonDeleted(['project_id' => $model->project_id])->with('creator', 'updater')
+        ]),
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            
+            'name',
+            'description',
             
             ['class' => 'yii\grid\ActionColumn',
             	'controller' => 'functionality']

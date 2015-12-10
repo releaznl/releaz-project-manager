@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\web\UploadedFile;
 use common\models\BidCategory;
 use common\models\BidPart;
 use common\models\Project;
@@ -10,6 +11,7 @@ use common\models\Functionality;
 use common\models\Todo;
 use common\models\Customer;
 use common\models\User;
+use common\models\File;
 use frontend\models\requestproject\StrategyForm;
 use frontend\models\requestproject\DesignForm;
 use frontend\models\requestproject\PlanningForm;
@@ -19,6 +21,9 @@ use frontend\models\SignupForm;
 
 class RequestProjectController extends \yii\web\Controller
 {
+	public $tempFileLocation = 'uploads/temp/';
+	public $permFileLocation = 'uploads/projects/';
+	
 	public $defaultAction = 'step-1';
 	
     public function actionStep1()
@@ -46,9 +51,13 @@ class RequestProjectController extends \yii\web\Controller
     	$model = Yii::$app->session->get('part2', new DesignForm());
     	$category = BidCategory::find()->where(['ordering' => 2])->one();
     	
-    	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-    		Yii::$app->session->set('part2', $model);
-    		return $this->redirect('/request-project/step-3');
+    	if ($model->load(Yii::$app->request->post())) {
+    		$model->current_style = UploadedFile::getInstance($model, 'current_style');
+    		if ($model->validate()) {
+	    		$model->current_style->saveAs($this->tempFileLocation . $model->current_style->baseName . '.' . $model->current_style->extension);
+	    		Yii::$app->session->set('part2', $model);
+	    		return $this->redirect('/request-project/step-3');
+    		}
     	}
         
         return $this->render('step-2', [
@@ -107,14 +116,21 @@ class RequestProjectController extends \yii\web\Controller
     	$model = Yii::$app->session->get('part5', new ContentForm());
     	$category = BidCategory::find()->where(['ordering' => 5])->one();
     	
-    	if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-    		Yii::$app->session->set('part5', $model);
+    	if ($model->load(Yii::$app->request->post())) {
+    		$model->content = UploadedFile::getInstance($model, 'content');
     		
-    		if (Yii::$app->user->isGuest) {
-	    		return $this->redirect('/request-project/create-user');
-    		} else {
-    			$this->generateProject();
-    			return $this->redirect('/request-project/completion');
+    		if ($model->validate()) {
+	    		$model->content->saveAs($this->tempFileLocation . $model->content->baseName . '.' . $model->content->extension);
+	    		Yii::$app->session->set('part5', $model);
+	    		
+	    		if (Yii::$app->user->isGuest) {
+		    		return $this->redirect('/request-project/create-user');
+	    		} else {
+	    			// TODO redirect to finished screen.
+	    			$project = $this->generateProject();
+	    			return $this->redirect(['/project/view', 'id' => $project->project_id]);
+	    		}
+    			
     		}
     	}
     	
@@ -131,8 +147,9 @@ class RequestProjectController extends \yii\web\Controller
     	if ($model->load(Yii::$app->request->post())) {
     		if ($user = $model->signup()) {
     			if (Yii::$app->getUser()->login($user)) {
-    				$this->generateProject();
-    				return $this->redirect('/request-project/completion');
+    				// TODO redirect to finished screen
+    				$project = $this->generateProject();
+    				return $this->redirect(['/project/view', 'id' => $project->project_id]);
     			}
     		}
     	}
@@ -145,13 +162,21 @@ class RequestProjectController extends \yii\web\Controller
     private function generateProject() {
     	
     	// Get the Parts
-    	$parts = array();
+    	$steps = array();
     	
-    	$parts[0] = Yii::$app->session->get('part1');
-    	$parts[1] = Yii::$app->session->get('part2');
-    	$parts[2] = Yii::$app->session->get('part3');
-    	$parts[3] = Yii::$app->session->get('part4');
-    	$parts[4] = Yii::$app->session->get('part5');
+    	$steps[0] = Yii::$app->session->get('part1');
+    	$steps[1] = Yii::$app->session->get('part2');
+    	$steps[2] = Yii::$app->session->get('part3');
+    	$steps[3] = Yii::$app->session->get('part4');
+    	$steps[4] = Yii::$app->session->get('part5');
+    	
+//     	echo '<html>';
+//     	foreach ($steps as $step) {
+//     		var_dump($step->attributes);
+//     		echo '<br><br>';
+//     	}
+//     	echo '</html>';
+//     	exit;
     	
     	// Create Project
     	$project = new Project();
@@ -162,22 +187,23 @@ class RequestProjectController extends \yii\web\Controller
     	$project->status = 0;
     	$project->name = $customer->name;
     	$project->deleted = 0;
-    	$project->description = 'Doel van de website: ' . $parts[1]->goal;
+    	$project->description = 'Doel van de website: ' . $steps[1]->goal;
     	
     	$project->save();
     	
+    	mkdir($this->permFileLocation . $project->project_id . '/');
     	
     	
-    	foreach ($parts as $part) {
-    		$this->saveAsFunctionalities($part, $project->project_id);
+    	foreach ($steps as $step) {
+    		$this->saveFunctionalities($step, $project->project_id);
     	}
     	
-    	// Unset all steps
-//     	Yii::$app->session->remove('part1');
-//     	Yii::$app->session->remove('part2');
-//     	Yii::$app->session->remove('part3');
-//     	Yii::$app->session->remove('part4');
-//     	Yii::$app->session->remove('part5');
+    	// Unset all steps in _SESSION
+    	Yii::$app->session->remove('part1');
+    	Yii::$app->session->remove('part2');
+    	Yii::$app->session->remove('part3');
+    	Yii::$app->session->remove('part4');
+    	Yii::$app->session->remove('part5');
     	
     	return $project;
     }
@@ -186,21 +212,38 @@ class RequestProjectController extends \yii\web\Controller
     	return $this->render('completion');
     }
     
-    private function saveAsFunctionalities($part, $project_id) {
-    	foreach($part->attributes as $key => $attribute) {
-    		$bidpart = BidPart::find(['attribute_name' => $key])->one();
-    		
-    		$functionality = new Functionality();
-    		
-    		$functionality->name = $bidpart->name;
-    		$functionality->description = $attribute;
-    		$functionality->project_id = $project_id;
-    		$functionality->deleted = 0;
-    		$functionality->amount = 1;
-    		$functionality->price = round($bidpart->price, 2);
-    		
-    		$functionality->save();
-//     		var_dump($functionality->getErrors()); exit;
+    private function saveFunctionalities($step, $project_id) {
+    	
+    	foreach($step->attributes as $key => $attribute) {
+    		if (!empty($attribute)) {
+	    		$bidpart = BidPart::find()->where(['attribute_name' => $key])->one();
+	    		
+	    		if ($bidpart->file_upload) {
+	    			$file = new File();
+	    			
+	    			$file->name = $attribute->baseName . '.' . $attribute->extension;
+	    			$file->description = $bidpart->description;
+	    			$file->project_id = $project_id;
+	    			$file->todo_id = null;
+	    			$file->deleted = 0;
+		    		
+	    			$file->save();
+	    			
+	    			rename($this->tempFileLocation . $file->name, $this->permFileLocation . $project_id . '/' . $file->name);
+	    			
+	    		} else {
+		    		$functionality = new Functionality();
+		    		
+		    		$functionality->name = $bidpart->name;
+		    		$functionality->description = $attribute;
+		    		$functionality->project_id = $project_id;
+		    		$functionality->deleted = 0;
+		    		$functionality->amount = 1;
+		    		$functionality->price = round($bidpart->price, 2);
+		    		
+		    		$functionality->save();
+	    		}
+    		}
     	}
     }
 }

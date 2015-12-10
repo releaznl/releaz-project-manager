@@ -8,13 +8,14 @@ use common\models\BidPart;
 
 class HostingForm extends Model {
 
-	public $information;
-	public $selectedBidPart;
+	public $informatie;
+// 	public $al_hosting;
+// 	public $wil_hosting;
 	
 	public function rules() {
-		return [		
-			[['selectedBidPart'], 'required'],
-			[['information'], 'safe'],
+		return [
+			[['informatie'], 'safe'],
+// 			[['al_hosting', 'wil_hosting'], 'safe'],
 		];
 	}
 	

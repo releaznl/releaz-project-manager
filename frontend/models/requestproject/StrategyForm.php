@@ -8,17 +8,18 @@ use common\models\BidPart;
 
 class StrategyForm extends Model {
 	/** var */
-	public $selection;
+	public $samenkijken;
+	public $overslaan;
 	
 	public function rules() {
 		return [
-				[['selection'], 'required'],
+				[['samenkijken', 'overslaan'], 'safe'],
 		];
 	}
 	
 	public function attributeLabels() {
 		return $labels = [
-				'selection' => 'Selection',
+				
 		];
 	}
 	

@@ -20,9 +20,9 @@ use yii\helpers\HTML;
     <?php echo $form->field($model, 'goal')->textInput() ?>
     
     <?php // Toevoegen slider ?>
-    <?php echo $form->field($model, 'targetAudience')->dropdownList($model->targetAudiences, ['prompt' => 'Selecteer een doelgroep']) ?>
+    <?php echo $form->field($model, 'target_audience')->dropdownList($model->targetAudiences, ['prompt' => 'Selecteer een doelgroep']) ?>
     
-    <?php echo $form->field($model, 'currentStyle')->fileInput() ?>
+    <?php echo $form->field($model, 'current_style')->fileInput() ?>
     
     <?php echo '<p>Het ontwerp van de website wordt gebaseerd op de ingevulde gegevens...</p>' ?>
     	

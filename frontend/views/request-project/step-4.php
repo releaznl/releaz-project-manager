@@ -14,9 +14,21 @@ use yii\helpers\ArrayHelper;
 	<p>
 	    <?php $form = ActiveForm::begin();?>
 	    
-	    <?= $form->field($model, 'information'); ?>
+	    <?= $form->field($model, 'informatie'); ?>
 	    
-		<?= $form->field ($model, 'selectedBidPart')->radioList(ArrayHelper::map($category->bidParts, 'id', 'description'), ['separator' => '<br>'])->label(false) ?>
+	    
+	    <?php /* foreach ($category->bidParts as $part) {
+	    
+	   	echo $form->field($model, $part->attribute_name)->radio([
+			'label' => $part->description,
+			'value' => $part->id,
+			'uncheckValue' => null,
+		]); 
+	    
+	    } */ ?>
+	    
+	    <?= ''; /*  $form->field($model, 'al_hosting')->radioList(ArrayHelper::map($category->bidParts, 'id', 'description'), ['separator' => '<br>'])->label(false) */ ?>
+	    
 		
 		<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 		

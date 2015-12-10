@@ -9,11 +9,10 @@ use common\models\BidPart;
 class PlanningForm extends Model {
 
 	public $deadline;
-	public $hasDeadline;
 	
 	public function rules() {
 		return [
-			[['deadline', 'hasDeadline'], 'safe'],
+			[['deadline'], 'safe'],
 		];
 	}
 	
@@ -24,7 +23,6 @@ class PlanningForm extends Model {
 	public function attributeLabels() {
 		return $labels = [
 				'deadline' => 'Mijn deadline',
-				'hasDeadline' => 'Ik heb geen deadline, maak zelf een planning',
 		];
 	}
 }

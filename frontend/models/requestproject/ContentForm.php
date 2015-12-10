@@ -12,12 +12,12 @@ class ContentForm extends Model {
 	
 	public function rules() {
 		return [
-			[['content'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip']
+			[['content'], 'file', 'skipOnEmpty' => false]
 		];
 	}
 	
 	public function saveAsFunctionality($project_id) {
-	
+		
 	}
 
 	public function attributeLabels() {

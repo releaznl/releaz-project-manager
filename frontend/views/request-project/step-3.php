@@ -19,8 +19,6 @@ use yii\helpers\HTML;
     		'dateFormat' => 'MM/dd/yyyy',
     ]); ?>
     
-    <?php echo $form->field($model, 'hasDeadline')->checkBox(); ?>
-    
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']); ?>
 	
 	<?php ActiveForm::end(); ?>

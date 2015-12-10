@@ -10,7 +10,7 @@ use yii\helpers\HTML;
 <p><?php echo $category->description ?></p>
 
 <p>
-    <?php $form = ActiveForm::begin();?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
     
     <?= $form->field($model, 'content')->fileInput();?>
 	
