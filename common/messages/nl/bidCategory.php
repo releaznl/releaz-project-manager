@@ -17,15 +17,15 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Client check.' => 'Client check.',
-    'Last step' => 'Vorige stap',
-    'Next step' => 'Volgende stap',
-    '{attribute} cannot be blank.' => '',
-    'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
-    'Create' => 'Aanmaken',
-    'Delete' => 'Verwijderen',
-    'My Company' => 'Mijn Bedrijf',
-    'Submit' => 'Verstuur',
-    'Update' => 'Update',
-    'create' => 'aanmaken',
+    'Create Bid Category' => 'Offerte categorie aanmaken',
+    'Datetime Updated' => 'Datum geupdate',
+    'Bid Categories' => 'Offerte Categorieen',
+    'Created By' => 'Aangemaakt door',
+    'Datetime Added' => 'Datum aangemaakt',
+    'Deleted' => 'Verwijdert',
+    'Description' => 'Beschrijving',
+    'ID' => 'ID',
+    'Name' => 'Naam',
+    'Order' => 'Volgorde',
+    'Updated By' => 'Geupdate door',
 ];

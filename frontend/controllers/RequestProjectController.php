@@ -170,14 +170,6 @@ class RequestProjectController extends \yii\web\Controller
     	$steps[3] = Yii::$app->session->get('part4');
     	$steps[4] = Yii::$app->session->get('part5');
     	
-//     	echo '<html>';
-//     	foreach ($steps as $step) {
-//     		var_dump($step->attributes);
-//     		echo '<br><br>';
-//     	}
-//     	echo '</html>';
-//     	exit;
-    	
     	// Create Project
     	$project = new Project();
     	$customer = Customer::find()->where(['user_id' => Yii::$app->user->id])->one();
@@ -193,7 +185,6 @@ class RequestProjectController extends \yii\web\Controller
     	
     	mkdir($this->permFileLocation . $project->project_id . '/');
     	
-    	
     	foreach ($steps as $step) {
     		$this->saveFunctionalities($step, $project->project_id);
     	}
@@ -204,6 +195,15 @@ class RequestProjectController extends \yii\web\Controller
     	Yii::$app->session->remove('part3');
     	Yii::$app->session->remove('part4');
     	Yii::$app->session->remove('part5');
+    	
+    	// Notify the admin
+    	$user = $project->projectmanager;
+    	$mail = Yii::$app->mailer->compose(['html' => 'newProjectRegistered-html', 'text' => 'newProjectRegistered-text'], ['customer' => $customer, 'project' => $project]);
+    	$mail->setFrom('noreply@releaz.nl');
+    	$mail->setTo($user->email);
+    	$mail->setSubject('Er is een nieuw project aangevraagd door ' . $customer->name);
+    	
+    	$mail->send();
     	
     	return $project;
     }

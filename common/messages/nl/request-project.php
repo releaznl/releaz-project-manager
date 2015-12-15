@@ -17,15 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Client check.' => 'Client check.',
-    'Last step' => 'Vorige stap',
-    'Next step' => 'Volgende stap',
-    '{attribute} cannot be blank.' => '',
-    'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
-    'Create' => 'Aanmaken',
-    'Delete' => 'Verwijderen',
-    'My Company' => 'Mijn Bedrijf',
-    'Submit' => 'Verstuur',
-    'Update' => 'Update',
-    'create' => 'aanmaken',
+    'Completion' => 'Afronding',
+    'Select a target audience' => 'Selecteer een doelgroep',
+    'Thank you for entering your information. We will take a look at your request as soon as possible and will let you know by email when we are ready.' => 'Bedankt voor het invullen van je informatie. We zullen je aanvraag bekijken en zullen je zo spoedig mogelijk informeren per email.',
+    'The design of the website will be based on the information entered.' => 'Het ontwerp van de website wordt gebaseerd op de hier ingevulde gegevens.',
 ];

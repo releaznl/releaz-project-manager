@@ -151,6 +151,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getClients() {
     	return array();
     }
+    
+    public function afterSave($insert, $changedAttributes) {
+    	if ($insert) {
+	    	$auth = \Yii::$app->authManager;
+    		$auth->assign($auth->getRole('client'), $this->id);
+    	}
+    }
 
     /**
      * @inheritdoc

@@ -17,6 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Please contact us if you think this is a server error. Thank you.' => '',
-    'The above error occurred while the Web server was processing your request.' => '',
+    'Please contact us if you think this is a server error. Thank you.' => 'Neem contact met ons op als je denkt dat dit een serverfout is.',
+    'The above error occurred while the Web server was processing your request.' => 'De bovenstaande fout is opgetreden toen de server bezig was met jouw verzoek.',
 ];

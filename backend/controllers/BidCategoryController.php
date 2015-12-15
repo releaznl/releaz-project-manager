@@ -8,11 +8,12 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\web\BackendController;
 
 /**
  * BidCategoryController implements the CRUD actions for BidCategory model.
  */
-class BidCategoryController extends Controller
+class BidCategoryController extends BackendController
 {
     public function behaviors()
     {

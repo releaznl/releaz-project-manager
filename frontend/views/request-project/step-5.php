@@ -14,6 +14,7 @@ use yii\helpers\HTML;
     
     <?= $form->field($model, 'content')->fileInput();?>
 	
+    <?= Html::a(Yii::t('common','Last step'), ['step-4'], ['class' => 'btn btn-primary']) ?>
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 	
 	<?php ActiveForm::end() ?>

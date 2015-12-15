@@ -11,7 +11,7 @@ $this->title = $this->title = Yii::t('site', 'Project management application');
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="../../backend/web/">Go to backend</a></p>
+        <p><a class="btn btn-lg btn-success" href="/request-project">Request project</a></p>
     </div>
 
     <div class="body-content">

@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'datetime_added:datetime',
             'creator.username',
-            'todo.description',
             'project.description',
             'datetime_updated:datetime',
             'updater.username',

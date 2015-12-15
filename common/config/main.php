@@ -12,10 +12,18 @@ return [
     	'urlManager' => [
     		'enablePrettyUrl' => true,
     		'showScriptName' => false,
-    		//'class' => 'yii/web/UrlManager',
+//     		'class' => 'yii/web/UrlManager',
     	],
     	'i18n' => [
     		'translations' => [
+//     			'*' => [
+//     				'basePath'              => '@common/messages',
+//     				'class'                 => 'yii\i18n\PhpMessageSource',
+//     				'fileMap'               => [
+//     					'app' => 'app.php',
+//     				],
+//     				'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation']
+//     			],
     			'functionality' => [
     				'class' => 'yii\i18n\PhpMessageSource',
     				'basePath' => '@common/messages',
@@ -25,6 +33,14 @@ return [
     				'basePath' => '@common/messages',
     			],
     			'app' => [
+    				'class' => 'yii\i18n\PhpMessageSource',
+    				'basePath' => '@common/messages',
+    			],
+    			'bidCategory' => [
+    				'class' => 'yii\i18n\PhpMessageSource',
+    				'basePath' => '@common/messages',
+    			],
+    			'bidPart' => [
     				'class' => 'yii\i18n\PhpMessageSource',
     				'basePath' => '@common/messages',
     			],
@@ -81,6 +97,14 @@ return [
     				'basePath' => '@common/messages',
     			],
     			'navbar' => [
+    				'class' => 'yii\i18n\PhpMessageSource',
+    				'basePath' => '@common/messages',
+    			],
+    			'request-project' => [
+    				'class' => 'yii\i18n\PhpMessageSource',
+    				'basePath' => '@common/messages',
+    			],
+    			'mail' => [
     				'class' => 'yii\i18n\PhpMessageSource',
     				'basePath' => '@common/messages',
     			],

@@ -61,20 +61,20 @@ class BidPart extends ReleazActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-        	'attribute_name' => 'Attribute Name',
-            'name' => 'Name',
-            'bid_category_id' => 'Bid Category ID',
-            'description' => 'Description',
-            'price' => 'Price',
-            'file_upload' => 'File Upload',
-            'explanation' => 'Explanation',
-            'order' => 'Order',
-            'creator_id' => 'Created By',
-            'datetime_added' => 'Datetime Added',
-            'updater_id' => 'Updated By',
-            'datetime_updated' => 'Datetime Updated',
-            'deleted' => 'Deleted',
+            'id' => \Yii::t('bidPart','ID'),
+        	'attribute_name' => \Yii::t('bidPart','Attribute Name'),
+            'name' => \Yii::t('bidPart','Name'),
+            'bid_category_id' => \Yii::t('bidPart','Bid Category ID'),
+            'description' => \Yii::t('bidPart','Description'),
+            'price' => \Yii::t('bidPart','Price'),
+            'file_upload' => \Yii::t('bidPart','File Upload'),
+            'explanation' => \Yii::t('bidPart','Explanation'),
+            'order' => \Yii::t('bidPart','Order'),
+            'creator_id' => \Yii::t('bidPart','Created By'),
+            'datetime_added' => \Yii::t('bidPart','Datetime Added'),
+            'updater_id' => \Yii::t('bidPart','Updated By'),
+            'datetime_updated' => \Yii::t('bidPart','Datetime Updated'),
+            'deleted' => \Yii::t('bidPart','Deleted'),
         ];
     }
 

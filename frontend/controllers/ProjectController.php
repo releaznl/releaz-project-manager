@@ -32,7 +32,7 @@ class ProjectController extends FrontendController
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => Yii::$app->user->id], ['projectmanager_id' => Yii::$app->user->id]])
+            'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => Customer::find(Yii::$app->user->id)->one()->customer_id], ['projectmanager_id' => Yii::$app->user->id]])
             ->with('creator', 'client', 'projectmanager', 'updater'),
         ]);
 
@@ -48,9 +48,15 @@ class ProjectController extends FrontendController
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+    	
+    	$model = $this->findModel($id);
+    	if (Yii::$app->user->can('partOf', ['project' => $model], false)) {
+	        return $this->render('view', [
+	            'model' => $model,
+	        ]);
+    	}
+    	throw new NotFoundHttpException('The requested page does not exist.');
+    	
     }
 
     /**
@@ -113,7 +119,6 @@ class ProjectController extends FrontendController
 	    	return $model->save(false);
     	}
     	return false;
-    	//Yii::$app->session->addFlash('danger', Yii::t('common', 'An error occured. Please try again.'));
     }
 
     /**

@@ -30,6 +30,7 @@ use yii\helpers\ArrayHelper;
 	    <?= ''; /*  $form->field($model, 'al_hosting')->radioList(ArrayHelper::map($category->bidParts, 'id', 'description'), ['separator' => '<br>'])->label(false) */ ?>
 	    
 		
+    	<?= Html::a(Yii::t('common','Last step'), ['step-3'], ['class' => 'btn btn-primary']) ?>
 		<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 		
 		<?php ActiveForm::end() ?>

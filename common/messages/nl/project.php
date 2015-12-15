@@ -17,8 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Client' => '@@Client@@',
+    'Accepted' => 'Geaccepteerd',
     'Add functionality' => 'Functionaliteit toevoegen',
-    'Client' => 'Client',
     'Client ID' => 'Klant',
     'Create Project' => 'Project aanmaken',
     'Creator' => 'Aanmaker',
@@ -28,15 +29,18 @@ return [
     'Deleted' => 'Verwijdert',
     'Description' => 'Beschrijving',
     'Existing user' => 'Bestaande Gebruiker',
+    'Files for this project' => 'Bestanden voor dit project',
+    'Finished' => 'Klaar',
+    'Functionalities for this project' => 'Functionaliteiten voor dit project',
     'Project' => 'Project',
     'Project ID' => 'Project ID',
     'Projectmanager' => 'Projectmanager',
     'Projectmanager ID' => 'Projectmanager',
     'Projects' => 'Projecten',
+    'Requested' => 'Aangevraagd',
     'Select a client' => 'Selecteer een client',
     'Select a projectmanager' => 'Selecteer een projectmanager',
     'Update Project: ' => 'Update Project',
     'Updater' => 'Updater',
     'Updater ID' => 'Updater ID',
-    'Functionalities for this project' => 'Functionaliteiten voor dit project',
 ];

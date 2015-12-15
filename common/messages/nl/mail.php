@@ -17,15 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Client check.' => 'Client check.',
-    'Last step' => 'Vorige stap',
-    'Next step' => 'Volgende stap',
-    '{attribute} cannot be blank.' => '',
-    'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
-    'Create' => 'Aanmaken',
-    'Delete' => 'Verwijderen',
-    'My Company' => 'Mijn Bedrijf',
-    'Submit' => 'Verstuur',
-    'Update' => 'Update',
-    'create' => 'aanmaken',
+    'There is a new project registered.' => '',
+    'View the project' => '',
 ];

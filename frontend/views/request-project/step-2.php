@@ -20,12 +20,13 @@ use yii\helpers\HTML;
     <?php echo $form->field($model, 'goal')->textInput() ?>
     
     <?php // Toevoegen slider ?>
-    <?php echo $form->field($model, 'target_audience')->dropdownList($model->targetAudiences, ['prompt' => 'Selecteer een doelgroep']) ?>
+    <?php echo $form->field($model, 'target_audience')->dropdownList($model->targetAudiences, ['prompt' => \Yii::t('request-project' , 'Select a target audience')]) ?>
     
     <?php echo $form->field($model, 'current_style')->fileInput() ?>
     
-    <?php echo '<p>Het ontwerp van de website wordt gebaseerd op de ingevulde gegevens...</p>' ?>
+    <?= '<p>' . \Yii::t('request-project','The design of the website will be based on the information entered.') . '</p>' ?>
     	
+    <?= Html::a(Yii::t('common','Last step'), ['step-1'], ['class' => 'btn btn-primary']) ?>
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 	
 	<?php ActiveForm::end() ?>
