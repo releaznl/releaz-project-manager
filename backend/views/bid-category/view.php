@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+
+use common\models\BidPart;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\BidCategory */
@@ -39,5 +43,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'deleted:boolean',
         ],
     ]) ?>
+    
+    <?= GridView::widget([
+    		'dataProvider' => new ActiveDataProvider([
+    				'query' => $model->getBidParts(),
+    		]),
+    		'columns' => [
+    				'ordering',
+    				'name',
+    				'description',
+    				'price',
+    				'deleted:boolean',
+    				['class' => 'yii\grid\ActionColumn', 'controller' => 'bid-part'],
+    		]
+    ])
+    ?>
 
 </div>

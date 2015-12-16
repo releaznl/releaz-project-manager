@@ -54,9 +54,21 @@ class SignupForm extends Model
         ];
     }
     
-    public function labels() {
+    public function attributeLabels() {
     	return [
-    			'password_repeat' => 'Repeat password',
+    			'password_repeat' 	=> \Yii::t('common','Password'),
+    			'company_name'		=> \Yii::t('common','Company name'),
+    			'email' 			=> \Yii::t('common','Email'),
+    			'password' 			=> \Yii::t('common','Password'),
+    			
+    			'address' 			=> \Yii::t('common','Address'),
+    			'zip_code' 			=> \Yii::t('common','Zip code'),
+    			'location' 			=> \Yii::t('common','Location'),
+    			'phone_number' 		=> \Yii::t('common','Phone number'),
+    			'website' 			=> \Yii::t('common','Website'),
+    			'kvk' 				=> \Yii::t('common','CoC number'),
+    			'btw' 				=> \Yii::t('common','Tax'),
+    			'description' 		=> \Yii::t('common','Description'),
     	];
     }
 

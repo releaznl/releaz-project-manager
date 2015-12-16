@@ -1,29 +1,29 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\BidCategory;
+use common\models\File;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\components\web\BackendController;
+use frontend\components\web\FrontendController;
 
 /**
- * BidCategoryController implements the CRUD actions for BidCategory model.
+ * FileController implements the CRUD actions for File model.
  */
-class BidCategoryController extends BackendController
+class FileController extends FrontendController
 {
 
     /**
-     * Lists all BidCategory models.
+     * Lists all File models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => BidCategory::find(),
+            'query' => File::find()->where(['creator_id' => Yii::$app->user->id]),
         ]);
 
         return $this->render('index', [
@@ -32,7 +32,7 @@ class BidCategoryController extends BackendController
     }
 
     /**
-     * Displays a single BidCategory model.
+     * Displays a single File model.
      * @param integer $id
      * @return mixed
      */
@@ -44,16 +44,16 @@ class BidCategoryController extends BackendController
     }
 
     /**
-     * Creates a new BidCategory model.
+     * Creates a new File model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new BidCategory();
+        $model = new File();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->file_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -62,7 +62,7 @@ class BidCategoryController extends BackendController
     }
 
     /**
-     * Updates an existing BidCategory model.
+     * Updates an existing File model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -72,7 +72,7 @@ class BidCategoryController extends BackendController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->file_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -81,7 +81,7 @@ class BidCategoryController extends BackendController
     }
 
     /**
-     * Deletes an existing BidCategory model.
+     * Deletes an existing File model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -94,15 +94,15 @@ class BidCategoryController extends BackendController
     }
 
     /**
-     * Finds the BidCategory model based on its primary key value.
+     * Finds the File model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return BidCategory the loaded model
+     * @return File the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = BidCategory::findOne($id)) !== null) {
+        if (($model = File::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

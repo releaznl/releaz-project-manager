@@ -24,6 +24,7 @@ class m151215_125402_partof_rule extends Migration
 		$auth->addChild($partOf, $viewProject);
 		$auth->addChild($auth->getRole('client'), $partOf);
 		$auth->addChild($auth->getRole('projectmanager'), $viewProject);
+		$auth->addChild($auth->getRole('admin'), $auth->getRole('projectmanager'));
     }
 
     public function down()

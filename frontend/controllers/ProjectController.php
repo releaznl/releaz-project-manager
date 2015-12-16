@@ -32,7 +32,7 @@ class ProjectController extends FrontendController
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => Customer::find(Yii::$app->user->id)->one()->customer_id], ['projectmanager_id' => Yii::$app->user->id]])
+            'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => Customer::find()->where(['user_id' => Yii::$app->user->id])->one()->customer_id], ['projectmanager_id' => Yii::$app->user->id]])
             ->with('creator', 'client', 'projectmanager', 'updater'),
         ]);
 
@@ -50,7 +50,7 @@ class ProjectController extends FrontendController
     {
     	
     	$model = $this->findModel($id);
-    	if (Yii::$app->user->can('partOf', ['project' => $model], false)) {
+    	if (Yii::$app->user->can('viewProject', ['project' => $model], false)) {
 	        return $this->render('view', [
 	            'model' => $model,
 	        ]);
@@ -66,6 +66,7 @@ class ProjectController extends FrontendController
      */
     public function actionCreate()
     {
+    	
     	$model = new Project();
     	$user = new User();
     	$customer = new Customer();

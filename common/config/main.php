@@ -17,10 +17,13 @@ return [
     	'i18n' => [
     		'translations' => [
 //     			'*' => [
-//     				'basePath'              => '@common/messages',
 //     				'class'                 => 'yii\i18n\PhpMessageSource',
+//     				'basePath'              => '@common/messages',
 //     				'fileMap'               => [
-//     					'app' => 'app.php',
+//     					'functionality' => 'functionality.php',
+//     					'about' => 'about.php',
+//     					'navbar' => 'navbar.php',
+//     					'site' => 'site.php',
 //     				],
 //     				'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation']
 //     			],
