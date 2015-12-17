@@ -9,6 +9,7 @@ class m151215_125402_partof_rule extends Migration
     {
     	$auth = Yii::$app->authManager;
     	
+    	// Create the PartOfRule
 		$rule = new \common\rbac\PartOfRule;
 		$auth->add($rule);
 		
@@ -24,15 +25,41 @@ class m151215_125402_partof_rule extends Migration
 		$auth->addChild($partOf, $viewProject);
 		$auth->addChild($auth->getRole('client'), $partOf);
 		$auth->addChild($auth->getRole('projectmanager'), $viewProject);
+		
+		// Give the admin all the permissions of the projectmanager
 		$auth->addChild($auth->getRole('admin'), $auth->getRole('projectmanager'));
+		
+		// Create the EditFileRule
+		$editFileRule = new \common\rbac\EditFileRule;
+		$auth->add($editFileRule);
+		
+		$editFile = $auth->getPermission('editFile');
+		$editFile->description = 'Is able to edit the file';
+		$editFile->ruleName = $editFileRule->name;
+		$auth->update('editFile', $editFile);
+		
+		$auth->addChild($editFile, $viewProject);
     }
 
     public function down()
     {
     	$auth = Yii::$app->authManager;
-    	$auth->remove($auth->getPermission('partOf'));
-        $auth->remove($auth->getRule('isPartOf'));
+    	
+    	// Remove the EditFileRule
+    	$auth->removeChild($auth->getPermission('editFile'), $auth->getPermission('viewProject'));
+    	
+    	$auth->remove($auth->getRule('editFile'));
+    	
+    	// Remove the PartOfRule
+    	$auth->removeChild($auth->getRole('admin'), $auth->getRole('projectmanager'));
+    	$auth->removeChild($auth->getRole('projectmanager'), $auth->getPermission('viewProject'));
+    	$auth->removeChild($auth->getRole('client'), $auth->getPermission('viewProject'));
+    	$auth->removeChild($auth->getPermission('partOf'), $auth->getPermission('viewProject'));
+    	
+        $auth->remove($auth->getPermission('partOf'));
         $auth->remove($auth->getPermission('viewProject'));
+        
+    	$auth->remove($auth->getRule('isPartOf'));
     }
 
     /*

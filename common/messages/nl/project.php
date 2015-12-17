@@ -17,7 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Client' => '@@Client@@',
     'Accepted' => 'Geaccepteerd',
     'Add functionality' => 'Functionaliteit toevoegen',
     'Client ID' => 'Klant',
@@ -34,6 +33,7 @@ return [
     'Functionalities for this project' => 'Functionaliteiten voor dit project',
     'Project' => 'Project',
     'Project ID' => 'Project ID',
+	'Project name' => 'Projectnaam',
     'Projectmanager' => 'Projectmanager',
     'Projectmanager ID' => 'Projectmanager',
     'Projects' => 'Projecten',

@@ -3,13 +3,14 @@
 namespace common\rbac;
 
 use yii\rbac\Rule;
+use yii\base\Object;
 
 /**
  * Checks if authorID matches user passed via params
  */
-class PartOfRule extends Rule
+class EditFileRule extends Rule
 {
-	public $name = 'isPartOf';
+	public $name = 'editFile';
 
 	/**
 	 * @param string|integer $user the user ID.
@@ -19,9 +20,18 @@ class PartOfRule extends Rule
 	 */
 	public function execute($user, $item, $params)
 	{
-		if (isset($params['project'])) {
-			return $params['project']->isAssociated($user);
+// 		var_dump($params); exit;
+		if (isset($params['file'])) {
+			$file = $params['file'];
+			
+			if ($todo = $file->todo) {
+				return $todo->functionality->project->isAssociated($user);
+			} else {
+				return $file->project->isAssociated($user);
+			}
+			
+		} else {
+			return false;
 		}
-		return false;
 	}
 }
