@@ -61,9 +61,6 @@ class FunctionalityController extends BackendController
     {
     	
         $model = new Functionality();
-        $model->deleted = FALSE;
-        $model->creator_id = Yii::$app->user->id;
-        $model->updater_id = Yii::$app->user->id;
         
         $projects = Project::find()->all();
 

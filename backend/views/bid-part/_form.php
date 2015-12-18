@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'attribute_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'bid_category_id')->dropdownList(ArrayHelper::map(BidCategory::find()->all(), 'id', 'name' )) ?>
 

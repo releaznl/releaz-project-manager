@@ -18,21 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
-                <?= $form->field($model, 'name') ?>
                 
+                <?= $form->field($model, 'company_name')?>
                 <?= $form->field($model, 'email') ?>
                 
                 <?= $form->field($model, 'description') ?>
-                <?= $form->field($model, 'address') ?>
                 <?= $form->field($model, 'zip_code') ?>
+                <?= $form->field($model, 'address') ?>
+                <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+                <?= $form->field($model, 'password')->passwordInput() ?>
                 <?= $form->field($model, 'location') ?>
                 <?= $form->field($model, 'phone_number') ?>
                 <?= $form->field($model, 'website') ?>
                 <?= $form->field($model, 'kvk') ?>
                 <?= $form->field($model, 'btw') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton(Yii::t('site', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

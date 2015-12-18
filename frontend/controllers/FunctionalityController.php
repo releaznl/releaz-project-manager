@@ -105,7 +105,6 @@ class FunctionalityController extends FrontendController
      */
     public function actionCreate($pid)
     {
-    	//$count = count(Yii::$app->request->post('Functionality', []));
     	$functionalities = [new Functionality()];
     	
     	if (Yii::$app->request->isPost) {
@@ -120,9 +119,6 @@ class FunctionalityController extends FrontendController
     		foreach ($functionalitydata as $data) {
     			$functionality->load($data, '');
     			$functionality->project_id = $pid;
-    			$functionality->creator_id = Yii::$app->user->id;
-    			$functionality->updater_id = Yii::$app->user->id;
-    			$functionality->deleted = false;
     			$functionality = next($functionalities);
     		}
     		
@@ -157,7 +153,6 @@ class FunctionalityController extends FrontendController
     public function actionUpdate($id)
     {
     	$model = $this->findModel($id);
-        //$models = $this->findModels($model->project_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->functionality_id]);

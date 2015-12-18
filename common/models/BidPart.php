@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 
 use common\components\db\ReleazActiveRecord;
+use common\models\Functionality;
 
 /**
  * This is the model class for table "bid_part".
@@ -22,6 +23,7 @@ use common\components\db\ReleazActiveRecord;
  * @property integer $updated_by
  * @property string $datetime_updated
  * @property integer $deleted
+ * @property string $attribute_name
  *
  * @property User $createdBy
  * @property User $updatedBy
@@ -43,12 +45,13 @@ class BidPart extends ReleazActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'attribute_name'], 'required'],
             [['bid_category_id', 'file_upload', 'explanation', 'ordering', 'creator_id', 'updater_id', 'deleted'], 'integer'],
             [['description'], 'string'],
+        	[['attribute_name'], 'match', 'pattern' => '(^\S*$)'],
             [['price'], 'number'],
             [['datetime_added', 'datetime_updated'], 'safe'],
-            [['name'], 'string', 'max' => 125]
+            [['name', 'attribute_name'], 'string', 'max' => 125]
         ];
     }
 
@@ -59,6 +62,7 @@ class BidPart extends ReleazActiveRecord
     {
         return [
             'id' => 'ID',
+        	'attribute_name' => 'Attribute Name',
             'name' => 'Name',
             'bid_category_id' => 'Bid Category ID',
             'description' => 'Description',
@@ -96,5 +100,23 @@ class BidPart extends ReleazActiveRecord
     public function getBidCategory()
     {
         return $this->hasOne(BidCategory::className(), ['id' => 'bid_category_id']);
+    }
+    
+    public function saveAsFunctionality($project_id) {
+    		
+    	$functionality = new Functionality();
+    	
+    	$functionality->project_id = $project_id;
+    	$functionality->name = $this->name;
+    	$functionality->price = round($this->price, 2);
+    	$functionality->amount = 1;
+    	$functionality->description = $this->description;
+    	$functionality->deleted = false;
+    	
+    	if (!$functionality->validate()) {
+    		return false;
+    	} else {
+    		return $functionality->save();
+    	}
     }
 }

@@ -45,10 +45,9 @@ class Functionality extends ReleazActiveRecord
     public function rules()
     {
         return [
-            [['description', 'deleted', 'project_id', 'name', 'creator_id', 'updater_id', 'amount', 'price'], 'required'],
+            [['description', 'project_id', 'name', 'amount', 'price'], 'required'],
             [['description'], 'string'],
-        	[['price'], 'match', 'pattern' => '/^[0-9]{0,4}(\,[0-9]{0,2})?$/', 'message' => 'Select a price from 0,01 to 9999,99'],
-            //[['datetime_added', 'datetime_updated'], 'safe'],
+        	[['price'], 'match', 'pattern' => '/^[0-9]{0,9}(\,[0-9]{0,4})?$/', 'message' => 'Select a price from 0,01 to 999999999,9999'],
             [['project_id', 'creator_id', 'updater_id', 'amount'], 'integer'],
             [['name'], 'string', 'max' => 128]
         ];

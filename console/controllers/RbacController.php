@@ -69,8 +69,8 @@ class RbacController extends Controller
         $auth->addChild($admin, $backend);
         
         // Assign roles to users
-        $auth->assign($admin, 14);
-        $auth->assign($projectmanager, 1);
+        $auth->assign($admin, 1);
+        $auth->assign($projectmanager, 2);
     }
     
     public function actionBackend() {

@@ -3,7 +3,9 @@ Yii 2 Advanced Project Template
 ===============================
 
 
-Username: Name
+Username: admin
+	: projectmanager
+	: user
 Password: password
 
 

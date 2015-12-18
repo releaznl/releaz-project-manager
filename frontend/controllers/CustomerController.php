@@ -76,11 +76,11 @@ class CustomerController extends FrontendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->customer_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+        
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

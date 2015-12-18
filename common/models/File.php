@@ -47,7 +47,7 @@ class File extends ReleazActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'deleted', 'creator_id', 'updater_id'], 'required'],
+            [['name', 'description'], 'required'],
             [['file_id', 'deleted', 'creator_id', 'todo_id', 'project_id', 'updater_id'], 'integer'],
             [['description'], 'string'],
             //[['datetime_added', 'datetime_updated'], 'safe'],
