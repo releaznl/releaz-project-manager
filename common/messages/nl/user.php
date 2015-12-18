@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'New user' => '',
+    'New user' => 'Nieuwe gebruiker',
     'Address' => 'Adres',
     'Btw' => 'BTW',
     'Create User' => 'Gebruiker Aanmaken',

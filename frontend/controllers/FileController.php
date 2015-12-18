@@ -77,8 +77,6 @@ class FileController extends FrontendController
     {
     	$model = $this->findModel($id);
     	
-//     	var_dump(Yii::$app->user->can('editFile', ['file' => $model])); exit;
-    	
     	if (!Yii::$app->user->can('editFile', ['file' => $model])) {
     		throw new NotFoundHttpException('The requested page does not exist.');
     	}
@@ -141,6 +139,8 @@ class FileController extends FrontendController
         } else {
         	return $this->render('create', [
         			'model' => $model,
+	    			'projects' => Project::find()->all(),
+	    			'todos' => Todo::find()->all(),
         	]);
         }
     }

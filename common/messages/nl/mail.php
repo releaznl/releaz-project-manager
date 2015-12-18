@@ -17,9 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Open the following URL to see it' => '',
-    'There is a new project registered' => '',
-    'There is a new project registered.' => '',
-    'View the project here' => '',
-    'View the project' => '@@@@',
+    'Open the following URL to see it' => 'Open de volgende URL om het te bekijken',
+    'There is a new project registered' => 'Er is een nieuw project geregistreerd',
+    'There is a new project registered.' => 'Er is een nieuw project gereigstrerd.',
+    'View the project here' => 'Bekijk het project hier',
 ];

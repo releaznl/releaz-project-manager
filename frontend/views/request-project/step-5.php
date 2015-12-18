@@ -12,7 +12,18 @@ use yii\helpers\HTML;
 <p>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
     
-    <?= $form->field($model, 'content')->fileInput();?>
+    <?php foreach ($category->bidParts as $part) : ?>
+	
+	<?php echo $form->field($model, $part->attribute_name)->checkBox([
+			'label' => $part->name,
+			'value' => $part->id,
+			'labelOptions' => [
+				'data-toggle' => 'tooltip',
+				'title' => $part->description,
+			]
+	]); ?>
+	
+	<?php endforeach; ?>
 	
     <?= Html::a(Yii::t('common','Last step'), ['step-4'], ['class' => 'btn btn-primary']) ?>
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>

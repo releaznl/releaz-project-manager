@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 	
 	<?php foreach ($category->bidParts as $part) : ?>
 	
-	<?php echo $form->field($model, $part->attribute_name)->radio([
+	<?php echo $form->field($model, $part->attribute_name)->checkBox([
 			'label' => $part->description,
 			'value' => $part->id,
 			'uncheckValue' => null,

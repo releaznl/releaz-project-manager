@@ -17,21 +17,21 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Todo' => '@@Todo@@',
     'Begun' => 'Begonnen',
-    'Done' => 'Klaar',
-    'Not yet started' => 'Nog niet begonnen',
-    'Todo saved' => 'Todo opgeslagen',
     'Create Todo' => 'Todo Aanmaken',
     'Creator ID' => 'Aanmaker ID',
     'Datetime Added' => 'Moment Aangemaakt',
     'Datetime Updated' => 'Moment Verbeterd',
     'Deleted' => 'Verwijdert',
     'Description' => 'Beschrijving',
+    'Done' => 'Klaar',
     'Functionality ID' => 'Functionaliteit ID',
     'Name' => 'Naam',
+    'Not yet started' => 'Nog niet begonnen',
     'Status ID' => 'Status ID',
-    'Todo' => 'Todo',
     'Todo ID' => 'Todo ID',
+    'Todo saved' => 'Todo opgeslagen',
     'Todos' => 'Todos',
     'Updater ID' => 'Updater ID',
 ];

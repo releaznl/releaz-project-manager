@@ -211,7 +211,7 @@ class m151209_151526_insert_bid_data extends Migration
 				'name' => 'Hosting informatie',
 				'bid_category_id' => $id,
 				'description' => 'Vul hier uw hostinginformatie in',
-				'price' => 0,
+				'price' => 140,
 				'file_upload' => 0,
 				'explanation' => 0,
 				'ordering' => 1,

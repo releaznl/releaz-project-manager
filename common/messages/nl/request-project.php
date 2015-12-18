@@ -17,8 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Select a target audience' => '@@Selecteer een doelgroep@@',
     'Completion' => 'Afronding',
-    'Select a target audience' => 'Selecteer een doelgroep',
+    'Overview' => 'Overview',
     'Thank you for entering your information. We will take a look at your request as soon as possible and will let you know by email when we are ready.' => 'Bedankt voor het invullen van je informatie. We zullen je aanvraag bekijken en zullen je zo spoedig mogelijk informeren per email.',
     'The design of the website will be based on the information entered.' => 'Het ontwerp van de website wordt gebaseerd op de hier ingevulde gegevens.',
+    'The following is an overview of the project that will be generated, along with the estimated price of the project.' => 'Het volgende is een overview van het project wat wordt gegenereerd, samen met de geschatte prijs van het project.',
 ];

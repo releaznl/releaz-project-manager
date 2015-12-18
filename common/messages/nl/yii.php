@@ -35,7 +35,7 @@ return [
     'Page not found.' => 'Pagina niet gevonden.',
     'Please fix the following errors:' => '',
     'Please upload a file.' => 'Upload een bestand a.u.b.',
-    'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> {totalCount, plural, one{item} other{items}}.' => '',
+    'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> {totalCount, plural, one{item} other{items}}.' => '<b>{begin, number}-{end, number}</b> van de <b>{totalCount, number}</b> items.',
     'The file "{file}" is not an image.' => '',
     'The file "{file}" is too big. Its size cannot exceed {limit, number} {limit, plural, one{byte} other{bytes}}.' => '',
     'The file "{file}" is too small. Its size cannot be smaller than {limit, number} {limit, plural, one{byte} other{bytes}}.' => '',
