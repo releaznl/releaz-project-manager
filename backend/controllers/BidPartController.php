@@ -8,23 +8,13 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\web\BackendController;
 
 /**
  * BidPartController implements the CRUD actions for BidPart model.
  */
-class BidPartController extends Controller
+class BidPartController extends BackendController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all BidPart models.

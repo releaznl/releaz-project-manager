@@ -33,6 +33,8 @@ use common\components\db\ReleazActiveRecord;
 class File extends ReleazActiveRecord
 {
 	
+	public $uploaded_file;
+	
     /**
      * @inheritdoc
      */
@@ -47,11 +49,12 @@ class File extends ReleazActiveRecord
     public function rules()
     {
         return [
+        	[['uploaded_file'], 'file', 'skipOnEmpty' => true],
             [['name', 'description'], 'required'],
             [['file_id', 'deleted', 'creator_id', 'todo_id', 'project_id', 'updater_id'], 'integer'],
             [['description'], 'string'],
             //[['datetime_added', 'datetime_updated'], 'safe'],
-            [['name'], 'string', 'max' => 128]
+            [['name'], 'string', 'max' => 128],
         ];
     }
 
@@ -61,7 +64,9 @@ class File extends ReleazActiveRecord
     public function attributeLabels()
     {
         return [
+        	'file' => Yii::t('file', 'File'),
             'file_id' => Yii::t('file','File ID'),
+        	'uploaded_file' => Yii::t('file', 'Uploaded file'),
             'name' => Yii::t('file','Name'),
             'description' => Yii::t('file','Description'),
             'datetime_added' => Yii::t('file','Datetime Added'),

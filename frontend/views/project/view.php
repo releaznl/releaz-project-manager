@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             
             ['class' => 'yii\grid\ActionColumn',
-            	'controller' => 'functionality']
+            	'controller' => 'file']
         ]
     ]);
     

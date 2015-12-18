@@ -17,6 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Please contact us if you think this is a server error. Thank you.' => 'Neem contact met ons op als je denkt dat dit een serverfout is.',
-    'The above error occurred while the Web server was processing your request.' => 'De bovenstaande fout is opgetreden toen de server bezig was met jouw verzoek.',
+    'Attribute Name' => 'Attribuut naam',
+    'Bid Category ID' => 'Offerte Categorie ID',
+    'Created By' => 'Aangemaakt door',
+    'Datetime Added' => 'Datum toegevoegd',
+    'Datetime Updated' => 'Datum geupdate',
+    'Deleted' => 'Verwijdert',
+    'Description' => 'Beschrijving',
+    'Explanation' => 'Verklaring',
+    'File Upload' => 'Bestand Upload',
+    'ID' => 'ID',
+    'Name' => 'Naam',
+    'Order' => 'Volgorde',
+    'Price' => 'Prijs',
+    'Updated By' => 'Bijgewerkt door',
 ];

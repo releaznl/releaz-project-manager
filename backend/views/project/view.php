@@ -63,17 +63,26 @@ $users = User::find()->all();
     
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([
-            'query' => Functionality::find(['project_id' => $model->project_id])->with('creator', 'updater')
+            'query' => Functionality::find()->where(['project_id' => $model->project_id])->with('creator', 'updater')
         ]),
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             
+        	'project_id',
             'name',
             'description',
             'datetime_added:datetime',
-            'creator.username',
+//             'creator.username',
+        	[
+        		'label' => \Yii::t('project', 'Creator'),
+        		'value' => 'creator.username',
+    		],
             'datetime_updated:datetime',
-            'updater.username',
+//             'updater.username',
+        	[
+        		'label' => \Yii::t('project', 'Updater'),
+        		'value' => 'updater.username',
+		    ],
             'deleted:boolean',
             
             ['class' => 'yii\grid\ActionColumn', 'controller' => 'functionality']

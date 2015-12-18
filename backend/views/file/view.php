@@ -36,14 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('user','Creator'),
                 'value' => $model->creator->username,
             ],
-            [
-                'label' => Yii::t('todo','Todo'),
-                'value' => $model->todo->description,
-            ],
-            [
-                'label' => Yii::t('project','Project'),
-                'value' => $model->project->description,
-            ],
+        	'todo.name',
+        	'project.name',
             'datetime_updated:datetime',
             // 'updater_id',
             [

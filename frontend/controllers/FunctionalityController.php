@@ -72,30 +72,36 @@ class FunctionalityController extends FrontendController
      */
     public function actionView($id)
     {
-  		$todo = new Todo();
-    	$todo->creator_id = Yii::$app->user->id;
-    	$todo->updater_id = Yii::$app->user->id;
-    	$todo->deleted = false;
-    	$todo->functionality_id = $id;
-    		
-    	if ($todo->load(Yii::$app->request->post()) && $todo->save(false)) {
-    		\Yii::$app->getSession()->setFlash('success', Yii::t('todo', 'Todo saved'));
-    		$todo = new Todo();
-    		$todo->creator_id = Yii::$app->user->id;
-    		$todo->updater_id = Yii::$app->user->id;
-    		$todo->deleted = false;
-    		$todo->functionality_id = $id;
+    	$model = $this->findModel($id);
+    	
+    	if (Yii::$app->user->can('viewProject', ['project' => $model->project], false)) {
+	  		$todo = new Todo();
+	    	$todo->creator_id = Yii::$app->user->id;
+	    	$todo->updater_id = Yii::$app->user->id;
+	    	$todo->deleted = false;
+	    	$todo->functionality_id = $id;
+	    		
+	    	if ($todo->load(Yii::$app->request->post()) && $todo->save(false)) {
+	    		\Yii::$app->getSession()->setFlash('success', Yii::t('todo', 'Todo saved'));
+	    		$todo = new Todo();
+	    		$todo->creator_id = Yii::$app->user->id;
+	    		$todo->updater_id = Yii::$app->user->id;
+	    		$todo->deleted = false;
+	    		$todo->functionality_id = $id;
+	    	}
+	    	
+	    	$dataProvider = new ActiveDataProvider([
+	    			'query' => Todo::find()->andWhere(['or', ['functionality_id' => $id]]),
+	    	]);
+	    	
+	        return $this->render('view', [
+	            'model' => $model,
+	        	'dataProvider' => $dataProvider,
+	        	'todo' => $todo,
+	        ]);
     	}
-    	
-    	$dataProvider = new ActiveDataProvider([
-    			'query' => Todo::find()->andWhere(['or', ['functionality_id' => $id]]),
-    	]);
-    	
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        	'dataProvider' => $dataProvider,
-        	'todo' => $todo,
-        ]);
+    	exit;
+    	throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= (\Yii::$app->user->can('createProject')) ? Html::a(Yii::t('project','Create Project'), ['create'], ['class' => 'btn btn-success']) : Html::a(''); ?>
+        <?= (\Yii::$app->user->can('createProject')) ? Html::a(Yii::t('project','Create Project'), ['create'], ['class' => 'btn btn-success']) : Html::a(Yii::t('project', 'Request Project'), ['/request-project'], ['class' => 'btn btn-success']); ?>
     </p>
 
     <?= GridView::widget([

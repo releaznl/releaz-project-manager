@@ -17,5 +17,5 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Incorrect username or password.' => 'Foute gebruikersnaam of wachtwoord ingevuld',
+    'Incorrect username or password.' => 'De gebruikersnaam en wachtwoord combinatie is niet correct.',
 ];

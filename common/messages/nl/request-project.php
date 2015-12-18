@@ -17,6 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Please contact us if you think this is a server error. Thank you.' => 'Neem contact met ons op als je denkt dat dit een serverfout is.',
-    'The above error occurred while the Web server was processing your request.' => 'De bovenstaande fout is opgetreden toen de server bezig was met jouw verzoek.',
+    'Completion' => 'Afronding',
+    'Select a target audience' => 'Selecteer een doelgroep',
+    'Thank you for entering your information. We will take a look at your request as soon as possible and will let you know by email when we are ready.' => 'Bedankt voor het invullen van je informatie. We zullen je aanvraag bekijken en zullen je zo spoedig mogelijk informeren per email.',
+    'The design of the website will be based on the information entered.' => 'Het ontwerp van de website wordt gebaseerd op de hier ingevulde gegevens.',
 ];

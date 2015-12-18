@@ -17,6 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Add functionality line' => '',
+    'Functionality ID' => '',
+    'Total Price' => '',
     'Amount' => 'Aantal',
     'Create Functionality' => 'Functionaliteit Aanmaken',
     'Creator ID' => 'Aanmaker ID',

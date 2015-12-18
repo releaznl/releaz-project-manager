@@ -19,6 +19,7 @@ use yii\helpers\HTML;
     		'dateFormat' => 'MM/dd/yyyy',
     ]); ?>
     
+    <?= Html::a(Yii::t('common','Last step'), ['step-2'], ['class' => 'btn btn-primary']) ?>
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']); ?>
 	
 	<?php ActiveForm::end(); ?>

@@ -17,6 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Bid Categories' => 'Offerte Categorieen',
+    'Bid Parts' => 'Offerte Onderdelen',
     'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
     'Create Customer' => 'Klant aanmaken',
     'Customers' => 'Klanten',

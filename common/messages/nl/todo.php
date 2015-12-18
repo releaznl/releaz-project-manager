@@ -17,6 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Begun' => 'Begonnen',
+    'Done' => 'Klaar',
+    'Not yet started' => 'Nog niet begonnen',
+    'Todo saved' => 'Todo opgeslagen',
     'Create Todo' => 'Todo Aanmaken',
     'Creator ID' => 'Aanmaker ID',
     'Datetime Added' => 'Moment Aangemaakt',

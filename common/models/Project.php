@@ -28,7 +28,7 @@ use common\components\db\ReleazActiveRecord;
  * @property File[] $files
  * @property Functionality[] $functionalities
  * @property User $creator
- * @property User $client
+ * @property Customer $client
  * @property User $projectmanager
  * @property User $updater
  */
@@ -75,6 +75,7 @@ class Project extends ReleazActiveRecord
     public function attributeLabels()
     {
         return [
+        	'name' => Yii::t('project', 'Project name'),
             'project_id' => Yii::t('project', 'Project ID'),
             'description' => Yii::t('project', 'Description'),
             'datetime_added' => Yii::t('project', 'Datetime Added'),
@@ -126,6 +127,17 @@ class Project extends ReleazActiveRecord
     public function getCreator()
     {
         return $this->hasOne(User::className(), ['id' => 'creator_id']);
+    }
+    /**
+     * Checks if the user is associated with the project
+     * @param integer $user_id
+     */
+    public function isAssociated($user_id) {
+    	if ($this->creator->id == $user_id || $this->client->user_id == $user_id || $this->projectmanager_id == $user_id) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 
     /**
