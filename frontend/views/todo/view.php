@@ -4,6 +4,8 @@ use common\models\Todo;
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\base\Widget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Todo */
@@ -17,8 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->todo_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->todo_id], [
+        <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->todo_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('file','Create file'),['/file/create', 'tid' => $model->todo_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->todo_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -58,5 +61,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'datetime_updated:datetime',
         ],
     ]) ?>
+    
+    <?= GridView::widget([
+    		'dataProvider' => $dataProvider,
+    		'columns' => [
+    			'name',
+    			'description',
+    			'creator.username',
+    			'datetime_added',
+    	]
+    ]); ?>
 
 </div>

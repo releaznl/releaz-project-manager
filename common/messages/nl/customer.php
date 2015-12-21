@@ -17,6 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Address' => 'Adres',
+    'CoC number' => 'KvK nummer',
+    'Company name' => 'Bedrijfsnaam',
+    'Contact type' => 'Contact type',
+    'Description' => 'Beschrijving',
+    'Location' => 'Locatie',
+    'Phone number' => 'Telefoonnummer',
+    'Tax' => 'BTW',
+    'Website' => 'Website',
+    'Zip code' => 'Postcode',
     'Client' => 'Client',
     'Create Customer' => 'Client Aanmaken',
     'Customers' => 'Clienten',

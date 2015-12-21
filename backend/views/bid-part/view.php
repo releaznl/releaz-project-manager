@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'file_upload:boolean',
             'explanation:boolean',
+        	'monthly_costs:boolean',
             'ordering',
             'creator_id',
             'datetime_added:datetime',

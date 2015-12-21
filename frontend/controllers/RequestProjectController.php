@@ -150,11 +150,17 @@ class RequestProjectController extends \yii\web\Controller
     			&& Yii::$app->session->has('part4')
     			&& Yii::$app->session->has('part5')) 
     	{
+    		$overview = $this->getStepsAsBidPartArray();
+    		
 	    	return $this->render('overview', [
-	    			'dataProvider' => new ArrayDataProvider([
-	    					'allModels' => $this->getStepsAsBidPartArray(),
+	    			'oneoffDataProvider' => new ArrayDataProvider([
+	    					'allModels' => $overview['oneoff'],
+	    			]),
+	    			'monthlyDataProvider' => new ArrayDataProvider([
+	    					'allModels' => $overview['monthly'],
 	    			]),
 	    	]);
+	    	
     	} else {
 //     		Yii::$app->session->setFlash('error', Yii::t('request_project', 'You have missed a part of the form, please check to see if you have entered the correct information.'));
     		return $this->redirect(['/request-project/step-5']);
@@ -195,7 +201,10 @@ class RequestProjectController extends \yii\web\Controller
     
     private function getStepsAsBidPartArray() 
     {
-    	$result = array();
+    	$result = ['oneoff' => array(), 'monthly' => array()];
+    	
+    	$result['oneoff'][] = BidPart::find()->where(['attribute_name' => 'oneoff_costs'])->one();
+    	$result['monthly'][] = BidPart::find()->where(['attribute_name' => 'monthly_costs'])->one();
     	
     	$steps[0] = Yii::$app->session->get('part1');
     	$steps[1] = Yii::$app->session->get('part2');
@@ -209,7 +218,15 @@ class RequestProjectController extends \yii\web\Controller
     		{
     			if (!empty($attribute)) 
     			{
-    				$result[] = $part = BidPart::find()->where(['attribute_name' => $key])->one();
+    				$part = BidPart::find()->where(['attribute_name' => $key])->one();
+    				
+    				if ($part->price != 0) {
+	    				if ($part->monthly_costs) {
+	    					$result['monthly'][] = $part;
+	    				} else {
+	    					$result['oneoff'][] = $part;
+	    				}
+    				}
     			}
     		}
     	}

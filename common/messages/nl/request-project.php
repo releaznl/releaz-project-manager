@@ -19,6 +19,8 @@
 return [
     'Select a target audience' => '@@Selecteer een doelgroep@@',
     'Completion' => 'Afronding',
+    'Monthly costs' => 'Maandelijkse kosten',
+    'One-off costs' => 'Eenmalige kosten',
     'Overview' => 'Overview',
     'Thank you for entering your information. We will take a look at your request as soon as possible and will let you know by email when we are ready.' => 'Bedankt voor het invullen van je informatie. We zullen je aanvraag bekijken en zullen je zo spoedig mogelijk informeren per email.',
     'The design of the website will be based on the information entered.' => 'Het ontwerp van de website wordt gebaseerd op de hier ingevulde gegevens.',

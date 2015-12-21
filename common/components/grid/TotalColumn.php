@@ -12,6 +12,6 @@ class TotalColumn
 		foreach ($provider as $item) {
 			$total += $item[$field_name];
 		}
-		return $total;
+		return Yii::$app->formatter->asCurrency($total);
 	}
 }

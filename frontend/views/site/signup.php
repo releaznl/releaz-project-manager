@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use common\models\Customer;
 
 //$this->title = Yii::t('site', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,8 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'address') ?>
                 <?= $form->field($model, 'password_repeat')->passwordInput() ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'location') ?>
+    			<?= $form->field($model, 'contact_type')->dropDownList(Customer::getContactTypes())?>
                 <?= $form->field($model, 'phone_number') ?>
+                <?= $form->field($model, 'location') ?>
                 <?= $form->field($model, 'website') ?>
                 <?= $form->field($model, 'kvk') ?>
                 <?= $form->field($model, 'btw') ?>

@@ -17,7 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Request Project' => '',
+    'Request Project' => 'Project aanvragen',
+    'Status' => 'Status',
     'Project' => '@@Project@@',
     'Accepted' => 'Geaccepteerd',
     'Add functionality' => 'Functionaliteit toevoegen',

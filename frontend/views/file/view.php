@@ -31,8 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
 //             'file_id',
             'name',
             'description',
-            'project.name',
-            'todo.name',
+        	[
+        		'attribute' => 'project.id',
+        		'format' => 'raw',
+        		'value' => Html::a($model->project_id, ['/project/view', 'id' => $model->project_id]),
+    		],
+        	[
+        		'attribute' => 'todo.id',
+        		'format' => 'raw',
+        		'value' => Html::a($model->todo_id, ['/todo/view', 'id' => $model->todo_id]),
+    		],
             'datetime_added',
             'creator.username',
             'datetime_updated',

@@ -52,15 +52,15 @@ class BidCategory extends ReleazActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => \Yii::t('bidCategory','ID'),
-            'name' => \Yii::t('bidCategory','Name'),
-            'ordering' => \Yii::t('bidCategory','Order'),
-            'description' => \Yii::t('bidCategory','Description'),
-            'creator_id' => \Yii::t('bidCategory','Created By'),
-            'datetime_added:datetime' => \Yii::t('bidCategory','Datetime Added'),
-            'updater_id' => \Yii::t('bidCategory','Updated By'),
-            'datetime_updated:datetime' => \Yii::t('bidCategory','Datetime Updated'),
-            'deleted:boolean' => \Yii::t('bidCategory','Deleted'),
+            'id' 							=> \Yii::t('bidCategory','ID'),
+            'name' 							=> \Yii::t('bidCategory','Name'),
+            'ordering' 						=> \Yii::t('bidCategory','Order'),
+            'description' 					=> \Yii::t('bidCategory','Description'),
+            'creator_id' 					=> \Yii::t('bidCategory','Created By'),
+            'datetime_added:datetime' 		=> \Yii::t('bidCategory','Datetime Added'),
+            'updater_id' 					=> \Yii::t('bidCategory','Updated By'),
+            'datetime_updated:datetime' 	=> \Yii::t('bidCategory','Datetime Updated'),
+            'deleted:boolean' 				=> \Yii::t('bidCategory','Deleted'),
         ];
     }
 

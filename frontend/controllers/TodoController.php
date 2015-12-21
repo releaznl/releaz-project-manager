@@ -4,10 +4,12 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Todo;
+use common\models\File;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\Object;
 
 /**
  * TodoController implements the CRUD actions for Todo model.
@@ -32,13 +34,7 @@ class TodoController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find(),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->redirect(['/project']);
     }
 
     /**
@@ -48,9 +44,18 @@ class TodoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+    	$model = $this->findModel($id);
+    	
+    	if (Yii::$app->user->can('viewProject', ['project' => $model->functionality->project])) 
+    	{
+	        return $this->render('view', [
+	            'model' => $model,
+	        	'dataProvider' => new ActiveDataProvider([
+	        			'query' => File::find()->where(['todo_id' => $id]),
+	        	]),
+	        ]);
+    	}
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**

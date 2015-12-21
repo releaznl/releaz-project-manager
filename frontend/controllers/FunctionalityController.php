@@ -56,13 +56,7 @@ class FunctionalityController extends FrontendController
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Functionality::find(),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+    	return $this->redirect(['/project']);
     }
 
     /**
@@ -100,7 +94,6 @@ class FunctionalityController extends FrontendController
 	        	'todo' => $todo,
 	        ]);
     	}
-    	exit;
     	throw new NotFoundHttpException('The requested page does not exist.');
     }
 

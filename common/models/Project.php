@@ -24,6 +24,7 @@ use common\components\db\ReleazActiveRecord;
  * @property integer $projectmanager_id
  * @property string $datetime_updated
  * @property integer $updater_id
+ * @property integer $status
  *
  * @property File[] $files
  * @property Functionality[] $functionalities
@@ -38,13 +39,11 @@ class Project extends ReleazActiveRecord
 	const STATUS_ACCEPTED = 1;
 	const STATUS_FINISHED = 2;
 	
-	
-	
 	public static function statusses() {
 		return [
-				self::STATUS_REQUESTED => Yii::t('project', 'Requested'),
-				self::STATUS_ACCEPTED => Yii::t('project', 'Accepted'),
-				self::STATUS_FINISHED => Yii::t('project', 'Finished'),
+				self::STATUS_REQUESTED 	=> Yii::t('project', 'Requested'),
+				self::STATUS_ACCEPTED 	=> Yii::t('project', 'Accepted'),
+				self::STATUS_FINISHED 	=> Yii::t('project', 'Finished'),
 		];
 	}
 	
@@ -65,7 +64,7 @@ class Project extends ReleazActiveRecord
             [['description', 'deleted', 'projectmanager_id'], 'required'],
             [['description'], 'string'],
             [['datetime_added', 'datetime_updated'], 'safe'],
-            [['deleted', 'creator_id', 'client_id', 'projectmanager_id', 'updater_id'], 'integer']
+            [['deleted', 'creator_id', 'client_id', 'projectmanager_id', 'updater_id', 'status'], 'integer'],
         ];
     }
 
@@ -85,6 +84,7 @@ class Project extends ReleazActiveRecord
             'projectmanager_id' => Yii::t('project', 'Projectmanager ID'),
             'datetime_updated' => Yii::t('project', 'Datetime Updated'),
             'updater_id' => Yii::t('project', 'Updater ID'),
+            'status' => Yii::t('project', 'Status'),
         ];
     }
     
@@ -103,6 +103,11 @@ class Project extends ReleazActiveRecord
     public function delete() {
         $this->deleted = TRUE;
         $this->save();
+    }
+    
+    public function getStatusName()
+    {
+    	return $this->statusses()[$this->status];
     }
 
     /**

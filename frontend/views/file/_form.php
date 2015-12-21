@@ -18,10 +18,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput() ?>
 
-    <?= $form->field($model, 'todo_id')->dropDownList(ArrayHelper::map($todos, 'todo_id', 'name'), ['prompt' => Yii::t('file', 'No todo')]) ?>
-
-    <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map($projects, 'project_id', 'name'), ['prompt' => Yii::t('file', 'No project')]) ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('common','Create') : Yii::t('common','Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

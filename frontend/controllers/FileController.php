@@ -35,7 +35,7 @@ class FileController extends FrontendController
                 	[
                 		'allow' => true,
                 		'actions' => ['update', 'create'],
-                		'roles' => ['projectmanager', 'admin'],
+                		'roles' => ['@', 'projectmanager', 'admin'],
                 	],
                 	[
                 		'allow' => true,
@@ -58,14 +58,7 @@ class FileController extends FrontendController
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-        	// TODO Maken zodat alles van alle projecten waar die persoon aan meedoet ophaalt
-            'query' => File::find()->innerJoin('todo', 'todo.todo_id = file.todo_id')->where(['todo.name' => 'Design']),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->redirect(['/project']);
     }
 
     /**
@@ -100,13 +93,18 @@ class FileController extends FrontendController
         	
         	$project_id;
         	
-	    	if ($pid) {
+	    	if ($pid) 
+	    	{
 	    		$model->project_id = $pid;
 	    		$project_id = $pid;
-	    	} else if ($tid) {
+	    	} 
+	    	else if ($tid) 
+	    	{
 	    		$model->todo_id = $tid;
 	    		$project_id = $model->todo->functionality->project->project_id;
-	    	} else {
+	    	} 
+	    	else 
+	    	{
 	    		$project_id = $model->project_id;
 	    	}
 	    	
@@ -129,6 +127,12 @@ class FileController extends FrontendController
 		    	}
 	    	}
         }
+//         var_dump(Project::find()->where(['project_id' => $pid])->one()->attributes); exit;
+//         var_dump(Yii::$app->user->can('isPartOf', ['project' => Project::find()->where(['project_id' => $pid])->one()])); exit;
+		
+//         if ($pid) {
+//         	var_dump($pid); exit;
+//         }
         
         if (!$pid && !$tid && Yii::$app->user->can('viewProject')) {
 	    	return $this->render('create', [
@@ -136,13 +140,38 @@ class FileController extends FrontendController
 	    			'projects' => Project::find()->all(),
 	    			'todos' => Todo::find()->all(),
 	    	]);
-        } else {
-        	return $this->render('create', [
-        			'model' => $model,
-	    			'projects' => Project::find()->all(),
-	    			'todos' => Todo::find()->all(),
-        	]);
+        } 
+        
+        if ($pid) {
+        	if (Yii::$app->user->can('viewProject', ['project' => Project::find()->where(['project_id' => $pid])->one()])) {
+        		
+        		$model->project_id = $pid;
+        		
+        		return $this->render('create', [
+        				'model' => $model,
+        		]);
+        	}
+        	
+        	throw new NotFoundHttpException('The requested page does not exist.');
+        } 
+        else if ($tid) 
+        {
+        	$todo = Todo::find()->where(['todo_id' => $tid])->one();
+        	
+        	if ($todo) {
+	        	if (Yii::$app->user->can('viewProject', ['project' => $todo->functionality->project])) {
+	        		$model->todo_id = $tid;
+	        		
+	        		return $this->render('create' , [
+	        				'model' => $model,
+	        		]);
+	        	}
+        	}
+        	
+        	throw new NotFoundHttpException('The requested page does not exist.');
         }
+        
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**

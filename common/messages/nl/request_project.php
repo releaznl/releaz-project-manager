@@ -17,5 +17,5 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'You have missed a part, please check to see if you have entered the correct information.' => '',
+    'You have missed a part, please check to see if you have entered the correct information.' => 'Je bent een onderdel vergeten, kijk a.u.b. of u de correcte informatie hebt ingevuld.',
 ];

@@ -3,6 +3,12 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	'language' => 'nl',
     'components' => [
+    	'formatter' => [
+    			'dateFormat' => 'dd.MM.yyyy',
+    			'thousandSeparator' => '.',
+    			'decimalSeparator' => ',',
+    			'currencyCode' => 'EUR'
+    	],
     	'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],

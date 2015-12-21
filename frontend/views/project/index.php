@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'projectmanager_id',
                 'value' => 'projectmanager.username',
             ],
+        	[
+        		'attribute' => 'status',
+        		'value' => 'statusName',
+    		],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
