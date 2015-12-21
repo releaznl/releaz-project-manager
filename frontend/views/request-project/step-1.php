@@ -7,6 +7,7 @@ use yii\helpers\ArrayHelper;
 
 ?>
 <h1><?php echo $category->name ?></h1>
+<p><?php echo $category->description ?></p>
 
 <p>
     <?php $form = ActiveForm::begin();?>
