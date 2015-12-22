@@ -15,7 +15,11 @@ use yii\helpers\HTML;
     <?php foreach ($category->bidParts as $part) : ?>
 	
 	<?php echo $form->field($model, $part->attribute_name)->checkBox([
+<<<<<<< HEAD
 			'label' => $part->getLabel(),
+=======
+			'label' => $part->name . ' ' . $part->price,
+>>>>>>> origin/master
 			'value' => $part->id,
 			'labelOptions' => [
 				'data-toggle' => 'tooltip',
