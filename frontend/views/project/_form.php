@@ -4,11 +4,12 @@
 use yii\helpers\Html;
 
 use common\models\Customer;
-use yii\widgets\ActiveForm;
+use common\models\Project;
 use common\models\User;
+use frontend\models\NewProjectForm;
 use yii\helpers\ArrayHelper;
 use yii\web\View;
-use frontend\models\NewProjectForm;
+use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
@@ -49,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <?php $form = ActiveForm::begin(); $users = User::getProjectManagers(); $customers = Customer::find()->all(); ?>
 	
 	    <?= $form->field($model, 'description')->textInput() ?>
+	    <?= $form->field($model, 'status')->dropDownList(Project::statusses()) ?>
 	    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>
 	    
     <div id="existing-user" style="display:none;">
@@ -70,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    	<?= $form->field($customer, 'name', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
 		    <?= $form->field($customer, 'address', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
 		    <?= $form->field($customer, 'zip_code', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+	    	<?= $form->field($customer, 'contact_type')->dropDownList(Customer::getContactTypes()) ?>
 		    <?= $form->field($customer, 'location', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
 		    <?= $form->field($customer, 'phone_number', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
 		    <?= $form->field($customer, 'website', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>

@@ -24,6 +24,7 @@ use common\models\Functionality;
  * @property string $datetime_updated
  * @property integer $deleted
  * @property string $attribute_name
+ * @property boolean $monthly_costs
  *
  * @property User $createdBy
  * @property User $updatedBy
@@ -50,7 +51,7 @@ class BidPart extends ReleazActiveRecord
             [['description'], 'string'],
         	[['attribute_name'], 'match', 'pattern' => '(^\S*$)'],
             [['price'], 'number'],
-            [['datetime_added', 'datetime_updated'], 'safe'],
+            [['datetime_added', 'datetime_updated', 'monthly_costs'], 'safe'],
             [['name', 'attribute_name'], 'string', 'max' => 125]
         ];
     }
@@ -61,20 +62,21 @@ class BidPart extends ReleazActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => \Yii::t('bidPart','ID'),
-        	'attribute_name' => \Yii::t('bidPart','Attribute Name'),
-            'name' => \Yii::t('bidPart','Name'),
-            'bid_category_id' => \Yii::t('bidPart','Bid Category ID'),
-            'description' => \Yii::t('bidPart','Description'),
-            'price' => \Yii::t('bidPart','Price'),
-            'file_upload' => \Yii::t('bidPart','File Upload'),
-            'explanation' => \Yii::t('bidPart','Explanation'),
-            'order' => \Yii::t('bidPart','Order'),
-            'creator_id' => \Yii::t('bidPart','Created By'),
-            'datetime_added' => \Yii::t('bidPart','Datetime Added'),
-            'updater_id' => \Yii::t('bidPart','Updated By'),
-            'datetime_updated' => \Yii::t('bidPart','Datetime Updated'),
-            'deleted' => \Yii::t('bidPart','Deleted'),
+            'id' 				=> \Yii::t('bidPart','ID'),
+        	'attribute_name'	=> \Yii::t('bidPart','Attribute Name'),
+            'name' 				=> \Yii::t('bidPart','Name'),
+            'bid_category_id' 	=> \Yii::t('bidPart','Bid Category ID'),
+            'description'		=> \Yii::t('bidPart','Description'),
+            'price' 			=> \Yii::t('bidPart','Price'),
+            'file_upload' 		=> \Yii::t('bidPart','File Upload'),
+            'explanation' 		=> \Yii::t('bidPart','Explanation'),
+        	'monthly_costs' 	=> \Yii::t('bidPart','Monthly costs'),
+            'order' 			=> \Yii::t('bidPart','Order'),
+            'creator_id' 		=> \Yii::t('bidPart','Created By'),
+            'datetime_added' 	=> \Yii::t('bidPart','Datetime Added'),
+            'updater_id' 		=> \Yii::t('bidPart','Updated By'),
+            'datetime_updated' 	=> \Yii::t('bidPart','Datetime Updated'),
+            'deleted' 			=> \Yii::t('bidPart','Deleted'),
         ];
     }
 
@@ -83,7 +85,7 @@ class BidPart extends ReleazActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::className(), ['id' => 'creator_id']);
     }
 
     /**
@@ -91,7 +93,7 @@ class BidPart extends ReleazActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        return $this->hasOne(User::className(), ['id' => 'updater_id']);
     }
 
     /**

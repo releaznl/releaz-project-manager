@@ -6,14 +6,15 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use common\models\Customer;
 
 //$this->title = Yii::t('site', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p><?= Yii::t('site', 'Please fill out the following fields to signup:')?></p>
+    
+    <p>We ontvangen graag onderstaande gegevens voor het afronden van de offerte aanvraag. Na deze stap wordt een overzicht van de gekozen opties getoond.</p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -27,8 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'address') ?>
                 <?= $form->field($model, 'password_repeat')->passwordInput() ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'location') ?>
+    			<?= $form->field($model, 'contact_type')->dropDownList(Customer::getContactTypes())?>
                 <?= $form->field($model, 'phone_number') ?>
+                <?= $form->field($model, 'location') ?>
                 <?= $form->field($model, 'website') ?>
                 <?= $form->field($model, 'kvk') ?>
                 <?= $form->field($model, 'btw') ?>

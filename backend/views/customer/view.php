@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'website',
             'kvk',
             'btw',
+        	'contactType',
             'email_address:email',
             'description',
         ],

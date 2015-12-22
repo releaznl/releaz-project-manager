@@ -24,6 +24,7 @@ class SignupForm extends Model
     public $kvk;
     public $btw;
     public $description;
+    public $contact_type;
 
     /**
      * @inheritdoc
@@ -51,24 +52,26 @@ class SignupForm extends Model
         	['password', 'compare'],
             [['password', 'password_repeat'], 'required'],
             [['password', 'password_repeat'], 'string', 'min' => 6],
+        	[['contact_type'] , 'integer'],
         ];
     }
     
     public function attributeLabels() {
     	return [
-    			'password_repeat' 	=> \Yii::t('common','Password'),
-    			'company_name'		=> \Yii::t('common','Company name'),
-    			'email' 			=> \Yii::t('common','Email'),
-    			'password' 			=> \Yii::t('common','Password'),
+    			'email' 			=> \Yii::t('user','Email'),
+    			'password_repeat' 	=> \Yii::t('user','Password'),
+    			'password' 			=> \Yii::t('user','Password'),
     			
-    			'address' 			=> \Yii::t('common','Address'),
-    			'zip_code' 			=> \Yii::t('common','Zip code'),
-    			'location' 			=> \Yii::t('common','Location'),
-    			'phone_number' 		=> \Yii::t('common','Phone number'),
-    			'website' 			=> \Yii::t('common','Website'),
-    			'kvk' 				=> \Yii::t('common','CoC number'),
-    			'btw' 				=> \Yii::t('common','Tax'),
-    			'description' 		=> \Yii::t('common','Description'),
+    			'company_name'		=> \Yii::t('customer','Company name'),
+    			'contact_type' 		=> \Yii::t('customer','Contact type'),
+    			'address' 			=> \Yii::t('customer','Address'),
+    			'zip_code' 			=> \Yii::t('customer','Zip code'),
+    			'location' 			=> \Yii::t('customer','Location'),
+    			'phone_number' 		=> \Yii::t('customer','Phone number'),
+    			'website' 			=> \Yii::t('customer','Website'),
+    			'kvk' 				=> \Yii::t('customer','CoC number'),
+    			'btw' 				=> \Yii::t('customer','Tax'),
+    			'description' 		=> \Yii::t('customer','Description'),
     	];
     }
 
@@ -99,14 +102,17 @@ class SignupForm extends Model
 	            $customer->btw = $this->btw;
 	            $customer->email_address = $this->email;
 	            $customer->description = $this->description;
+	            $customer->contact_type = $this->contact_type;
 	            
                 $customer->user_id = $user->id;
                 
                 if ($customer->save(false)) {
                     
                     return $user;
+                } else {
+                	$user->delete();
                 }
-            }
+            } 
         }
 
         return null;

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Customer;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Customer */
@@ -33,6 +35,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'btw')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email_address')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'contact_type')->dropDownList(Customer::getContactTypes())?>
 
     <?= $form->field($model, 'description')->textInput() ?>
 

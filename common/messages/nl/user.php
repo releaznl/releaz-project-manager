@@ -17,7 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'New user' => '',
+    'Contact type' => '',
+    'Contact via Email' => '',
+    'Contact via Phone' => '',
+    'Email' => '',
+    'Password' => '',
     'Address' => 'Adres',
     'Btw' => 'BTW',
     'Create User' => 'Gebruiker Aanmaken',
@@ -30,6 +34,7 @@ return [
     'Location' => 'Locatie',
     'Name' => 'Naam',
     'New User' => 'Nieuwe Gebruiker',
+    'New user' => 'Nieuwe gebruiker',
     'Phone Number' => 'Telefoonnummer',
     'Project manager' => 'Projectmanager',
     'Updater' => 'Wijziger',

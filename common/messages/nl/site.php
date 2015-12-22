@@ -18,7 +18,7 @@
  */
 return [
     'Backend projectmanager application' => 'Backend projectmanager applicatie',
-    'If you forgot your password you can' => 'Als je je wachtwoord bent vergeten kan je',
+    'If you forgot your password you can' => 'Als je je wachtwoord bent vergeten kan je een nieuw wachtwoord aanvragen.',
     'Login' => 'Log in',
     'Please fill out the following fields to signup:' => 'Vul het onderstaande formulier in op je aan te melden.',
     'Project management application' => 'Projectmanager applicatie',

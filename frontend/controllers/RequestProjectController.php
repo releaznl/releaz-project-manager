@@ -16,8 +16,10 @@ use frontend\models\requestproject\StrategyForm;
 use frontend\models\requestproject\DesignForm;
 use frontend\models\requestproject\PlanningForm;
 use frontend\models\requestproject\HostingForm;
-use frontend\models\requestproject\ContentForm;
+use frontend\models\requestproject\PromotionForm;
 use frontend\models\SignupForm;
+use yii\base\Object;
+use yii\data\ArrayDataProvider;
 
 class RequestProjectController extends \yii\web\Controller
 {
@@ -54,7 +56,10 @@ class RequestProjectController extends \yii\web\Controller
     	if ($model->load(Yii::$app->request->post())) {
     		$model->current_style = UploadedFile::getInstance($model, 'current_style');
     		if ($model->validate()) {
-	    		$model->current_style->saveAs($this->tempFileLocation . $model->current_style->baseName . '.' . $model->current_style->extension);
+    			if ($model->current_style) {
+	    			$model->current_style->saveAs($this->tempFileLocation . $model->current_style->baseName . '.' . $model->current_style->extension);
+    			}
+    			
 	    		Yii::$app->session->set('part2', $model);
 	    		return $this->redirect('/request-project/step-3');
     		}
@@ -109,28 +114,25 @@ class RequestProjectController extends \yii\web\Controller
 
     public function actionStep5()
     {
-    	if (!Yii::$app->session->has('part4')) {
+    	if (!Yii::$app->session->has('part4')) 
+    	{
     		return $this->redirect('/request-project/step-4');
     	}
     	
-    	$model = Yii::$app->session->get('part5', new ContentForm());
+    	$model = Yii::$app->session->get('part5', new PromotionForm());
     	$category = BidCategory::find()->where(['ordering' => 5])->one();
     	
-    	if ($model->load(Yii::$app->request->post())) {
-    		$model->content = UploadedFile::getInstance($model, 'content');
-    		
-    		if ($model->validate()) {
-	    		$model->content->saveAs($this->tempFileLocation . $model->content->baseName . '.' . $model->content->extension);
+    	if ($model->load(Yii::$app->request->post())) 
+    	{
+    		if ($model->validate()) 
+    		{
 	    		Yii::$app->session->set('part5', $model);
 	    		
 	    		if (Yii::$app->user->isGuest) {
 		    		return $this->redirect('/request-project/create-user');
 	    		} else {
-	    			// TODO redirect to finished screen.
-	    			$project = $this->generateProject();
-	    			return $this->redirect(['/project/view', 'id' => $project->project_id]);
+	    			return $this->redirect('/request-project/overview');
 	    		}
-    			
     		}
     	}
     	
@@ -139,17 +141,55 @@ class RequestProjectController extends \yii\web\Controller
         		'category' => $category,
         ]);
     }
-
-    public function actionCreateUser() {
+    
+    public function actionOverview()
+    {
+    	if (Yii::$app->session->has('part1')
+    			&& Yii::$app->session->has('part2')
+    			&& Yii::$app->session->has('part3')
+    			&& Yii::$app->session->has('part4')
+    			&& Yii::$app->session->has('part5')) 
+    	{
+    		$overview = $this->getStepsAsBidPartArray();
+    		
+	    	return $this->render('overview', [
+	    			'oneoffDataProvider' => new ArrayDataProvider([
+	    					'allModels' => $overview['oneoff'],
+	    			]),
+	    			'monthlyDataProvider' => new ArrayDataProvider([
+	    					'allModels' => $overview['monthly'],
+	    			]),
+	    	]);
+	    	
+    	} else {
+//     		Yii::$app->session->setFlash('error', Yii::t('request_project', 'You have missed a part of the form, please check to see if you have entered the correct information.'));
+    		return $this->redirect(['/request-project/step-5']);
+    	}
     	
+    }
+    
+    public function actionGenerateProject() 
+    {
+    	if (Yii::$app->session->has('part1')
+    			&& Yii::$app->session->has('part2')
+    			&& Yii::$app->session->has('part3')
+    			&& Yii::$app->session->has('part4')
+    			&& Yii::$app->session->has('part5')) 
+    	{
+    		$this->generateProject();
+    		return $this->redirect('/request-project/completion');
+    	}
+    	return $this->redirect('/request-project/overview');
+    }
+
+    public function actionCreateUser() 
+    {
     	$model = new SignupForm();
     	
     	if ($model->load(Yii::$app->request->post())) {
     		if ($user = $model->signup()) {
     			if (Yii::$app->getUser()->login($user)) {
-    				// TODO redirect to finished screen
-    				$project = $this->generateProject();
-    				return $this->redirect(['/project/view', 'id' => $project->project_id]);
+    				return $this->redirect('/request-project/overview');
     			}
     		}
     	}
@@ -159,8 +199,43 @@ class RequestProjectController extends \yii\web\Controller
     	]);
     }
     
-    private function generateProject() {
+    private function getStepsAsBidPartArray() 
+    {
+    	$result = ['oneoff' => array(), 'monthly' => array()];
     	
+    	$result['oneoff'][] = BidPart::find()->where(['attribute_name' => 'oneoff_costs'])->one();
+    	$result['monthly'][] = BidPart::find()->where(['attribute_name' => 'monthly_costs'])->one();
+    	
+    	$steps[0] = Yii::$app->session->get('part1');
+    	$steps[1] = Yii::$app->session->get('part2');
+    	$steps[2] = Yii::$app->session->get('part3');
+    	$steps[3] = Yii::$app->session->get('part4');
+    	$steps[4] = Yii::$app->session->get('part5');
+    	
+    	foreach ($steps as $step) 
+    	{
+    		foreach($step->attributes as $key => $attribute) 
+    		{
+    			if (!empty($attribute)) 
+    			{
+    				$part = BidPart::find()->where(['attribute_name' => $key])->one();
+    				
+    				if ($part->price != 0) {
+	    				if ($part->monthly_costs) {
+	    					$result['monthly'][] = $part;
+	    				} else {
+	    					$result['oneoff'][] = $part;
+	    				}
+    				}
+    			}
+    		}
+    	}
+    	
+    	return $result;
+    }
+    
+    private function generateProject() 
+    {
     	// Get the Parts
     	$steps = array();
     	
@@ -185,7 +260,8 @@ class RequestProjectController extends \yii\web\Controller
     	
     	mkdir($this->permFileLocation . $project->project_id . '/');
     	
-    	foreach ($steps as $step) {
+    	foreach ($steps as $step) 
+    	{
     		$this->saveFunctionalities($step, $project->project_id);
     	}
     	

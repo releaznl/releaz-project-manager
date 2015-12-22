@@ -127,7 +127,7 @@ JS
 				<td><?=  $form->Field($model, "[$index]price")->label(false) ?></td>
 				<td><?= Html::activeHiddenInput($model, "[$index]functionality_id") ?><?= Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', ['class' => 'remove-functionality-line']) ?></td>
 			</tr>
-		<?= $index++; ?>
+		<?php $index++; ?>
 		<?php endforeach ?>
 		</tbody>
 	</table>

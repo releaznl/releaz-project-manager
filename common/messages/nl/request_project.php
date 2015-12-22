@@ -17,22 +17,5 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Create file' => '',
-    'File' => 'Bestand',
-    'No project' => 'Geen project',
-    'No todo' => 'Geen todo',
-    'Uploaded file' => 'Geuploade bestand',
-    'Create File' => 'File Aanmaken',
-    'Creator ID' => 'Aanmaker ID',
-    'Datetime Added' => 'Moment Toegevoegd',
-    'Datetime Updated' => 'Moment Geupdate',
-    'Deleted' => 'Verwijdert',
-    'Description' => 'Beschrijving',
-    'File ID' => 'Bestands ID',
-    'Files' => 'Bestanden',
-    'Name' => 'Naam',
-    'Project ID' => 'Project ID',
-    'Todo ID' => 'Todo ID',
-    'Update File: ' => 'File Wijzigen: ',
-    'Updater ID' => 'Wijziger ID',
+    'You have missed a part, please check to see if you have entered the correct information.' => 'Je bent een onderdel vergeten, kijk a.u.b. of u de correcte informatie hebt ingevuld.',
 ];

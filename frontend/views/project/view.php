@@ -70,9 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
             
             'name',
             'description',
-            'amount',
+//             'amount',
             'price',
-        	'totalPrice',
+//         	'totalPrice',
         	'todoAmount',
             
             ['class' => 'yii\grid\ActionColumn',
@@ -83,6 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     
     <h2><?= Yii::t('project','Files for this project') ?></h2>
+    
+    <?= Html::a(Yii::t('file', 'Create file'), ['/file/create', 'pid' => $model->project_id], ['class' => 'btn btn-success']) ?>
     
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([

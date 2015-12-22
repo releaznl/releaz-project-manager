@@ -17,10 +17,10 @@ use yii\helpers\HTML;
     <?php echo $form->field($model, 'website2')->textInput()->label(false); ?>
     <?php echo $form->field($model, 'website3')->textInput()->label(false); ?>
     
-    <?php echo $form->field($model, 'goal')->textInput() ?>
+    <?php echo $form->field($model, 'goal')->textArea() ?>
     
     <?php // Toevoegen slider ?>
-    <?php echo $form->field($model, 'target_audience')->dropdownList($model->targetAudiences, ['prompt' => \Yii::t('request-project' , 'Select a target audience')]) ?>
+    <?php echo $form->field($model, 'target_audience')->textArea() ?>
     
     <?php echo $form->field($model, 'current_style')->fileInput() ?>
     

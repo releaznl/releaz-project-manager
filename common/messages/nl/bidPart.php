@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Monthly costs' => 'Maandelijkse kosten',
     'Attribute Name' => 'Attribuut naam',
     'Bid Category ID' => 'Offerte Categorie ID',
     'Created By' => 'Aangemaakt door',
