@@ -95,6 +95,35 @@ class BidPart extends ReleazActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'updater_id']);
     }
+    
+    /**
+     * If $descriptive is true, the label that will be returned is the description instead of the name
+     * @param boolean $descriptive
+     * @return string Label
+     */
+    public function getLabel($descriptive = false) 
+    {
+    	$text;
+    	
+    	if ($descriptive) {
+    		$text = $this->description;
+    	} else {
+    		$text = $this->name;
+    	}
+    	
+    	if ($this->price == 0) {
+    		return $text;
+    	} else {
+    		$text .= ' (' . Yii::$app->formatter->asCurrency($this->price);
+    		if ($this->monthly_costs) {
+    			$text .= Yii::t('bidPart', ' per month');
+    		} else {
+    			$text .= Yii::t('bidPart',' one-off');
+    		}
+    		$text .= ')';
+    		return $text;
+    	}
+    }
 
     /**
      * @return \yii\db\ActiveQuery

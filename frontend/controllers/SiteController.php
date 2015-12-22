@@ -150,27 +150,27 @@ class SiteController extends FrontendController
         return $this->render('about');
     }
 
-    /**
-     * Signs user up.
-     *
-     * @return mixed
-     */
-    public function actionSignup()
-    {
-        $model = new SignupForm();
+//     /**
+//      * Signs user up.
+//      *
+//      * @return mixed
+//      */
+//     public function actionSignup()
+//     {
+//         $model = new SignupForm();
         
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
+//         if ($model->load(Yii::$app->request->post())) {
+//             if ($user = $model->signup()) {
+//                 if (Yii::$app->getUser()->login($user)) {
+//                     return $this->goHome();
+//                 }
+//             }
+//         }
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    }
+//         return $this->render('signup', [
+//             'model' => $model,
+//         ]);
+//     }
 
     /**
      * Requests password reset.
@@ -180,7 +180,9 @@ class SiteController extends FrontendController
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
+        
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        	
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 

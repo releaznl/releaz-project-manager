@@ -4,6 +4,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\HTML;
 use yii\helpers\ArrayHelper;
+use common\models\BidPart;
 
 ?>
 <div>
@@ -14,20 +15,7 @@ use yii\helpers\ArrayHelper;
 	<p>
 	    <?php $form = ActiveForm::begin();?>
 	    
-	    <?= $form->field($model, 'informatie'); ?>
-	    
-	    
-	    <?php /* foreach ($category->bidParts as $part) {
-	    
-	   	echo $form->field($model, $part->attribute_name)->radio([
-			'label' => $part->description,
-			'value' => $part->id,
-			'uncheckValue' => null,
-		]); 
-	    
-	    } */ ?>
-	    
-	    <?= ''; /*  $form->field($model, 'al_hosting')->radioList(ArrayHelper::map($category->bidParts, 'id', 'description'), ['separator' => '<br>'])->label(false) */ ?>
+	    <?= $form->field($model, 'informatie')->textInput()->label(BidPart::find()->where(['attribute_name' => 'informatie'])->one()->getLabel()); ?>
 	    
 		
     	<?= Html::a(Yii::t('common','Last step'), ['step-3'], ['class' => 'btn btn-primary']) ?>

@@ -21,7 +21,7 @@ return [
     'CoC number' => 'KvK nummer',
     'Company name' => 'Bedrijfsnaam',
     'Contact type' => 'Contact type',
-    'Description' => 'Beschrijving',
+    'Description' => 'Omschrijving',
     'Location' => 'Locatie',
     'Phone number' => 'Telefoonnummer',
     'Tax' => 'BTW',

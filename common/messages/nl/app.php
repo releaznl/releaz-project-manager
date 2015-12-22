@@ -17,14 +17,15 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Controllers' => 'Controllers',
-    'Funcionalities' => 'Functionaliteiten',
+    'Signup' => '@@Aanmelden@@',
     'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
     'Bid Categories' => 'Offerte Categorieen',
     'Bid Parts' => 'Offerte Onderdelen',
+    'Controllers' => 'Controllers',
     'Create Customer' => 'Klant aanmaken',
     'Customers' => 'Klanten',
     'Files' => 'Bestanden',
+    'Funcionalities' => 'Functionaliteiten',
     'Functionalities' => 'Functionaliteiten',
     'Home' => 'Home',
     'Login' => 'Log in',
@@ -32,7 +33,6 @@ return [
     'Request password reset' => 'Wachtwoord reset aanvragen',
     'Reset password' => 'Reset wachtwoord',
     'Select a client' => 'Selecteer een client',
-    'Signup' => 'Aanmelden',
     'Todo ID' => 'Todo id',
     'Todos' => 'Todos',
     'Update' => 'Update',
