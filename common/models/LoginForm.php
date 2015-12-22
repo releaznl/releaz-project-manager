@@ -3,6 +3,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
+use yii\base\InvalidParamException;
 
 /**
  * Login form
@@ -40,12 +41,17 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, Yii::t('loginform','Incorrect username or password.'));
-            }
-        }
+    	try {
+	        if (!$this->hasErrors()) {
+	            $user = $this->getUser();
+	            if (!$user || !$user->validatePassword($this->password)) {
+	                $this->addError($attribute, Yii::t('loginform','Incorrect username or password.'));
+	            }
+	        }
+    	} catch (InvalidParamException $ipe) {
+
+    		$this->addError($attribute, Yii::t('loginform','This account has not been activated yet.'));
+    	}
     }
 
     /**

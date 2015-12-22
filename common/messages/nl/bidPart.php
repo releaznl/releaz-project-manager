@@ -17,7 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Monthly costs' => 'Maandelijkse kosten',
+    ' one-off' => ' eenmalig',
+    ' per month' => ' per maand',
     'Attribute Name' => 'Attribuut naam',
     'Bid Category ID' => 'Offerte Categorie ID',
     'Created By' => 'Aangemaakt door',
@@ -28,6 +29,7 @@ return [
     'Explanation' => 'Verklaring',
     'File Upload' => 'Bestand Upload',
     'ID' => 'ID',
+    'Monthly costs' => 'Maandelijkse kosten',
     'Name' => 'Naam',
     'Order' => 'Volgorde',
     'Price' => 'Prijs',

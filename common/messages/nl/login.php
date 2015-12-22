@@ -17,5 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Please fill out the following fields to login:' => 'Vul de volgende velden in om in te loggen:',
     'Login' => 'Log in',
 ];

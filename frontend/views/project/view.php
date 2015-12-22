@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use common\models\User;
 use common\models\Functionality;
 use common\models\File;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Project */
@@ -24,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('common','Update'), ['update', 'id' => $model->project_id], ['class' => 'btn btn-primary']) : Html::a('') ?>
         <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('project','Add functionality'), ['functionality/create', 'pid' => $model->project_id], ['class' => 'btn btn-success']) : Html::a('') ?>
+        <?= (Yii::$app->user->can('editProject') && $model->status == Project::STATUS_REQUESTED) ? Html::a(Yii::t('project','Accept project request'), ['project/accept', 'pid' => $model->project_id], ['class' => 'btn btn-warning']) : Html::a('') ?>
         <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->project_id], [
             'class' => 'btn btn-danger',
             'data' => [

@@ -24,7 +24,7 @@ class m151209_151526_insert_bid_data extends Migration
 		$this->insert('bid_part', [
 				'name' => 'Samen kijken',
 				'bid_category_id' => $id,
-				'description' => 'Ik wil met jullie samen kijken waar ik met mijn organisatie heen wil en wat de website hierin kan bijdragen (€ 210,-)',
+				'description' => 'Ik wil met jullie samen kijken waar ik met mijn organisatie heen wil en wat de website hierin kan bijdragen',
 				'price' => 210,
 				'file_upload' => 0,
 				'explanation' => 0,
@@ -226,7 +226,7 @@ class m151209_151526_insert_bid_data extends Migration
 		$this->insert('bid_part', [
 				'name' => 'Ik heb al hosting',
 				'bid_category_id' => $id,
-				'description' => 'Ik heb al hosting bij iemand anders (€140,-)',
+				'description' => 'Ik heb al hosting bij iemand anders',
 				'price' => 140,
 				'file_upload' => 0,
 				'explanation' => 0,

@@ -48,15 +48,40 @@ class ProjectController extends FrontendController
      */
     public function actionView($id)
     {
-    	
     	$model = $this->findModel($id);
     	if (Yii::$app->user->can('viewProject', ['project' => $model], false)) {
 	        return $this->render('view', [
 	            'model' => $model,
 	        ]);
     	}
-    	throw new NotFoundHttpException('The requested page does not exist.');
     	
+    	throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    
+    public function actionAccept($pid) 
+    {
+    	if (Yii::$app->user->can('editProject')) 
+    	{
+	    	$project = Project::find()->where(['project_id' => $pid])->one();
+	    	$project->accept();
+	    	
+	    	$user = $project->creator;
+	    	
+	    	if (!$user->password_reset_token) 
+	    	{
+	    		$user->generatePasswordResetToken();
+	    		$user->status = User::STATUS_ACTIVE;
+	    		$user->save();
+	    		
+	    		$bool = Yii::$app->mailer->compose(['html' => 'projectAccepted-html', 'text' => 'projectAccepted-text'], ['user' => $user])
+	    		->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+	    		->setTo($user->email)
+	    		->setSubject(Yii::t('mail','Password reset for ') . \Yii::$app->name)
+	    		->send();
+	    	}
+    	}
+    	
+    	$this->redirect(['/project/view', 'id' => $pid]);
     }
 
     /**

@@ -18,16 +18,15 @@
  */
 return [
     'Create file' => '',
-    'File' => 'Bestand',
-    'No project' => 'Geen project',
-    'No todo' => 'Geen todo',
-    'Uploaded file' => 'Geuploade bestand',
+    'No project' => '@@Geen project@@',
+    'No todo' => '@@Geen todo@@',
     'Create File' => 'File Aanmaken',
     'Creator ID' => 'Aanmaker ID',
     'Datetime Added' => 'Moment Toegevoegd',
     'Datetime Updated' => 'Moment Geupdate',
     'Deleted' => 'Verwijdert',
     'Description' => 'Beschrijving',
+    'File' => 'Bestand',
     'File ID' => 'Bestands ID',
     'Files' => 'Bestanden',
     'Name' => 'Naam',
@@ -35,4 +34,5 @@ return [
     'Todo ID' => 'Todo ID',
     'Update File: ' => 'File Wijzigen: ',
     'Updater ID' => 'Wijziger ID',
+    'Uploaded file' => 'Geuploade bestand',
 ];

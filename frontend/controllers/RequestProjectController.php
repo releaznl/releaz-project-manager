@@ -128,11 +128,7 @@ class RequestProjectController extends \yii\web\Controller
     		{
 	    		Yii::$app->session->set('part5', $model);
 	    		
-	    		if (Yii::$app->user->isGuest) {
-		    		return $this->redirect('/request-project/create-user');
-	    		} else {
-	    			return $this->redirect('/request-project/overview');
-	    		}
+	    		return $this->redirect('/request-project/overview');
     		}
     	}
     	
@@ -165,19 +161,18 @@ class RequestProjectController extends \yii\web\Controller
 //     		Yii::$app->session->setFlash('error', Yii::t('request_project', 'You have missed a part of the form, please check to see if you have entered the correct information.'));
     		return $this->redirect(['/request-project/step-5']);
     	}
-    	
     }
     
-    public function actionGenerateProject() 
+    public function actionGenerateProject($uid) 
     {
     	if (Yii::$app->session->has('part1')
-    			&& Yii::$app->session->has('part2')
-    			&& Yii::$app->session->has('part3')
-    			&& Yii::$app->session->has('part4')
-    			&& Yii::$app->session->has('part5')) 
+    		&& Yii::$app->session->has('part2')
+    		&& Yii::$app->session->has('part3')
+    		&& Yii::$app->session->has('part4')
+    		&& Yii::$app->session->has('part5')) 
     	{
-    		$this->generateProject();
-    		return $this->redirect('/request-project/completion');
+	    		$this->generateProject($uid);
+	    		return $this->redirect('/request-project/completion');
     	}
     	return $this->redirect('/request-project/overview');
     }
@@ -186,17 +181,22 @@ class RequestProjectController extends \yii\web\Controller
     {
     	$model = new SignupForm();
     	
-    	if ($model->load(Yii::$app->request->post())) {
-    		if ($user = $model->signup()) {
-    			if (Yii::$app->getUser()->login($user)) {
-    				return $this->redirect('/request-project/overview');
-    			}
+    	if ($model->load(Yii::$app->request->post())) 
+    	{
+    		if ($user = $model->signup()) 
+    		{
+    			return $this->redirect(['/request-project/generate-project', 'uid' => $user->id]);
     		}
     	}
     	
-    	return $this->render('/site/signup', [
-    			'model' => $model,
-    	]);
+    	if (Yii::$app->user->isGuest)
+    	{
+	    	return $this->render('/site/signup', [
+	    			'model' => $model,
+	    	]);
+    	}
+    	
+    	return $this->redirect('/request-project/generate-project');
     }
     
     private function getStepsAsBidPartArray() 
@@ -234,7 +234,7 @@ class RequestProjectController extends \yii\web\Controller
     	return $result;
     }
     
-    private function generateProject() 
+    private function generateProject($uid) 
     {
     	// Get the Parts
     	$steps = array();
@@ -247,7 +247,11 @@ class RequestProjectController extends \yii\web\Controller
     	
     	// Create Project
     	$project = new Project();
-    	$customer = Customer::find()->where(['user_id' => Yii::$app->user->id])->one();
+    	$user = User::find()->where(['id' => $uid])->one();
+    	$customer = Customer::find()->where($user->id)->one();
+    	
+    	// Log in the user temporarily so the project and functionalities get the right creator_id and updater_id
+    	Yii::$app->user->login($user);
     	
     	$project->client_id = $customer->customer_id;
     	$project->projectmanager_id = User::getProjectmanagers()[0]->id;
@@ -256,13 +260,13 @@ class RequestProjectController extends \yii\web\Controller
     	$project->deleted = 0;
     	$project->description = 'Doel van de website: ' . $steps[1]->goal;
     	
-    	$project->save();
+    	$project->save(false);
     	
     	mkdir($this->permFileLocation . $project->project_id . '/');
     	
     	foreach ($steps as $step) 
     	{
-    		$this->saveFunctionalities($step, $project->project_id);
+    		$this->saveFunctionalities($step, $project->project_id, $uid);
     	}
     	
     	// Unset all steps in _SESSION
@@ -271,6 +275,9 @@ class RequestProjectController extends \yii\web\Controller
     	Yii::$app->session->remove('part3');
     	Yii::$app->session->remove('part4');
     	Yii::$app->session->remove('part5');
+    	
+    	// Log the user out
+    	Yii::$app->user->logout();
     	
     	// Notify the admin
     	$user = $project->projectmanager;
@@ -288,7 +295,7 @@ class RequestProjectController extends \yii\web\Controller
     	return $this->render('completion');
     }
     
-    private function saveFunctionalities($step, $project_id) {
+    private function saveFunctionalities($step, $project_id, $uid) {
     	
     	foreach($step->attributes as $key => $attribute) {
     		if (!empty($attribute)) {
@@ -302,6 +309,8 @@ class RequestProjectController extends \yii\web\Controller
 	    			$file->project_id = $project_id;
 	    			$file->todo_id = null;
 	    			$file->deleted = 0;
+	    			$file->creator_id = $uid;
+	    			$file->updater_id = $uid;
 		    		
 	    			$file->save();
 	    			
@@ -316,6 +325,8 @@ class RequestProjectController extends \yii\web\Controller
 		    		$functionality->deleted = 0;
 		    		$functionality->amount = 1;
 		    		$functionality->price = round($bidpart->price, 2);
+		    		$functionality->creator_id = $uid;
+		    		$functionality->updater_id = $uid;
 		    		
 		    		$functionality->save();
 	    		}

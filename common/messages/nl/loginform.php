@@ -17,5 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'This account has not been activated yet.' => 'Dit account is nog niet geactiveerd.',
     'Incorrect username or password.' => 'De gebruikersnaam en wachtwoord combinatie is niet correct.',
 ];

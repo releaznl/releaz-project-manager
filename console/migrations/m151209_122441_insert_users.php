@@ -14,6 +14,7 @@ class m151209_122441_insert_users extends Migration
 				'role_id' => 0,
 				'created_at' => 0,
 				'updated_at' => 0,
+				'status' => 10,
 				'email' => 'admin@releaz.nl'
 				]);
 		
@@ -32,6 +33,7 @@ class m151209_122441_insert_users extends Migration
 				'role_id' => 0,
 				'created_at' => 0,
 				'updated_at' => 0,
+				'status' => 10,
 				'email' => 'projectmanager@releaz.nl',
 		]);
 		
@@ -50,6 +52,7 @@ class m151209_122441_insert_users extends Migration
 				'role_id' => 0,
 				'created_at' => 0,
 				'updated_at' => 0,
+				'status' => 10,
 				'email' => 'info@releaz.nl',
 		]);
 		

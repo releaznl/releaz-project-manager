@@ -15,8 +15,8 @@ use yii\helpers\ArrayHelper;
 	
 	<?php foreach ($category->bidParts as $part) : ?>
 	
-	<?php echo $form->field($model, $part->attribute_name)->checkBox([
-			'label' => $part->description,
+	<?= $form->field($model, $part->attribute_name)->checkBox([
+			'label' => $part->getLabel(true),
 			'value' => $part->id,
 			'uncheckValue' => null,
 			'labelOptions' => [

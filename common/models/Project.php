@@ -168,4 +168,13 @@ class Project extends ReleazActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'updater_id']);
     }
+    
+    /**
+     * Sets the status of the project to STATUS_ACCEPTED
+     */
+    public function accept() 
+    {
+    	$this->status = self::STATUS_ACCEPTED;
+    	$this->save();
+    }
 }

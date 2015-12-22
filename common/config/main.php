@@ -7,7 +7,7 @@ return [
     			'dateFormat' => 'dd.MM.yyyy',
     			'thousandSeparator' => '.',
     			'decimalSeparator' => ',',
-    			'currencyCode' => 'EUR'
+    			'currencyCode' => 'EUR',
     	],
     	'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -86,6 +86,14 @@ return [
     				'basePath' => '@common/messages',
     			],
     			'project' => [
+    				'class' => 'yii\i18n\PhpMessageSource',
+    				'basePath' => '@common/messages',
+    			],
+    			'request-project' => [
+    				'class' => 'yii\i18n\PhpMessageSource',
+    				'basePath' => '@common/messages',
+    			],
+    			'signup' => [
     				'class' => 'yii\i18n\PhpMessageSource',
     				'basePath' => '@common/messages',
     			],
