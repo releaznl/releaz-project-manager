@@ -22,7 +22,7 @@ return [
     'Company name' => 'Bedrijfsnaam',
     'Contact type' => 'Contact type',
     'Description' => 'Omschrijving',
-    'Location' => 'Locatie',
+    'Location' => 'Plaats',
     'Phone number' => 'Telefoonnummer',
     'Tax' => 'BTW',
     'Website' => 'Website',

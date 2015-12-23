@@ -158,7 +158,6 @@ class RequestProjectController extends \yii\web\Controller
 	    	]);
 	    	
     	} else {
-//     		Yii::$app->session->setFlash('error', Yii::t('request_project', 'You have missed a part of the form, please check to see if you have entered the correct information.'));
     		return $this->redirect(['/request-project/step-5']);
     	}
     }
@@ -171,32 +170,67 @@ class RequestProjectController extends \yii\web\Controller
     		&& Yii::$app->session->has('part4')
     		&& Yii::$app->session->has('part5')) 
     	{
+    			$mail = $this->setupOverviewMail($uid);
 	    		$this->generateProject($uid);
+	    		$mail->send();
 	    		return $this->redirect('/request-project/completion');
     	}
     	return $this->redirect('/request-project/overview');
     }
+    
+    private function setupOverviewMail($uid) 
+    {
+    	$arrays = $this->getStepsAsBidPartArray();
+    	$oneOffDataProvider = new ArrayDataProvider(['allModels' => $arrays['oneoff']]);
+    	$monthlyDataProvider = new ArrayDataProvider(['allModels' => $arrays['monthly']]);
+    	
+    	$user = User::findOne(['id' => $uid]);
+    	if ($user === null) return null;
+    	
+    	$mail = Yii::$app->mailer->compose([
+    			'html' => 'overviewMail-html', 
+    			'text' => 'overviewMail-text',
+    	],
+    	[
+    			'oneOffDataProvider' => $oneOffDataProvider,
+    			'monthlyDataProvider' => $monthlyDataProvider,
+    			'arrays' => $arrays,
+    	]);
+    	$mail->setTo($user->email);
+    	$mail->setFrom('noreply@releaz.nl');
+    	$mail->setSubject(Yii::t('mail', 'Your request has been noted'));
+    	return $mail;
+    }
 
     public function actionCreateUser() 
     {
-    	$model = new SignupForm();
-    	
-    	if ($model->load(Yii::$app->request->post())) 
+    	if (Yii::$app->session->has('part1')
+    			&& Yii::$app->session->has('part2')
+    			&& Yii::$app->session->has('part3')
+    			&& Yii::$app->session->has('part4')
+    			&& Yii::$app->session->has('part5'))
     	{
-    		if ($user = $model->signup()) 
-    		{
-    			return $this->redirect(['/request-project/generate-project', 'uid' => $user->id]);
-    		}
+	    	$model = new SignupForm();
+	    	
+	    	if ($model->load(Yii::$app->request->post())) 
+	    	{
+	    		if ($user = $model->signup()) 
+	    		{
+	    			return $this->redirect(['/request-project/generate-project', 'uid' => $user->id]);
+	    		}
+	    	}
+	    	
+	    	if (Yii::$app->user->isGuest)
+	    	{
+		    	return $this->render('/site/signup', [
+		    			'model' => $model,
+		    	]);
+	    	}
+	    	
+	    	return $this->redirect(['/request-project/generate-project', 'uid' => Yii::$app->user->id]);
+    	} else {
+    		return $this->redirect(['/request-project/overview']);
     	}
-    	
-    	if (Yii::$app->user->isGuest)
-    	{
-	    	return $this->render('/site/signup', [
-	    			'model' => $model,
-	    	]);
-    	}
-    	
-    	return $this->redirect('/request-project/generate-project');
     }
     
     private function getStepsAsBidPartArray() 

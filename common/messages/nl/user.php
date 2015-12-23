@@ -31,7 +31,7 @@ return [
     'Email Address' => 'Email Adres',
     'Existing user' => 'Bestaande Gebruiker',
     'Kvk' => 'KVK',
-    'Location' => 'Locatie',
+    'Location' => 'Plaats',
     'Name' => 'Naam',
     'New User' => 'Nieuwe Gebruiker',
     'New user' => 'Nieuwe gebruiker',
