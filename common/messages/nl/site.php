@@ -17,10 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Please fill out the following fields to signup:' => '@@Vul het onderstaande formulier in op je aan te melden.@@',
     'Backend projectmanager application' => 'Backend projectmanager applicatie',
     'If you forgot your password you can' => 'Als je je wachtwoord bent vergeten kan je ',
     'Login' => 'Log in',
-    'Please fill out the following fields to signup:' => 'Vul het onderstaande formulier in op je aan te melden.',
     'Project management application' => 'Projectmanager applicatie',
     'Save' => 'Opslaan',
     'Send' => 'Verzenden',

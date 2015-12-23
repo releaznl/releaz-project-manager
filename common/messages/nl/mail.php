@@ -17,12 +17,14 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Thank you for requesting your project with us. Below is an overview of what you have requested. We will contact you as soon as possible when we have accepted your request.' => 'Bedankt voor het aanvragen van een project. Hieronder staat een overzicht van de gekozen opties. We zullen zo spoedig mogelijk contact met u opnemen.',
+    'Your request has been noted' => 'Je aanvraag staat genoteerd',
     'Follow the link below to reset your password:' => 'Volg de onderstaande link om je wachtwoort te resetten:',
     'Follow the link below to set your password and activate your account:' => 'Volg de onderstaande link om je wachtwoord in te stellen en je account te activeren:',
     'Hello' => 'Hallo',
-    'The project you have requested has been accepted.' => 'Het project wat je hebt aangevraagd is geaccepteerd.',
     'Open the following URL to see it' => 'Open de volgende URL om het te bekijken',
     'Password reset for ' => 'Wachtwoord reset voor ',
+    'The project you have requested has been accepted.' => 'Het project wat je hebt aangevraagd is geaccepteerd.',
     'There is a new project registered' => 'Er is een nieuw project geregistreerd',
     'There is a new project registered.' => 'Er is een nieuw project gereigstrerd.',
     'View the project here' => 'Bekijk het project hier',

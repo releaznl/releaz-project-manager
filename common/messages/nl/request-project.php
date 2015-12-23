@@ -17,6 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Total monthly costs: ' => 'Totaal maandelijkse kosten: ',
+    'Total one-off costs: ' => 'Totaal eenmalige kosten: ',
     'Select a target audience' => '@@Selecteer een doelgroep@@',
     'Completion' => 'Afronding',
     'Monthly costs' => 'Maandelijkse kosten',
