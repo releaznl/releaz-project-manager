@@ -20,7 +20,7 @@ return [
     'Address' => 'Adres',
     'CoC number' => 'KvK nummer',
     'Company name' => 'Bedrijfsnaam',
-    'Contact type' => 'Contact type',
+    'Contact type' => 'Voorkeur voor contact',
     'Description' => 'Omschrijving',
     'Location' => 'Plaats',
     'Phone number' => 'Telefoonnummer',
