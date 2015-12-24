@@ -10,9 +10,7 @@ use common\models\BidPart;
 <div>
 	<h1><?php echo $category->name ?></h1>
 	
-	<p><?php echo $category->description ?></p>
-	
-	<p>
+	<div class="col-sm-6">
 	    <?php $form = ActiveForm::begin();?>
 	    
 	    <?= $form->field($model, 'informatie')->textInput()->label(BidPart::find()->where(['attribute_name' => 'informatie'])->one()->getLabel()); ?>
@@ -22,5 +20,7 @@ use common\models\BidPart;
 		<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 		
 		<?php ActiveForm::end() ?>
-	</p>
+	</div>
+
+	<div class="col-sm-6"><?php echo $category->description ?></div>
 </div>

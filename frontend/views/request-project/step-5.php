@@ -7,9 +7,7 @@ use yii\helpers\HTML;
 ?>
 <h1><?php echo $category->name ?></h1>
 
-<p><?php echo $category->description ?></p>
-
-<p>
+<div class="col-sm-6">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
     
     <?php foreach ($category->bidParts as $part) : ?>
@@ -29,4 +27,7 @@ use yii\helpers\HTML;
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 	
 	<?php ActiveForm::end() ?>
-</p>
+</div>
+
+
+<div class="col-sm-6"><?php echo $category->description ?></div>

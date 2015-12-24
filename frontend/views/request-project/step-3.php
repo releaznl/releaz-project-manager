@@ -9,9 +9,8 @@ use yii\helpers\HTML;
 ?>
 
 <h1><?php echo $category->name ?></h1>
-<p><?php echo $category->description ?></p>
 
-<p>
+<div class="col-sm-6">
     <?php $form = ActiveForm::begin() ?>
     
     <?php echo $form->field($model, 'deadline')->widget(\yii\jui\DatePicker::classname(), [
@@ -23,4 +22,8 @@ use yii\helpers\HTML;
 	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']); ?>
 	
 	<?php ActiveForm::end(); ?>
-</p>
+</div>
+
+<div class="col-sm-6">
+	<?php echo $category->description ?>
+</div>
