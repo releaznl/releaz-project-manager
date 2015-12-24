@@ -33,7 +33,7 @@ return [
     'Step 5' => 'Stap 5',
     'Thank you for entering your information. We will take a look at your request as soon as possible and will let you know by email when we are ready.' => 'Bedankt voor het invullen van je informatie. We zullen je aanvraag bekijken en zullen je zo spoedig mogelijk informeren per email.',
     'The design of the website will be based on the information entered.' => 'Het ontwerp van de website wordt gebaseerd op de hier ingevulde gegevens.',
-    'The following is an overview of the project that will be generated, along with the estimated price of the project.' => 'Hieronder staan de geselecteerde opties en een overzicht van de eenmalige en maandelijkse kosten op basis van uw gekozen opties. Klik op de knop \'Bevestigen\' om de aanvraag definief te maken. Er wordt dan contact met u opgenomen voor het bespreken van de offerte.',
+    'The following is an overview of the project that will be generated, along with the estimated price of the project.' => 'Hieronder staan de geselecteerde opties en een overzicht van de eenmalige en maandelijkse kosten op basis van uw gekozen opties. Klik op de knop \'Bevestigen\' om de aanvraag definief te maken. Vervolgens dient u uw gegevens in te vullen en wordt de aanvraag opgeslagen. Er wordt dan contact met u opgenomen voor het bespreken van de offerte.',
     'Total monthly costs: ' => 'Totaal maandelijkse kosten: ',
     'Total one-off costs: ' => 'Totaal eenmalige kosten: ',
 ];

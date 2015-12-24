@@ -23,7 +23,7 @@ return [
     'Client' => 'Client',
     'CoC number' => 'KvK nummer',
     'Company name' => 'Bedrijfsnaam',
-    'Contact type' => 'Contact type',
+    'Contact type' => 'Voorkeur voor contact',
     'Create Customer' => 'Client Aanmaken',
     'Customers' => 'Clienten',
     'Description' => 'Omschrijving',
