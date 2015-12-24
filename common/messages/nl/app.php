@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Login' => '@@Log in@@',
     'Signup' => '@@Aanmelden@@',
     'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
     'Bid Categories' => 'Offerte Categorieen',
@@ -28,7 +29,6 @@ return [
     'Funcionalities' => 'Functionaliteiten',
     'Functionalities' => 'Functionaliteiten',
     'Home' => 'Home',
-    'Login' => 'Log in',
     'Projects' => 'Projecten',
     'Request password reset' => 'Wachtwoord reset aanvragen',
     'Reset password' => 'Reset wachtwoord',

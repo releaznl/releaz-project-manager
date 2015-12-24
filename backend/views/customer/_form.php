@@ -21,6 +21,8 @@ use common\models\Customer;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'contact')->textInput() ?>
 
     <?= $form->field($model, 'zip_code')->textInput(['maxlength' => true]) ?>
 

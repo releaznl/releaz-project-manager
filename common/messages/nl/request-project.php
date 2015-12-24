@@ -17,14 +17,23 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Total monthly costs: ' => 'Totaal maandelijkse kosten: ',
-    'Total one-off costs: ' => 'Totaal eenmalige kosten: ',
+    'Total' => 'Totaal',
     'Select a target audience' => '@@Selecteer een doelgroep@@',
+    ' Comments:' => ' Opmerkingen:',
+    'Comment' => 'Opmerking',
     'Completion' => 'Afronding',
     'Monthly costs' => 'Maandelijkse kosten',
     'One-off costs' => 'Eenmalige kosten',
     'Overview' => 'Overzicht gekozen opties',
+    'Step' => 'Stap',
+    'Step 1' => 'Stap 1',
+    'Step 2' => 'Stap 2',
+    'Step 3' => 'Stap 3',
+    'Step 4' => 'Stap 4',
+    'Step 5' => 'Stap 5',
     'Thank you for entering your information. We will take a look at your request as soon as possible and will let you know by email when we are ready.' => 'Bedankt voor het invullen van je informatie. We zullen je aanvraag bekijken en zullen je zo spoedig mogelijk informeren per email.',
     'The design of the website will be based on the information entered.' => 'Het ontwerp van de website wordt gebaseerd op de hier ingevulde gegevens.',
     'The following is an overview of the project that will be generated, along with the estimated price of the project.' => 'Hieronder staan de geselecteerde opties en een overzicht van de eenmalige en maandelijkse kosten op basis van uw gekozen opties. Klik op de knop \'Bevestigen\' om de aanvraag definief te maken. Er wordt dan contact met u opgenomen voor het bespreken van de offerte.',
+    'Total monthly costs: ' => 'Totaal maandelijkse kosten: ',
+    'Total one-off costs: ' => 'Totaal eenmalige kosten: ',
 ];

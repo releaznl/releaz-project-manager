@@ -44,7 +44,7 @@ AppAsset::register($this);
 //         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app','Login'), 'url' => ['/site/login']];
+    	
     } else {
         $menuItems[] = 
         [

@@ -18,8 +18,8 @@ use Yii;
  * @property string $kvk
  * @property string $btw
  * @property string $email_address
- * @property resource $description
  * @property int $contact_type
+ * @property string $contact
  *
  * @property User $user
  */
@@ -57,9 +57,8 @@ class Customer extends \yii\db\ActiveRecord
         return [
             [['address', 'user_id', 'name', 'zip_code', 'email_address'], 'required'],
             [['customer_id', 'user_id', 'contact_type'], 'integer'],
-            [['description'], 'string'],
         	[['email_address'], 'email'],
-            [['name', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'email_address'], 'string', 'max' => 128]
+            [['name', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'email_address', 'contact'], 'string', 'max' => 128]
         ];
     }
     
@@ -75,19 +74,19 @@ class Customer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'customer_id' => Yii::t('user','Customer ID'),
-            'user_id' => Yii::t('user','User ID'),
-            'name' => Yii::t('user','Name'),
-            'address' => Yii::t('user','Address'),
-            'contact_type' => Yii::t('user','Contact type'),
-            'zip_code' => Yii::t('user','Zip Code'),
-            'location' => Yii::t('user','Location'),
-            'phone_number' => Yii::t('user','Phone Number'),
-            'website' => Yii::t('user','Website'),
-            'kvk' => Yii::t('user','Kvk'),
-            'btw' => Yii::t('user','Btw'),
+            'customer_id' 	=> Yii::t('user','Customer ID'),
+            'user_id' 		=> Yii::t('user','User ID'),
+            'name' 			=> Yii::t('user','Name'),
+            'address' 		=> Yii::t('user','Address'),
+            'contact_type' 	=> Yii::t('user','Contact type'),
+        	'contact' 		=> Yii::t('customer', 'contact'),
+            'zip_code' 		=> Yii::t('user','Zip Code'),
+            'location' 		=> Yii::t('user','Location'),
+            'phone_number' 	=> Yii::t('user','Phone Number'),
+            'website' 		=> Yii::t('user','Website'),
+            'kvk' 			=> Yii::t('user','Kvk'),
+            'btw' 			=> Yii::t('user','Btw'),
             'email_address' => Yii::t('user','Email Address'),
-            'description' => Yii::t('user','Description'),
         ];
     }
     

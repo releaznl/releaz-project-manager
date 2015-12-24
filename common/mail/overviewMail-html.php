@@ -10,6 +10,7 @@ use yii\base\Widget;
 	
 	<?= GridView::widget([
 			'dataProvider' => $oneOffDataProvider,
+			'layout' => '{items}',
 			'showFooter' => true,
 			'columns' => [
 					'name',
@@ -26,6 +27,7 @@ use yii\base\Widget;
 	
 	<?= GridView::widget([
 			'dataProvider' => $monthlyDataProvider,
+			'layout' => '{items}',
 			'showFooter' => true,
 			'columns' => [
 					'name',

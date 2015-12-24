@@ -11,10 +11,11 @@ class PromotionForm extends Model {
 	public $socialmedia_service;
 	public $google_analytics_service;
 	public $nieuwsbrief_service;
+	public $comment;
 	
 	public function rules() {
 		return [
-			[['socialmedia_service', 'google_analytics_service', 'nieuwsbrief_service'], 'safe'],
+			[['socialmedia_service', 'google_analytics_service', 'nieuwsbrief_service', 'comment'], 'safe'],
 		];
 	}
 

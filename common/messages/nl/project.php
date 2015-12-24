@@ -33,6 +33,7 @@ return [
     'Files for this project' => 'Bestanden voor dit project',
     'Finished' => 'Klaar',
     'Functionalities for this project' => 'Functionaliteiten voor dit project',
+    'Goal of the website: ' => 'Doel van de website',
     'Project ID' => 'Project ID',
     'Project name' => 'Projectnaam',
     'Projectmanager' => 'Projectmanager',

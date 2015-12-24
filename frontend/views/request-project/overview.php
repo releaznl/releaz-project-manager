@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
+use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
@@ -12,6 +13,36 @@ $this->title = Yii::t('request-project', 'Overview');
 
 <div>
 	<h1><?= $this->title ?></h1>
+	
+	<?= Breadcrumbs::widget([
+// 				'itemTemplate' => '<li>{link}</li>',
+				'links' => [
+					[
+						'label' => Yii::t('request-project', 'Step 1'),
+						'url' => ['/request-project/step-1'],
+					],
+					[
+						'label' => Yii::t('request-project', 'Step 2'),
+						'url' => ['/request-project/step-2'],
+					],
+					[
+						'label' => Yii::t('request-project', 'Step 3'),
+						'url' => ['/request-project/step-3'],
+					],
+					[
+						'label' => Yii::t('request-project', 'Step 4'),
+						'url' => ['/request-project/step-4'],
+					],
+					[
+						'label' => Yii::t('request-project', 'Step 5'),
+						'url' => ['/request-project/step-5'],
+					],
+					[
+						'label' => Yii::t('request-project', 'Overview'),
+						'url' => ['/request-project/overview'],
+					],
+				]
+		]); ?>
 
 	<div class="col-sm-6">
 		<div class="row">
@@ -20,9 +51,13 @@ $this->title = Yii::t('request-project', 'Overview');
 				
 				<?= GridView::widget([
 						'dataProvider' => $oneoffDataProvider,
+						'layout' => '{items}',
 						'showFooter' => true,
 						'columns' => [
-								'name',
+								[
+									'attribute' => 'name',
+									'footer' => Yii::t('request-project', 'Total'),
+								],
 								'description',
 								[
 									'attribute' => 'price',
@@ -36,9 +71,13 @@ $this->title = Yii::t('request-project', 'Overview');
 				
 				<?= GridView::widget([
 						'dataProvider' => $monthlyDataProvider,
+						'layout' => '{items}',
 						'showFooter' => true,
 						'columns' => [
-								'name',
+								[
+									'attribute' => 'name',
+									'footer' => Yii::t('request-project', 'Total'),
+								],
 								'description',
 								[
 									'attribute' => 'price',
@@ -61,7 +100,7 @@ $this->title = Yii::t('request-project', 'Overview');
 			<?= Yii::t('request-project', 'The following is an overview of the project that will be generated, along with the estimated price of the project.')?>
 		</div>
 		<div class="call">
-			Komt je er niet uit of heb je vragen?<br />
+			Kom je er niet uit of heb je vragen?<br />
 			<a href="tel:+31503015965">050 30 15 965</a>
 		</div>
 	</div>

@@ -9,10 +9,12 @@ use common\models\BidPart;
 class ContentForm extends Model {
 	
 	public $content;
+	public $comment;
 	
 	public function rules() {
 		return [
-			[['content'], 'file', 'skipOnEmpty' => false]
+			[['content'], 'file', 'skipOnEmpty' => false],
+			[['comment'], 'safe'],
 		];
 	}
 	
@@ -22,7 +24,8 @@ class ContentForm extends Model {
 
 	public function attributeLabels() {
 		return $labels = [
-				'content' => 'Inhoud'
+				'content' => 'Inhoud',
+				'comment' => \Yii::t('request-project', 'Comment'),
 		];
 	}
 }

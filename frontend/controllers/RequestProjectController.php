@@ -20,6 +20,7 @@ use frontend\models\requestproject\PromotionForm;
 use frontend\models\SignupForm;
 use yii\base\Object;
 use yii\data\ArrayDataProvider;
+use yii\base\Model;
 
 class RequestProjectController extends \yii\web\Controller
 {
@@ -250,17 +251,20 @@ class RequestProjectController extends \yii\web\Controller
     	{
     		foreach($step->attributes as $key => $attribute) 
     		{
-    			if (!empty($attribute)) 
-    			{
-    				$part = BidPart::find()->where(['attribute_name' => $key])->one();
-    				
-    				if ($part->price != 0) {
-	    				if ($part->monthly_costs) {
-	    					$result['monthly'][] = $part;
-	    				} else {
-	    					$result['oneoff'][] = $part;
+    			if ($key != 'comment') 
+    			{	
+	    			if (!empty($attribute)) 
+	    			{
+	    				$part = BidPart::find()->where(['attribute_name' => $key])->one();
+	    				
+	    				if ($part->price != 0) {
+		    				if ($part->monthly_costs) {
+		    					$result['monthly'][] = $part;
+		    				} else {
+		    					$result['oneoff'][] = $part;
+		    				}
 	    				}
-    				}
+	    			}
     			}
     		}
     	}
@@ -292,15 +296,37 @@ class RequestProjectController extends \yii\web\Controller
     	$project->status = 0;
     	$project->name = $customer->name;
     	$project->deleted = 0;
-    	$project->description = 'Doel van de website: ' . $steps[1]->goal;
+    	$project->description = Yii::t('project', 'Goal of the website: ') . $steps[1]->goal;
     	
     	$project->save(false);
     	
-    	mkdir($this->permFileLocation . $project->project_id . '/');
+    	$location = $this->permFileLocation . $project->project_id . '/';
     	
+    	if (!file_exists($location)) {
+	    	mkdir($location);
+    	}
+    	
+    	
+    	$i = 1;
+    	$comments = Yii::t('request-project',' Comments:');
     	foreach ($steps as $step) 
     	{
-    		$this->saveFunctionalities($step, $project->project_id, $uid);
+    		$comment = $this->saveFunctionalities($step, $project->project_id, $uid);
+    		
+    		if (!empty($comment)) {
+    			$comments .= ' ' . Yii::t('request-project', 'Step');
+    			$comments .= ' ' . $i . ': ';
+    			$comments .= $comment;
+    		}
+    		
+    		$i++;
+    	}
+    	
+    	if ($comments != Yii::t('request-project',' Comments:'))
+    	{
+//     		var_dump($comments); exit;
+	    	$project->description .= $comments;
+	    	$project->save(false);
     	}
     	
     	// Unset all steps in _SESSION
@@ -329,42 +355,62 @@ class RequestProjectController extends \yii\web\Controller
     	return $this->render('completion');
     }
     
+    /**
+     * 
+     * @param Model $step
+     * @param integer $project_id
+     * @param integer $uid
+     * @return string $comments
+     */
     private function saveFunctionalities($step, $project_id, $uid) {
+    	$comment = '';
     	
-    	foreach($step->attributes as $key => $attribute) {
-    		if (!empty($attribute)) {
-	    		$bidpart = BidPart::find()->where(['attribute_name' => $key])->one();
-	    		
-	    		if ($bidpart->file_upload) {
-	    			$file = new File();
-	    			
-	    			$file->name = $attribute->baseName . '.' . $attribute->extension;
-	    			$file->description = $bidpart->description;
-	    			$file->project_id = $project_id;
-	    			$file->todo_id = null;
-	    			$file->deleted = 0;
-	    			$file->creator_id = $uid;
-	    			$file->updater_id = $uid;
+    	foreach($step->attributes as $key => $attribute) 
+    	{
+    		if (!empty($attribute)) 
+    		{
+    			if ($key == 'comment') 
+    			{
+    				$comment = $attribute;
+    			}
+    			else 
+    			{
+		    		$bidpart = BidPart::find()->where(['attribute_name' => $key])->one();
 		    		
-	    			$file->save();
-	    			
-	    			rename($this->tempFileLocation . $file->name, $this->permFileLocation . $project_id . '/' . $file->name);
-	    			
-	    		} else {
-		    		$functionality = new Functionality();
-		    		
-		    		$functionality->name = $bidpart->name;
-		    		$functionality->description = $attribute;
-		    		$functionality->project_id = $project_id;
-		    		$functionality->deleted = 0;
-		    		$functionality->amount = 1;
-		    		$functionality->price = round($bidpart->price, 2);
-		    		$functionality->creator_id = $uid;
-		    		$functionality->updater_id = $uid;
-		    		
-		    		$functionality->save();
-	    		}
+		    		if ($bidpart->file_upload) 
+		    		{
+		    			$file = new File();
+		    			
+		    			$file->name = $attribute->baseName . '.' . $attribute->extension;
+		    			$file->description = $bidpart->description;
+		    			$file->project_id = $project_id;
+		    			$file->todo_id = null;
+		    			$file->deleted = 0;
+		    			$file->creator_id = $uid;
+		    			$file->updater_id = $uid;
+			    		
+		    			$file->save();
+		    			
+		    			rename($this->tempFileLocation . $file->name, $this->permFileLocation . $project_id . '/' . $file->name);
+		    			
+		    		} else {
+			    		$functionality = new Functionality();
+			    		
+			    		$functionality->name = $bidpart->name;
+			    		$functionality->description = $attribute;
+			    		$functionality->project_id = $project_id;
+			    		$functionality->deleted = 0;
+			    		$functionality->amount = 1;
+			    		$functionality->price = round($bidpart->price, 2);
+			    		$functionality->creator_id = $uid;
+			    		$functionality->updater_id = $uid;
+			    		
+			    		$functionality->save();
+		    		}
+    			}
     		}
     	}
+    	
+    	return $comment;
     }
 }

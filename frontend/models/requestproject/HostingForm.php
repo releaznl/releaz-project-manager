@@ -11,10 +11,11 @@ class HostingForm extends Model {
 	public $informatie;
 // 	public $al_hosting;
 // 	public $wil_hosting;
+	public $comment;
 	
 	public function rules() {
 		return [
-			[['informatie'], 'safe'],
+			[['informatie', 'comment'], 'safe'],
 // 			[['al_hosting', 'wil_hosting'], 'safe'],
 		];
 	}
@@ -25,7 +26,8 @@ class HostingForm extends Model {
 
 	public function attributeLabels() {
 		return $labels = [
-				'information' => 'Hosting informatie'
+				'information' => 'Hosting informatie',
+				'comment' => \Yii::t('request-project', 'Comment'),
 		];
 	}
 }

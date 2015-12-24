@@ -21,6 +21,7 @@ class DesignForm extends Model {
      */
 	public $current_style;
 	public $target_audience;
+	public $comment;
 
 	public function rules() {
 		return [
@@ -28,7 +29,7 @@ class DesignForm extends Model {
 					'message' => 'Dit is geen valide website'],
 			[['goal', 'target_audience'], 'required'],
 			[['current_style'], 'image', 'skipOnEmpty' => true],
-			[['website2', 'website3'], 'safe'],
+			[['website2', 'website3', 'comment'], 'safe'],
 		];
 	}
 	
@@ -44,7 +45,8 @@ class DesignForm extends Model {
 				'website3' => 'Website 3',
 				'goal' => 'Doel van de website',
 				'current_style' => 'Huidige huisstijl',
-				'target_audience' => 'Doelgroep'
+				'target_audience' => 'Doelgroep',
+				'comment' => \Yii::t('request-project', 'Comment'),
 		];
 	}
 }

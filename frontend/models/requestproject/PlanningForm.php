@@ -9,10 +9,11 @@ use common\models\BidPart;
 class PlanningForm extends Model {
 
 	public $deadline;
+	public $comment;
 	
 	public function rules() {
 		return [
-			[['deadline'], 'safe'],
+			[['deadline', 'comment'], 'safe'],
 		];
 	}
 	
@@ -23,6 +24,7 @@ class PlanningForm extends Model {
 	public function attributeLabels() {
 		return $labels = [
 				'deadline' => 'Mijn deadline',
+				'comment' => \Yii::t('request-project', 'Comment'),
 		];
 	}
 }

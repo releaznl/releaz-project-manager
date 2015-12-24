@@ -25,6 +25,7 @@ class SignupForm extends Model
     public $btw;
     public $description;
     public $contact_type;
+    public $contact;
 
     /**
      * @inheritdoc
@@ -39,9 +40,8 @@ class SignupForm extends Model
             //['name', 'required'],
             //['name', 'unique', 'targetClass' => '\common\models\Customer', 'message' => 'This company name is already in use.'],
             
-            [['address', 'zip_code', 'description', 'company_name'], 'required'],
-            [['description'], 'string'],
-            [['address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw'], 'string', 'max' => 128],
+            [['address', 'zip_code', 'location', 'company_name'], 'required'],
+            [['address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'contact'], 'string', 'max' => 128],
             
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
@@ -62,6 +62,7 @@ class SignupForm extends Model
     			
     			'company_name'		=> \Yii::t('customer','Company name'),
     			'contact_type' 		=> \Yii::t('customer','Contact type'),
+    			'contact' 			=> \Yii::t('customer', 'Contact'),
     			'address' 			=> \Yii::t('customer','Address'),
     			'zip_code' 			=> \Yii::t('customer','Zip code'),
     			'location' 			=> \Yii::t('customer','Location'),
@@ -100,6 +101,7 @@ class SignupForm extends Model
 	            $customer->email_address = $this->email;
 	            $customer->description = $this->description;
 	            $customer->contact_type = $this->contact_type;
+	            $customer->contact = $this->contact;
 	            
                 $customer->user_id = $user->id;
                 
@@ -111,7 +113,6 @@ class SignupForm extends Model
                 }
             } 
         }
-
         return null;
     }
 }
