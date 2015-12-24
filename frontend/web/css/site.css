@@ -5,6 +5,32 @@ body {
     background-size: cover;
 }
 
+h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
+
+.block { 
+	background: #FFF; 
+	margin-top: 30px;
+	padding: 30px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	font-family: proxima-nova,sans-serif;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.info { 
+	background: #92281C; 
+	color: #EC6D5F;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.call { padding: 30px; color: #EC6D5F; }
+.call a { color: #FFF; font-size: 30px; }
+
+.btn-primary { background: #ca3320; border: 0; font-family: proxima-nova,sans-serif; }
+
 .wrap {
     min-height: 100%;
     height: auto;
