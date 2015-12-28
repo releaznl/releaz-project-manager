@@ -12,13 +12,13 @@ $this->title = $category->name;
 
 <h1><?php echo $category->name ?></h1>
 
-<ul>
-	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 1 - Strategy'), ['/request-project/step-1'])?></li>
-	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 2 - Design'), ['/request-project/step-2'])?></li>
-	<li><?= Html::a(Yii::t('request-project', 'Step 3 - Planning'), ['/request-project/step-3'])?></li>
-	<li><?= Html::a(Yii::t('request-project', 'Step 4 - Hosting'), ['/request-project/step-4'])?></li>
-	<li><?= Html::a(Yii::t('request-project', 'Step 5 - Website promotion'), ['/request-project/step-5']) ?></li>
-	<li><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/step-5']) ?></li>
+<ul class="steps">
+    <li class="active"><span>Stap 1</span><?= Html::a(Yii::t('request-project', 'Strategy'), ['/request-project/step-1'])?></li>
+    <li class="active"><span>Stap 2</span><?= Html::a(Yii::t('request-project', 'Design'), ['/request-project/step-2'])?></li>
+    <li><span>Stap 3</span><?= Html::a(Yii::t('request-project', 'Planning'), ['/request-project/step-3'])?></li>
+    <li><span>Stap 4</span><?= Html::a(Yii::t('request-project', 'Hosting'), ['/request-project/step-4'])?></li>
+    <li><span>Stap 5</span><?= Html::a(Yii::t('request-project', 'Website promotion'), ['/request-project/step-5']) ?></li>
+    <li><span>Stap 6</span><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/step-5']) ?></li>
 </ul>
 
 <div class="col-sm-6">

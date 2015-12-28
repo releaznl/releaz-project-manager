@@ -17,11 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Step 1 - Strategy' => 'Stap 1 - Strategie',
-    'Step 2 - Design' => 'Stap 2 - Design',
-    'Step 3 - Planning' => 'Stap 3 - Planning',
-    'Step 4 - Hosting' => 'Stap 4 - Hosting',
-    'Step 5 - Website promotion' => 'Stap 5 - Promotie website',
+    'Strategy' => 'Strategie',
+    'Design' => 'Ontwerp',
+    'Planning' => 'Planning',
+    'Hosting' => 'Hosting',
+    'Website promotion' => 'Promotie website',
     'Select a target audience' => '@@Selecteer een doelgroep@@',
     ' Comments:' => ' Opmerkingen:',
     'Comment' => 'Opmerking',
