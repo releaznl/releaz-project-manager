@@ -67,7 +67,7 @@ $this->title = Yii::t('request-project', 'Overview');
 				]) ?>
 				
 				<?= Html::a(Yii::t('common', 'Last step'), Url::to(['/request-project/step-5']), ['class' => 'btn btn-primary'])?>
-				<?= Html::a(Yii::t('common', 'Create'), Url::to(['/request-project/create-user']), ['class' => 'btn btn-success']) ?>
+				<?= Html::a(Yii::t('common', 'Confirm'), Url::to(['/request-project/create-user']), ['class' => 'btn btn-success']) ?>
 			</div>
 		</div>
 	</div>

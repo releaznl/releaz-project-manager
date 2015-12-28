@@ -40,5 +40,6 @@ return [
     'create' => 'aanmaken',
     'delete' => 'verwijder',
     'update' => 'update',
+    'Confirm' => 'Bevestigen',
     '{attribute} cannot be blank.' => '{attribute} mag niet leeg zijn.',
 ];
