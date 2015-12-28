@@ -10,31 +10,14 @@ $this->title = $category->name;
 ?>
 <h1><?php echo $category->name ?></h1>
 
-<?= Breadcrumbs::widget([
-// 				'itemTemplate' => '<li>{link}</li>',
-				'links' => [
-					[
-						'label' => Yii::t('request-project', 'Step 1'),
-						'url' => ['/request-project/step-1'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 2'),
-						'url' => ['/request-project/step-2'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 3'),
-						'url' => ['/request-project/step-3'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 4'),
-						'url' => ['/request-project/step-4'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 5'),
-						'url' => ['/request-project/step-5'],
-					],
-				]
-		]); ?>
+<ul>
+	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 1 - Strategy'), ['/request-project/step-1'])?></li>
+	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 2 - Design'), ['/request-project/step-2'])?></li>
+	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 3 - Planning'), ['/request-project/step-3'])?></li>
+	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 4 - Hosting'), ['/request-project/step-4'])?></li>
+	<li class="active"><?= Html::a(Yii::t('request-project', 'Step 5 - Website promotion'), ['/request-project/step-5']) ?></li>
+	<li><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/step-5']) ?></li>
+</ul>
 
 <div class="col-sm-6">
 	<div class="row">
