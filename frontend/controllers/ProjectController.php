@@ -74,9 +74,9 @@ class ProjectController extends FrontendController
 	    		$user->save();
 	    		
 	    		$bool = Yii::$app->mailer->compose(['html' => 'projectAccepted-html', 'text' => 'projectAccepted-text'], ['user' => $user])
-	    		->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+	    		->setFrom('info@releaz.nl')
 	    		->setTo($user->email)
-	    		->setSubject(Yii::t('mail','Password reset for ') . \Yii::$app->name)
+	    		->setSubject('Uw projectaanvraag is geaccepteerd')
 	    		->send();
 	    	}
     	}

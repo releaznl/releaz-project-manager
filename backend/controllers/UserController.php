@@ -4,12 +4,10 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\User;
+use backend\models\CreateUser;
 use backend\components\web\BackendController;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -40,7 +38,6 @@ class UserController extends BackendController
      */
     public function actionView($id)
     {
-    	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -93,7 +90,6 @@ class UserController extends BackendController
      */
     public function actionDelete($id)
     {
-    	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

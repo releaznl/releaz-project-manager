@@ -23,6 +23,10 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+	public $password1;
+	public $password2;
+	public $roles;
+	
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
     const STATUS_AWAITING_REQUEST = 11;
@@ -35,6 +39,23 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
     
+    /**
+     * List of statusses sorted by status value
+     * @return string[]
+     */
+    public function getStatusses() {
+    	return [
+    			self::STATUS_DELETED => 'Verwijdert',
+    			self::STATUS_ACTIVE => 'Actief',
+    			self::STATUS_AWAITING_REQUEST => 'In afwachting',
+    	];
+    }
+    
+    /**
+     * Scenarios
+     * {@inheritDoc}
+     * @see \yii\base\Model::scenarios()
+     */
     public function scenarios() {
     	$scenarios = parent::scenarios();
     	$scenarios['createProject'] = [];
@@ -57,6 +78,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+        	['username', 'trim'],
+        	['password2', 'compare', 'compareAttribute' => 'password1'],
             ['status', 'default', 'value' => self::STATUS_AWAITING_REQUEST],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
@@ -91,6 +114,21 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+    
+    /**
+     * Checks if the user is a projectmanager
+     * @return boolean
+     */
+    public function isProjectmanager() {
+    	$manager = Yii::$app->authManager;
+    	$assignment = $manager->getAssignment('projectmanager', $this->id);
+    	
+    	if (isset($assignment)) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 
     /**
@@ -154,10 +192,16 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     public function afterSave($insert, $changedAttributes) {
+    	parent::afterSave($insert, $changedAttributes);
+    	
     	if ($insert) {
 	    	$auth = \Yii::$app->authManager;
     		$auth->assign($auth->getRole('client'), $this->id);
     	}
+    }
+    
+    public function roles() {
+    	return Yii::$app->authManager->getAssignments($this->id);
     }
 
     /**
