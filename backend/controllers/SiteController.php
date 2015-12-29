@@ -7,11 +7,12 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
 use yii\web\UnauthorizedHttpException;
+use backend\components\web\BackendController;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BackendController
 {
 
     /**

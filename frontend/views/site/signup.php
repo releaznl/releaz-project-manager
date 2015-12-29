@@ -14,35 +14,14 @@ $this->title = Yii::t('site', 'Signup');
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
     
-    <?= Breadcrumbs::widget([
-// 				'itemTemplate' => '<li>{link}</li>',
-				'links' => [
-					[
-						'label' => Yii::t('request-project', 'Step 1'),
-						'url' => ['/request-project/step-1'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 2'),
-						'url' => ['/request-project/step-2'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 3'),
-						'url' => ['/request-project/step-3'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 4'),
-						'url' => ['/request-project/step-4'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Step 5'),
-						'url' => ['/request-project/step-5'],
-					],
-					[
-						'label' => Yii::t('request-project', 'Overview'),
-						'url' => ['/request-project/overview'],
-					],
-				]
-		]); ?>
+<ul class="steps">
+	<li class="active"><span>Stap 1</span><?= Html::a(Yii::t('request-project', 'Strategy'), ['/request-project/step-1'])?></li>
+	<li class="active"><span>Stap 2</span><?= Html::a(Yii::t('request-project', 'Design'), ['/request-project/step-2'])?></li>
+	<li class="active"><span>Stap 3</span><?= Html::a(Yii::t('request-project', 'Planning'), ['/request-project/step-3'])?></li>
+	<li class="active"><span>Stap 4</span><?= Html::a(Yii::t('request-project', 'Hosting'), ['/request-project/step-4'])?></li>
+	<li class="active"><span>Stap 5</span><?= Html::a(Yii::t('request-project', 'Website promotion'), ['/request-project/step-5']) ?></li>
+	<li class="active"><span>Stap 6</span><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/step-5']) ?></li>
+</ul>
     
     <p>We ontvangen graag onderstaande gegevens voor het afronden van de offerte aanvraag. Na deze stap wordt een overzicht van de gekozen opties getoond.</p>
 

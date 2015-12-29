@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\DatePicker;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
-use yii\helpers\HTML;
+use yii\helpers\Html;
 
 $this->title = $category->name;
 

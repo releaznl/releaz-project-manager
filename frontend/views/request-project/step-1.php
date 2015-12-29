@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 
 use yii\widgets\ActiveForm;
-use yii\helpers\HTML;
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
 use yii\base\Widget;
