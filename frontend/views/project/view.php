@@ -53,11 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->creator->username,
             ],
             'datetime_added:datetime',  
-            'datetime_updated:datetime',
             [
                 'label' => Yii::t('project','Updater'),
                 'value' => $model->updater->username,
             ],
+            'datetime_updated:datetime',
             // 'updater_id',
         ],
     ]) ?>
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'description',
 //             'amount',
-            'price',
+            'price:currency',
 //         	'totalPrice',
         	'todoAmount',
             

@@ -140,7 +140,7 @@ class FunctionalityController extends FrontendController
     			}
     		}
     	}
-    	return $this->render('create', ['models' => $functionalities]);
+    	return $this->render('create', ['models' => $functionalities, 'pid' => $pid]);
     }
 
     /**

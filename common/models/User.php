@@ -43,7 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
      * List of statusses sorted by status value
      * @return string[]
      */
-    public function getStatusses() {
+    public static function getStatusses() {
     	return [
     			self::STATUS_DELETED => 'Verwijdert',
     			self::STATUS_ACTIVE => 'Actief',

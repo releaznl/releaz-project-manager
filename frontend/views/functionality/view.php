@@ -10,7 +10,8 @@ use yii\grid\GridView;
 /* @var $model common\models\Functionality */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Functionalities'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Projects'), 'url' => ['/project/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->project->description, 'url' => ['/project/view', 'id' => $model->project_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="functionality-view">
@@ -34,15 +35,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'name',
             'description',                        
+        	'price:currency',
         	[
-        		'attribute' => 'project_id', 
-                        'format' => 'raw',
+        		'attribute' => 'project_id',
+                'format' => 'raw',
         		'value' => Html::a($model->project->description, ['project/view', 'id' => $model->project_id]),
     		],
         	[
         		'label' => Yii::t('user','Creator'),
         		'value' => $model->creator->username,
-    		],            
+    		],
+        	'datetime_added:datetime',
+        	[
+        		'label' => Yii::t('user', 'Updater'),
+        		'value' => $model->updater->username,
+   			],
+        	'datetime_updated:datetime',
         ],
     ]) ?>
     

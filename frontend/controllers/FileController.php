@@ -127,12 +127,6 @@ class FileController extends FrontendController
 		    	}
 	    	}
         }
-//         var_dump(Project::find()->where(['project_id' => $pid])->one()->attributes); exit;
-//         var_dump(Yii::$app->user->can('isPartOf', ['project' => Project::find()->where(['project_id' => $pid])->one()])); exit;
-		
-//         if ($pid) {
-//         	var_dump($pid); exit;
-//         }
         
         if (!$pid && !$tid && Yii::$app->user->can('viewProject')) {
 	    	return $this->render('create', [

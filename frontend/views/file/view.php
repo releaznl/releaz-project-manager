@@ -7,8 +7,19 @@ use yii\widgets\DetailView;
 /* @var $model common\models\File */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
+if (isset($model->project_id)) {
+	$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Projects'), 'url' => ['/project/index']];
+	$this->params['breadcrumbs'][] = ['label' => $model->project->description, 'url' => ['/project/view', 'id' => $model->project_id]];
+	$this->params['breadcrumbs'][] = $this->title;
+} else  {
+	$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Projects'), 'url' => ['/project/index']];
+	$this->params['breadcrumbs'][] = ['label' => $model->todo->functionality->project->description, 'url' => ['/project/view', 'id' => $model->todo->functionality->project_id]];
+	$this->params['breadcrumbs'][] = ['label' => $model->todo->functionality->name, 'url' => ['/functionality/view', 'id' => $model->todo->functionality_id]];
+	$this->params['breadcrumbs'][] = ['label' => $model->todo->name, 'url' => ['/todo/view', 'id' => $model->todo_id]];
+	$this->params['breadcrumbs'][] = $this->title;
+}
+
 ?>
 <div class="file-view">
 
@@ -44,10 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	        		'format' => 'raw',
 	        		'value' => (isset($model->todo_id)) ? Html::a($model->todo->name, ['/todo/view', 'id' => $model->todo_id]) : null,
 	    		],
-	            'datetime_added',
 	            'creator.username',
-	            'datetime_updated',
+	            'datetime_added',
 	            'updater.username',
+	            'datetime_updated',
 	//             'deleted:boolean',
 	        ],
 	    ]) ?>
