@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+	<div class="block">
     <p>
         <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->functionality_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->functionality_id], [
@@ -72,5 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
     		],
         ],
     ]); ?>
+    </div>
 
 </div>

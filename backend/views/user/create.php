@@ -16,25 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php $form = ActiveForm::begin(); ?>
-    
-    <?= $form->field($model, 'username')->textInput() ?>
-    
-    <?= $form->field($model, 'status')->dropDownList(User::getStatusses(), ['selected' => User::STATUS_ACTIVE])?>
-    
-    <?= $form->field($model, 'password1')->passwordInput() ?>
-    
-    <?= $form->field($model, 'password2')->passwordInput() ?>
-    
-    <fieldset>
-		<legend>Rollen</legend>
-		<?= $form->field($model, 'roles')->checkboxList(\yii\helpers\ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name')); ?>
-	</fieldset>
-    
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('common','Create'), ['class' => 'btn btn-success']) ?>
-    </div>
-    
-    <?php ActiveForm::end()?>
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
 
 </div>

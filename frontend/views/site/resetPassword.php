@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><?Yii::t('site','Please choose your new password:')?></p>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-5 block">
             <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>

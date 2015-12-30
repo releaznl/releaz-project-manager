@@ -45,13 +45,14 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('project', 'Projects'), 'url
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-create">
+	<div class="block">
     
 
-	    <?php $form = ActiveForm::begin(); $users = User::getProjectManagers(); $customers = Customer::find()->all(); ?>
-	
-	    <?= $form->field($model, 'description')->textInput() ?>
-	    <?= $form->field($model, 'status')->dropDownList(Project::statusses()) ?>
-	    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>
+    <?php $form = ActiveForm::begin(); $users = User::getProjectManagers(); $customers = Customer::find()->all(); ?>
+
+    <?= $form->field($model, 'description')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(Project::statusses()) ?>
+    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>
 	    
     <div id="existing-user" style="display:none;">
     	<fieldset>
@@ -89,5 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
+    </div>
 
 </div>

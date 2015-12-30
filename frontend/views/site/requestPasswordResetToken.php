@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><? Yii::t('site','Please fill out your email. A link to reset password will be sent there.') ?></p>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-5 block">
             <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
 
                 <?= $form->field($model, 'email') ?>
@@ -26,6 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
             <?php ActiveForm::end(); ?>
-        </div>
+            </div>
     </div>
 </div>

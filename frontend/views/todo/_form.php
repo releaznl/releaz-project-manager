@@ -13,6 +13,8 @@ use yii\helpers\Arrayhelper;
 ?>
 
 <div class="todo-form">
+
+<div class="block">
     <?php $form = ActiveForm::begin(); ?>
 <table>
 	<thead>
@@ -34,5 +36,5 @@ use yii\helpers\Arrayhelper;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
 </div>

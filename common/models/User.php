@@ -71,6 +71,17 @@ class User extends ActiveRecord implements IdentityInterface
             TimestampBehavior::className(),
         ];
     }
+    
+    public function attributeLabels() {
+    	return [
+    			'username' => 'Gebruikersnaam',
+    			'status' => 'Status',
+    			'password1' => 'Wachtwoord',
+    			'password2' => 'Wachtwoord',
+    			'roles' => 'Rollen',
+    			'email' => 'Email',
+    	];
+    }
 
     /**
      * @inheritdoc
@@ -79,7 +90,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
         	['username', 'trim'],
-        	['password2', 'compare', 'compareAttribute' => 'password1'],
+        	['email', 'email'],
+        	[['password1', 'password2', 'roles'], 'safe'],
+//         	['password2', 'compare', 'compareAttribute' => 'password1'],
             ['status', 'default', 'value' => self::STATUS_AWAITING_REQUEST],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
@@ -191,17 +204,17 @@ class User extends ActiveRecord implements IdentityInterface
     	return array();
     }
     
-    public function afterSave($insert, $changedAttributes) {
+    public function afterSave($insert, $changedAttributes) 
+    {
     	parent::afterSave($insert, $changedAttributes);
     	
-    	if ($insert) {
-	    	$auth = \Yii::$app->authManager;
-    		$auth->assign($auth->getRole('client'), $this->id);
-    	}
-    }
-    
-    public function roles() {
-    	return Yii::$app->authManager->getAssignments($this->id);
+    	if (!empty($this->roles)) {
+			\Yii::$app->db->createCommand()->delete('auth_assignment', 'user_id = ' . (int)$this->id)->execute(); //Delete existing value
+			foreach ($this->roles as $selected_role) { //Write new values
+				$role = Yii::$app->authManager->getRole($selected_role);
+				Yii::$app->authManager->assign($role, $this->id);
+			}
+		}
     }
 
     /**

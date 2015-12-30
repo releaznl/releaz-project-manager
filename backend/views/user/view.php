@@ -16,25 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php
-        if ($model->isProjectManager()) {
-        	echo Html::a(Yii::t('common','Make projectmanager'), ['make-projectmanager', 'uid' => $model->id], [
-        			'class' => 'btn btn-warning',
-        			'data' => [
-        					'confirm' => Yii::t('common','Are you sure you want to promote this user to projectmanager?'),
-        					'method' => 'post',
-        			],
-        	]);
-        } else {
-        	echo Html::a(Yii::t('common','Remove projectmanager status'), ['remove-projectmanager', 'uid' => $model->id], [
-        			'class' => 'btn btn-warning',
-        			'data' => [
-        					'confirm' => Yii::t('common','Are you sure you want remove the projectmanager status from this user?'),
-        					'method' => 'post',
-        			],
-        	]);
-        }
-        ?>
         
         <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

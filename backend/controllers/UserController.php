@@ -4,10 +4,10 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\User;
-use backend\models\CreateUser;
 use backend\components\web\BackendController;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Html;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -53,8 +53,12 @@ class UserController extends BackendController
     	
         $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+        	$model->setPassword($model->password1);
+        	if ($model->save()) {
+        		Yii::$app->session->setFlash('danger', 'De gebruiker is toegevoegd, maar kan nog niet inloggen omdat er geen klant aan is gekoppeld. ' . Html::a('Klik hier om een nieuwe klant aan te maken.', ['/customer/create', 'uid' => $model->id, 'email' => $model->email]));
+            	return $this->redirect(['view', 'id' => $model->id]);
+        	}
         } else {
             return $this->render('create', [
                 'model' => $model,

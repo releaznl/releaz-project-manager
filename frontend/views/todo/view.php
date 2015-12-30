@@ -18,9 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+<div class="block">
     <p>
         <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->todo_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('file','Create file'),['/file/create', 'tid' => $model->todo_id], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->todo_id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -62,6 +62,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     
+    <h2>Bestanden voor deze Todo</h2>
+    
+    <p><?= Html::a(Yii::t('file','Create file'),['/file/create', 'tid' => $model->todo_id], ['class' => 'btn btn-success']) ?></p>
+    
     <?= GridView::widget([
     		'dataProvider' => $dataProvider,
     		'columns' => [
@@ -69,7 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
     			'description',
     			'creator.username',
     			'datetime_added',
+	            ['class' => 'yii\grid\ActionColumn', 'controller' => '/file'],
     	]
     ]); ?>
-
+	</div>
 </div>
