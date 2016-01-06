@@ -18,6 +18,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 
 use yii\filters\VerbFilter;
+use yii\db\ActiveQuery;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -31,13 +32,38 @@ class ProjectController extends FrontendController
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => Customer::find()->where(['user_id' => Yii::$app->user->id])->one()->customer_id], ['projectmanager_id' => Yii::$app->user->id]])
-            ->with('creator', 'client', 'projectmanager', 'updater'),
-        ]);
+    	$dataProvider1 = null;
+    	$dataProvider2 = null;
+
+    	if (Yii::$app->user->can('editProject')) {
+    		
+	    	$dataProvider1 = new ActiveDataProvider([
+	    			'query' => Project::find()->andWhere(['not', ['projectmanager_id' => null]])
+	    	]);
+	    	
+	    	$dataProvider2 = new ActiveDataProvider([
+	    			'query' => Project::find()->andWhere(['projectmanager_id' => null])
+	    	]);
+	    	
+    	} else {
+    		
+    		if ($customer = Customer::findOne(['user_id' => Yii::$app->user->id])) {
+    	   		$dataProvider1 = new ActiveDataProvider([
+    				'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => $customer->customer_id], ['projectmanager_id' => Yii::$app->user->id]])
+    				->with('creator', 'client', 'projectmanager', 'updater'),
+    	   		]);
+    	   	} else {
+    	   		$dataProvider1 = new ActiveDataProvider([
+    				'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['projectmanager_id' => Yii::$app->user->id]])
+    				->with('creator', 'client', 'projectmanager', 'updater'),
+    	   		]);
+    	   	}
+    	}
+
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider1' => $dataProvider1,
+        	'dataProvider2' => $dataProvider2,
         ]);
     }
 

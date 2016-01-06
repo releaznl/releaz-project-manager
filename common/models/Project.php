@@ -61,9 +61,9 @@ class Project extends ReleazActiveRecord
     public function rules()
     {
         return [
-            [['description', 'deleted', 'projectmanager_id'], 'required'],
+            [['description', 'deleted'], 'required'],
             [['description'], 'string'],
-            [['datetime_added', 'datetime_updated'], 'safe'],
+            [['datetime_added', 'datetime_updated', 'projectmanager_id'], 'safe'],
             [['deleted', 'creator_id', 'client_id', 'projectmanager_id', 'updater_id', 'status'], 'integer'],
         ];
     }
@@ -74,17 +74,17 @@ class Project extends ReleazActiveRecord
     public function attributeLabels()
     {
         return [
-        	'name' => Yii::t('project', 'Project name'),
-            'project_id' => Yii::t('project', 'Project ID'),
-            'description' => Yii::t('project', 'Description'),
-            'datetime_added' => Yii::t('project', 'Datetime Added'),
-            'deleted' => Yii::t('project', 'Deleted'),
-            'creator_id' => Yii::t('project', 'Creator ID'),
-            'client_id' => Yii::t('project', 'Client ID'),
-            'projectmanager_id' => Yii::t('project', 'Projectmanager ID'),
-            'datetime_updated' => Yii::t('project', 'Datetime Updated'),
-            'updater_id' => Yii::t('project', 'Updater ID'),
-            'status' => Yii::t('project', 'Status'),
+        	'name' 					=> Yii::t('project', 'Project name'),
+            'project_id' 			=> Yii::t('project', 'Project ID'),
+            'description' 			=> Yii::t('project', 'Description'),
+            'datetime_added' 		=> Yii::t('project', 'Datetime Added'),
+            'deleted' 				=> Yii::t('project', 'Deleted'),
+            'creator_id' 			=> Yii::t('project', 'Creator ID'),
+            'client_id' 			=> Yii::t('project', 'Client ID'),
+            'projectmanager_id' 	=> Yii::t('project', 'Projectmanager ID'),
+            'datetime_updated' 		=> Yii::t('project', 'Datetime Updated'),
+            'updater_id' 			=> Yii::t('project', 'Updater ID'),
+            'status' 				=> Yii::t('project', 'Status'),
         ];
     }
     

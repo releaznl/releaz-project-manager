@@ -14,12 +14,44 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
 	<div class="block">
-	    <p>
+	    <?php
+	    
+	    if ($dataProvider2->getTotalCount() !== 0) {
+	    	echo '<h2>Nieuwe projectaanvragen</h2>';
+	    	echo GridView::widget([
+		        'dataProvider' => $dataProvider2,
+		        'columns' => [
+		            //['class' => 'yii\grid\SerialColumn'],
+		
+		            'description',
+		            [
+		                'attribute' => 'client_id',
+		                'value' => 'client.name',
+		            ],
+		            [
+		                'attribute' => 'projectmanager_id',
+		                'value' => 'projectmanager.username',
+		            ],
+		        	[
+		        		'attribute' => 'status',
+		        		'value' => 'statusName',
+		    		],
+		
+		            ['class' => 'yii\grid\ActionColumn'],
+		        ],
+	    	]);
+	    }
+	    	
+	    ?>
+	
+		<h2>Projecten</h2>
+		
+		<p>
 	        <?= (\Yii::$app->user->can('createProject')) ? Html::a(Yii::t('project','Create Project'), ['create'], ['class' => 'btn btn-success']) : Html::a(Yii::t('project', 'Request Project'), ['/request-project'], ['class' => 'btn btn-success']); ?>
 	    </p>
-	
+	    
 	    <?= GridView::widget([
-	        'dataProvider' => $dataProvider,
+	        'dataProvider' => $dataProvider1,
 	        'columns' => [
 	            //['class' => 'yii\grid\SerialColumn'],
 	

@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'projectmanager_id',
             [
                 'label' => Yii::t('project','Projectmanager'),
-                'value' => $model->projectmanager->username,
+                'value' => (($model->projectmanager_id) ? $model->projectmanager->username : $model->projectmanager_id),
             ],
             [
                 'label' => Yii::t('project','Creator'),

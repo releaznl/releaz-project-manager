@@ -286,17 +286,17 @@ class RequestProjectController extends \yii\web\Controller
     	// Create Project
     	$project = new Project();
     	$user = User::find()->where(['id' => $uid])->one();
-    	$customer = Customer::find()->where($user->id)->one();
+    	$customer = Customer::find()->where(['user_id' => $user->id])->one();
     	
     	// Log in the user temporarily so the project and functionalities get the right creator_id and updater_id
     	Yii::$app->user->login($user);
     	
     	$project->client_id = $customer->customer_id;
-    	$project->projectmanager_id = User::getProjectmanagers()[0]->id;
+//     	$project->projectmanager_id = User::getProjectmanagers()[0]->id;
     	$project->status = 0;
     	$project->name = $customer->name;
     	$project->deleted = 0;
-    	$project->description = Yii::t('project', 'Goal of the website: ') . $steps[1]->goal;
+    	$project->description = 'Doel van de website: ' . $steps[1]->goal;
     	
     	$project->save(false);
     	
@@ -340,10 +340,9 @@ class RequestProjectController extends \yii\web\Controller
     	Yii::$app->user->logout();
     	
     	// Notify the admin
-    	$user = $project->projectmanager;
     	$mail = Yii::$app->mailer->compose(['html' => 'newProjectRegistered-html', 'text' => 'newProjectRegistered-text'], ['customer' => $customer, 'project' => $project]);
     	$mail->setFrom('noreply@releaz.nl');
-    	$mail->setTo($user->email);
+    	$mail->setTo('info@releaz.nl');
     	$mail->setSubject('Er is een nieuw project aangevraagd door ' . $customer->name);
     	
     	$mail->send();
@@ -401,11 +400,11 @@ class RequestProjectController extends \yii\web\Controller
 			    		$functionality->project_id = $project_id;
 			    		$functionality->deleted = 0;
 			    		$functionality->amount = 1;
-			    		$functionality->price = round($bidpart->price, 2);
+			    		$functionality->price = $bidpart->price;
 			    		$functionality->creator_id = $uid;
 			    		$functionality->updater_id = $uid;
 			    		
-			    		$functionality->save();
+			    		$functionality->save(false);
 		    		}
     			}
     		}
