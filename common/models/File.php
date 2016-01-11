@@ -115,4 +115,5 @@ class File extends ReleazActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'updater_id']);
     }
+    
 }

@@ -33,7 +33,7 @@ $this->title = $category->name;
 		    		'options' => [
 		    				'class' => 'form-control',
 		    		],
-		    ]); ?>
+		    ]); // TODO datetimepicker toevoegen ?>
 			
 		    <?= $form->field($model, 'comment') ?>
 		    

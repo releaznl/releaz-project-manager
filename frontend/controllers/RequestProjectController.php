@@ -24,8 +24,8 @@ use yii\base\Model;
 
 class RequestProjectController extends \yii\web\Controller
 {
-	public $tempFileLocation = 'uploads/temp/';
-	public $permFileLocation = 'uploads/projects/';
+	private $tempFileLocation = 'uploads/temp/';
+	private $permFileLocation = 'uploads/projects/';
 	
 	public $defaultAction = 'step-1';
 	
@@ -141,11 +141,7 @@ class RequestProjectController extends \yii\web\Controller
     
     public function actionOverview()
     {
-    	if (Yii::$app->session->has('part1')
-    			&& Yii::$app->session->has('part2')
-    			&& Yii::$app->session->has('part3')
-    			&& Yii::$app->session->has('part4')
-    			&& Yii::$app->session->has('part5')) 
+    	if ($this->hasAllPartsInSession()) 
     	{
     		$overview = $this->getStepsAsBidPartArray();
     		
@@ -165,11 +161,7 @@ class RequestProjectController extends \yii\web\Controller
     
     public function actionGenerateProject($uid) 
     {
-    	if (Yii::$app->session->has('part1')
-    		&& Yii::$app->session->has('part2')
-    		&& Yii::$app->session->has('part3')
-    		&& Yii::$app->session->has('part4')
-    		&& Yii::$app->session->has('part5')) 
+    	if ($this->hasAllPartsInSession()) 
     	{
     			$mail = $this->setupOverviewMail($uid);
 	    		$this->generateProject($uid);
@@ -205,11 +197,7 @@ class RequestProjectController extends \yii\web\Controller
 
     public function actionCreateUser() 
     {
-    	if (Yii::$app->session->has('part1')
-    			&& Yii::$app->session->has('part2')
-    			&& Yii::$app->session->has('part3')
-    			&& Yii::$app->session->has('part4')
-    			&& Yii::$app->session->has('part5'))
+    	if ($this->hasAllPartsInSession())
     	{
 	    	$model = new SignupForm();
 	    	
@@ -241,11 +229,7 @@ class RequestProjectController extends \yii\web\Controller
     	$result['oneoff'][] = BidPart::find()->where(['attribute_name' => 'oneoff_costs'])->one();
     	$result['monthly'][] = BidPart::find()->where(['attribute_name' => 'monthly_costs'])->one();
     	
-    	$steps[0] = Yii::$app->session->get('part1');
-    	$steps[1] = Yii::$app->session->get('part2');
-    	$steps[2] = Yii::$app->session->get('part3');
-    	$steps[3] = Yii::$app->session->get('part4');
-    	$steps[4] = Yii::$app->session->get('part5');
+    	$steps = $this->getSessionPartsAsArray();
     	
     	foreach ($steps as $step) 
     	{
@@ -272,16 +256,43 @@ class RequestProjectController extends \yii\web\Controller
     	return $result;
     }
     
+    private function hasAllPartsInSession() {
+    	return (Yii::$app->session->has('part1')
+    			&& Yii::$app->session->has('part2')
+    			&& Yii::$app->session->has('part3')
+    			&& Yii::$app->session->has('part4')
+    			&& Yii::$app->session->has('part5'));
+    }
+    
+    private function removeAllStepsFromSession() {
+    	Yii::$app->session->remove('part1');
+    	Yii::$app->session->remove('part2');
+    	Yii::$app->session->remove('part3');
+    	Yii::$app->session->remove('part4');
+    	Yii::$app->session->remove('part5');
+    }
+    
+    private function getSessionPartsAsArray() {
+    	if ($this->hasAllPartsInSession()) {
+    				
+    		$array = array();
+    		
+    		$array[0] = Yii::$app->session->get('part1');
+    		$array[1] = Yii::$app->session->get('part2');
+    		$array[2] = Yii::$app->session->get('part3');
+    		$array[3] = Yii::$app->session->get('part4');
+    		$array[4] = Yii::$app->session->get('part5');
+    		
+    		return $array;
+    	} else {
+    		return null;
+    	}
+    }
+    
     private function generateProject($uid) 
     {
     	// Get the Parts
-    	$steps = array();
-    	
-    	$steps[0] = Yii::$app->session->get('part1');
-    	$steps[1] = Yii::$app->session->get('part2');
-    	$steps[2] = Yii::$app->session->get('part3');
-    	$steps[3] = Yii::$app->session->get('part4');
-    	$steps[4] = Yii::$app->session->get('part5');
+    	$steps = $this->getSessionPartsAsArray();
     	
     	// Create Project
     	$project = new Project();
@@ -292,7 +303,6 @@ class RequestProjectController extends \yii\web\Controller
     	Yii::$app->user->login($user);
     	
     	$project->client_id = $customer->customer_id;
-//     	$project->projectmanager_id = User::getProjectmanagers()[0]->id;
     	$project->status = 0;
     	$project->name = $customer->name;
     	$project->deleted = 0;
@@ -324,17 +334,12 @@ class RequestProjectController extends \yii\web\Controller
     	
     	if ($comments != Yii::t('request-project',' Comments:'))
     	{
-//     		var_dump($comments); exit;
 	    	$project->description .= $comments;
 	    	$project->save(false);
     	}
     	
     	// Unset all steps in _SESSION
-    	Yii::$app->session->remove('part1');
-    	Yii::$app->session->remove('part2');
-    	Yii::$app->session->remove('part3');
-    	Yii::$app->session->remove('part4');
-    	Yii::$app->session->remove('part5');
+    	$this->removeAllStepsFromSession();
     	
     	// Log the user out
     	Yii::$app->user->logout();

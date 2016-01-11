@@ -1,18 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use frontend\components\web\FrontendController;
-use common\models\Customer;
+use common\models\ContactMoment;
 use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CustomerController implements the CRUD actions for Customer model.
+ * ContactMomentController implements the CRUD actions for ContactMoment model.
  */
-class CustomerController extends FrontendController
+class ContactMomentController extends Controller
 {
     public function behaviors()
     {
@@ -27,15 +27,13 @@ class CustomerController extends FrontendController
     }
 
     /**
-     * Lists all Customer models.
+     * Lists all ContactMoment models.
      * @return mixed
      */
     public function actionIndex()
     {
-        //return $this->render('view', ['model' => $this->findModelForCurrentUser()]);
-        
         $dataProvider = new ActiveDataProvider([
-            'query' => Customer::find()->where(['user_id' => Yii::$app->user->getId()]),
+            'query' => ContactMoment::find(),
         ]);
 
         return $this->render('index', [
@@ -44,46 +42,37 @@ class CustomerController extends FrontendController
     }
 
     /**
-     * Displays a single Customer model.
+     * Displays a single ContactMoment model.
      * @param integer $id
      * @return mixed
      */
-    public function actionView()
+    public function actionView($id)
     {
-        $customer = Customer::find()->where(['user_id' => Yii::$app->user->id])->one();
-        if ($customer != NULL) {
-            $id = $customer->customer_id;
-            
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-            
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
-     * Creates a new Customer model.
+     * Creates a new ContactMoment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        // TODO aanmaken klant + gebruiker hier
-        $model = new Customer();
+        $model = new ContactMoment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->customer_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-        
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
-     * Updates an existing Customer model.
+     * Updates an existing ContactMoment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -93,7 +82,7 @@ class CustomerController extends FrontendController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->customer_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -102,7 +91,7 @@ class CustomerController extends FrontendController
     }
 
     /**
-     * Deletes an existing Customer model.
+     * Deletes an existing ContactMoment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -115,15 +104,15 @@ class CustomerController extends FrontendController
     }
 
     /**
-     * Finds the Customer model based on its primary key value.
+     * Finds the ContactMoment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Customer the loaded model
+     * @return ContactMoment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Customer::findOne($id)) !== null) {
+        if (($model = ContactMoment::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

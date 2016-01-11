@@ -55,8 +55,8 @@ class Customer extends \yii\db\ActiveRecord
     {
         
         return [
-            [['address', 'user_id', 'name', 'zip_code', 'email_address'], 'required'],
-            [['customer_id', 'user_id', 'contact_type'], 'integer'],
+            [['address', 'name', 'zip_code', 'email_address'], 'required'],
+            [['customer_id',  'user_id', 'user_id', 'contact_type'], 'integer'],
         	[['email_address'], 'email'],
             [['name', 'address', 'zip_code', 'location', 'phone_number', 'website', 'kvk', 'btw', 'email_address', 'contact'], 'string', 'max' => 128]
         ];

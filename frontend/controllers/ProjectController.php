@@ -151,8 +151,6 @@ class ProjectController extends FrontendController
     			$user->username = $customer->email_address;
     			$user->email = $user->username;
     			$user->setPassword(Yii::$app->security->generateRandomString(10));
-    		
-    			Yii::trace('User saved', 'ProjectController.saveProject()');
     			
     			$user->save();
     			$customer->user_id = $user->id;

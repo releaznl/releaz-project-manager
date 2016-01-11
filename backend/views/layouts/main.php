@@ -39,12 +39,14 @@ AppAsset::register($this);
     	['label' => Yii::t('app', 'Controllers'), 'items' => [
 	    	['label' => Yii::t('app','Bid Categories'), 'url' => ['/bid-category/index']],
 	    	['label' => Yii::t('app','Bid Parts'), 'url' => ['/bid-part/index']],
+	        ['label' => Yii::t('app','Contact Moments'), 'url' => ['/contact-moment/index']],
 	        ['label' => Yii::t('app','Customers'), 'url' => ['/customer/index']],
-	        ['label' => Yii::t('app','Users'), 'url' => ['/user/index']],
 	        ['label' => Yii::t('app','Files'), 'url' => ['/file/index']],
-	        ['label' => Yii::t('app','Projects'), 'url' => ['/project/index']],
 	        ['label' => Yii::t('app','Functionalities'), 'url' => ['/functionality/index']],
+	        ['label' => Yii::t('app','Meetings'), 'url' => ['/meeting/index']],
+	        ['label' => Yii::t('app','Projects'), 'url' => ['/project/index']],
 	        ['label' => Yii::t('app','Todos'), 'url' => ['/todo/index']],
+	        ['label' => Yii::t('app','Users'), 'url' => ['/user/index']],
     	]]
     ];
     if (Yii::$app->user->isGuest) {
