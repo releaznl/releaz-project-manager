@@ -14,9 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
 	<div class="block">
-	    <p>
-	        <?= Html::a(Yii::t('app', 'Create Meeting'), ['create'], ['class' => 'btn btn-success']) ?>
-	    </p>
 	
 	    <?= GridView::widget([
 	        'dataProvider' => $dataProvider,
@@ -24,10 +21,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	            ['class' => 'yii\grid\SerialColumn'],
 	
 // 	            'id',
-	            'contact_moment_id',
+// 	            'contact_moment_id',
+	        	[
+	        		'attribute' => 'contact_moment_id',
+	        		'format' => 'raw',
+	        		'value' => function ($data) {
+	        			return Html::a($data->contact_moment_id, ['/contact-moment/view', 'id' => $data->contact_moment_id]);
+	        		},
+	        	],
 	            'moment:datetime',
 	            'comment',
-	            'creator_id',
 	        	[
 	        		'attribute' => 'creator_id',
 	        		'value' => 'creator.username',

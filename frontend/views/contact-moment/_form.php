@@ -13,7 +13,11 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'moment')->textInput(); // TODO datetimepicker toevoegen ?>
+    <?= $form->field($model, 'moment')->widget(\kartik\datetime\DateTimePicker::classname(), [
+		    		'pluginOptions' => [
+		    				'format' => 'yyyy-mm-dd h:ii:00',
+		    		],
+		    ]); ?>
     
     <?= $form->field($model, 'customer_id')->dropDownList(ArrayHelper::map($customers, 'customer_id', 'name'))?>
 

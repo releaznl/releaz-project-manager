@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            ['class' => 'yii\grid\SerialColumn'],
 	
 // 	            'id',
-	            'moment',
+	            'moment:datetime',
 	            [
 	            	'attribute' => 'customer_id',
 	            	'value' => 'customer.name',

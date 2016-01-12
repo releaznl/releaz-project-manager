@@ -40,6 +40,22 @@ class MeetingController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    /**
+     * 
+     * @param integer $mid
+     */
+    public function actionMakeBid($mid) {
+    	
+    	$meeting = Meeting::find()->where($mid)->one();
+    	$customer = $meeting->contactMoment->customer;
+    	
+//     	var_dump($customer); exit;
+    	
+    	Yii::$app->session->set('customer', $customer);
+    	
+    	$this->redirect(['/request-project/step-1']);
+    }
 
     /**
      * Displays a single Meeting model.

@@ -22,15 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'contact_moment_id',
+//             'id',
+        	'contactMoment.customer.email_address',
             'moment',
             'comment',
-            'creator_id',
-            // 'updater_id',
+        	[
+        		'attribute' => 'creator_id',
+        		'value' => 'creator.username',
+    		],
+//             'updater_id',
             // 'datetime_added',
             // 'datetime_updated',
-            // 'deleted',
+            'deleted:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Cancel' => 'Annuleren',
     'Address' => '@@Adres@@',
     'CoC number' => '@@KvK nummer@@',
     'Company name' => '@@Bedrijfsnaam@@',
@@ -30,6 +31,7 @@ return [
     'Zip code' => '@@Postcode@@',
     'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wil verwijderen?',
     'Client check.' => 'Client check.',
+    'Confirm' => 'Bevestigen',
     'Create' => 'Aanmaken',
     'Delete' => 'Verwijderen',
     'Last step' => 'Vorige stap',
@@ -40,6 +42,5 @@ return [
     'create' => 'aanmaken',
     'delete' => 'verwijder',
     'update' => 'update',
-    'Confirm' => 'Bevestigen',
     '{attribute} cannot be blank.' => '{attribute} mag niet leeg zijn.',
 ];

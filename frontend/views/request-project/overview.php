@@ -1,11 +1,9 @@
 <?php
 /* @var $this yii\web\View */
 
-use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use yii\base\Widget;
 
 $this->title = Yii::t('request-project', 'Overview');
 
@@ -22,10 +20,15 @@ $this->title = Yii::t('request-project', 'Overview');
 	<li class="active"><span>Stap 5</span><?= Html::a(Yii::t('request-project', 'Website promotion'), ['/request-project/step-5']) ?></li>
 	<li class="active"><span>Stap 6</span><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/overview']) ?></li>
 </ul>
+			
+	<?php if (Yii::$app->session->has('customer')) { 
+		echo '<div class="alert alert-danger" role="alert">Dit project wordt aangemaakt voor de klant <b>' . Yii::$app->session->get('customer')->name . '</b></div>'; 
+	} ?>
 
 	<div class="col-sm-6">
 		<div class="row">
 			<div class="block">
+			
 				<h3><?= Yii::t('request-project', 'One-off costs')?></h3>
 				
 				<?= GridView::widget([
@@ -67,6 +70,7 @@ $this->title = Yii::t('request-project', 'Overview');
 				]) ?>
 				
 				<?= Html::a(Yii::t('common', 'Last step'), Url::to(['/request-project/step-5']), ['class' => 'btn btn-primary'])?>
+				<?= Html::a(Yii::t('common', 'Cancel'), Url::to(['/request-project/clear-steps']), ['class' => 'btn btn-warning']) ?>
 				<?= Html::a(Yii::t('common', 'Confirm'), Url::to(['/request-project/create-user']), ['class' => 'btn btn-success']) ?>
 			</div>
 		</div>

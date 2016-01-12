@@ -171,6 +171,11 @@ class RequestProjectController extends \yii\web\Controller
     	return $this->redirect('/request-project/overview');
     }
     
+    public function actionClearSteps() {
+    	$this->removeAllStepsFromSession();
+    	$this->redirect(['/site/index']);
+    }
+    
     private function setupOverviewMail($uid) 
     {
     	$arrays = $this->getStepsAsBidPartArray();
@@ -270,6 +275,7 @@ class RequestProjectController extends \yii\web\Controller
     	Yii::$app->session->remove('part3');
     	Yii::$app->session->remove('part4');
     	Yii::$app->session->remove('part5');
+    	Yii::$app->session->remove('customer');
     }
     
     private function getSessionPartsAsArray() {
@@ -296,11 +302,27 @@ class RequestProjectController extends \yii\web\Controller
     	
     	// Create Project
     	$project = new Project();
-    	$user = User::find()->where(['id' => $uid])->one();
-    	$customer = Customer::find()->where(['user_id' => $user->id])->one();
+    	
+    	$user;
+    	$customer;
+    	$previousUser = false;
+    	
+    	
+    	
+    	if (Yii::$app->session->has('customer')) {
+    		$customer = Yii::$app->session->get('customer');
+    		$user = $customer->user;
+    	} else {
+    		$user = User::find()->where(['id' => $uid])->one();
+    		$customer = Customer::find()->where(['user_id' => $user->id])->one();
+    	}
     	
     	// Log in the user temporarily so the project and functionalities get the right creator_id and updater_id
-    	Yii::$app->user->login($user);
+    	if (Yii::$app->user->isGuest) {
+	    	Yii::$app->user->login($user);
+    	} else {
+    		$previousUser = true;
+    	}
     	
     	$project->client_id = $customer->customer_id;
     	$project->status = 0;
@@ -342,7 +364,9 @@ class RequestProjectController extends \yii\web\Controller
     	$this->removeAllStepsFromSession();
     	
     	// Log the user out
-    	Yii::$app->user->logout();
+    	if (!$previousUser) {
+    		Yii::$app->user->logout();
+    	}
     	
     	// Notify the admin
     	$mail = Yii::$app->mailer->compose(['html' => 'newProjectRegistered-html', 'text' => 'newProjectRegistered-text'], ['customer' => $customer, 'project' => $project]);

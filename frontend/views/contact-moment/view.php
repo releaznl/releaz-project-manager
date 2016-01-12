@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        'model' => $model,
 	        'attributes' => [
 // 	            'id',
-	            'moment',
+	            'moment:datetime',
 	        	[
 	        		'attribute' => 'customer_id',
 	        		'value' => $model->customer->name,
@@ -41,12 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	        		'attribute' => 'creator_id',
 	        		'value' => $model->creator->username,
 	    		],
-	            'datetime_added',
+	            'datetime_added:datetime',
 	        	[
 	        		'attribute' => 'updater_id',
 	        		'value' => $model->updater->username,
 	        	],
-	            'datetime_updated',
+	            'datetime_updated:datetime',
 // 	            'deleted',
 	        ],
 	    ]) ?>

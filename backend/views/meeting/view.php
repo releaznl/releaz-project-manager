@@ -29,7 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
 //             'id',
-            'contact_moment_id',
+            [
+            	'attribute' => 'contact_moment_id',
+            	'format' => 'raw',
+            	'value' => Html::a($model->contact_moment_id, ['/contact-moment/view', 'id' => $model->contact_moment_id]),
+    		],
             'moment:datetime',
             'comment',
         	[

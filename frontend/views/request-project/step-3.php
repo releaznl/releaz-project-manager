@@ -27,13 +27,12 @@ $this->title = $category->name;
 		<div class="block">
 		    <?php $form = ActiveForm::begin() ?>
 		    
-		    <?= $form->field($model, 'deadline')->widget(\yii\jui\DatePicker::classname(), [
-		    		'language' => 'nl',
-		    		'dateFormat' => 'dd/MM/yyyy',
-		    		'options' => [
-		    				'class' => 'form-control',
+		    <?= $form->field($model, 'deadline')->widget(\kartik\datetime\DateTimePicker::classname(), [
+		    		'pluginOptions' => [
+		    				'minView' => 'month',
+		    				'format' => 'yyyy-mm-dd',
 		    		],
-		    ]); // TODO datetimepicker toevoegen ?>
+		    ]); ?>
 			
 		    <?= $form->field($model, 'comment') ?>
 		    
