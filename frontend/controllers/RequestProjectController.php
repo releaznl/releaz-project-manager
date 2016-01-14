@@ -163,9 +163,10 @@ class RequestProjectController extends \yii\web\Controller
     {
     	if ($this->hasAllPartsInSession()) 
     	{
-    			$mail = $this->setupOverviewMail($uid);
-	    		$this->generateProject($uid);
+	    		$project = $this->generateProject($uid);
+    			$mail = $this->setupOverviewMail($project->client->email_address);
 	    		$mail->send();
+		    	$this->removeAllStepsFromSession();
 	    		return $this->redirect('/request-project/completion');
     	}
     	return $this->redirect('/request-project/overview');
@@ -176,14 +177,11 @@ class RequestProjectController extends \yii\web\Controller
     	$this->redirect(['/site/index']);
     }
     
-    private function setupOverviewMail($uid) 
+    private function setupOverviewMail($email)
     {
     	$arrays = $this->getStepsAsBidPartArray();
     	$oneOffDataProvider = new ArrayDataProvider(['allModels' => $arrays['oneoff']]);
     	$monthlyDataProvider = new ArrayDataProvider(['allModels' => $arrays['monthly']]);
-    	
-    	$user = User::findOne(['id' => $uid]);
-    	if ($user === null) return null;
     	
     	$mail = Yii::$app->mailer->compose([
     			'html' => 'overviewMail-html', 
@@ -194,7 +192,7 @@ class RequestProjectController extends \yii\web\Controller
     			'monthlyDataProvider' => $monthlyDataProvider,
     			'arrays' => $arrays,
     	]);
-    	$mail->setTo($user->email);
+    	$mail->setTo($email);
     	$mail->setFrom('noreply@releaz.nl');
     	$mail->setSubject(Yii::t('mail', 'Your request has been noted'));
     	return $mail;
@@ -235,6 +233,10 @@ class RequestProjectController extends \yii\web\Controller
     	$result['monthly'][] = BidPart::find()->where(['attribute_name' => 'monthly_costs'])->one();
     	
     	$steps = $this->getSessionPartsAsArray();
+    	
+    	if (!$steps) {
+    		var_dump($steps); exit;
+    	}
     	
     	foreach ($steps as $step) 
     	{
@@ -359,9 +361,6 @@ class RequestProjectController extends \yii\web\Controller
 	    	$project->description .= $comments;
 	    	$project->save(false);
     	}
-    	
-    	// Unset all steps in _SESSION
-    	$this->removeAllStepsFromSession();
     	
     	// Log the user out
     	if (!$previousUser) {

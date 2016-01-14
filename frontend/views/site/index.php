@@ -9,7 +9,7 @@ $this->title = $this->title = Yii::t('site', 'Project management application');
    <div class="jumbotron">
         <h1>/Kees offreert</h1>
 
-        <p class="lead">Via 5 stappen kun je een offerteaanvraag plaatsen en zie je direct de eenmalige en maandelijkse kosten op basis van jouw gekozen functoinaliteiten en diensten.</p>
+        <p class="lead">Via 5 stappen kun je een offerteaanvraag plaatsen en zie je direct de eenmalige en maandelijkse kosten op basis van jouw gekozen functionaliteiten en diensten.</p>
         
         <p class="lead">Het aanvragen van een offerte is geheel vrijblijvend. Na aanvraag wordt er binnen 1 werkdag contact met je opgenomen.</p>
 

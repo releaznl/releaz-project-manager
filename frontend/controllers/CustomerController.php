@@ -35,7 +35,7 @@ class CustomerController extends FrontendController
         //return $this->render('view', ['model' => $this->findModelForCurrentUser()]);
         
         $dataProvider = new ActiveDataProvider([
-            'query' => Customer::find()->where(['user_id' => Yii::$app->user->getId()]),
+            'query' => Customer::find(),
         ]);
 
         return $this->render('index', [
@@ -48,19 +48,15 @@ class CustomerController extends FrontendController
      * @param integer $id
      * @return mixed
      */
-    public function actionView()
+    public function actionView($id = null)
     {
-        $customer = Customer::find()->where(['user_id' => Yii::$app->user->id])->one();
-        if ($customer != NULL) {
-            $id = $customer->customer_id;
-            
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-            
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+    	if (Yii::$app->user->can('createProject') && $id) {
+    		$model = $this->findModel($id);
+    	} else {
+    		$model = Customer::find()->where(['user_id' => \Yii::$app->user->id]);
+    	}
+    	
+    	return $this->render('view', ['model' => $model]);
     }
 
     /**

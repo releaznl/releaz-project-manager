@@ -49,7 +49,7 @@ class ProjectController extends FrontendController
     		
     		if ($customer = Customer::findOne(['user_id' => Yii::$app->user->id])) {
     	   		$dataProvider1 = new ActiveDataProvider([
-    				'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => $customer->customer_id], ['projectmanager_id' => Yii::$app->user->id]])
+    				'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => $customer->customer_id], ['projectmanager_id' => Yii::$app->user->id]])->andWhere(['status' => 1])
     				->with('creator', 'client', 'projectmanager', 'updater'),
     	   		]);
     	   	} else {
@@ -75,7 +75,8 @@ class ProjectController extends FrontendController
     public function actionView($id)
     {
     	$model = $this->findModel($id);
-    	if (Yii::$app->user->can('viewProject', ['project' => $model], false)) {
+    	
+    	if (Yii::$app->user->can('partOf', ['project' => $model], false)) {
 	        return $this->render('view', [
 	            'model' => $model,
 	        ]);
@@ -84,21 +85,30 @@ class ProjectController extends FrontendController
     	throw new NotFoundHttpException('The requested page does not exist.');
     }
     
+    /**
+     * Accepts the project request
+     * @param unknown $pid
+     */
     public function actionAccept($pid) 
     {
     	if (Yii::$app->user->can('editProject')) 
     	{
 	    	$project = Project::find()->where(['project_id' => $pid])->one();
-	    	$project->accept();
 	    	
-	    	$user = $project->creator;
+	    	if ($project->status == Project::STATUS_REQUESTED) {
 	    	
-	    	if (!$user->password_reset_token) 
-	    	{
-	    		$user->generatePasswordResetToken();
-	    		$user->status = User::STATUS_ACTIVE;
-	    		$user->save();
-	    		
+		    	$project->accept();
+		    	
+		    	$user = $project->client->user;
+		    	
+		    	if (!$user->password_reset_token) 
+		    	{
+		    		$user->generatePasswordResetToken();
+		    		$user->status = User::STATUS_ACTIVE;
+		    		$user->save();
+		    	
+		    	}
+		    		
 	    		$bool = Yii::$app->mailer->compose(['html' => 'projectAccepted-html', 'text' => 'projectAccepted-text'], ['user' => $user])
 	    		->setFrom('info@releaz.nl')
 	    		->setTo($user->email)

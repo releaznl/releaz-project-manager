@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\base\Widget;
+use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Customer */
@@ -35,6 +38,21 @@ $this->params['breadcrumbs'][] = $this->title;
 	            'description',
 	        ],
 	    ]) ?>
+	    
+	    <h3>Contact Momenten</h3>
+	    
+	    <?= GridView::widget([
+	    		'dataProvider' => new ActiveDataProvider(['query' => $model->getContactMoments()]),
+	    		'columns' => [
+	    			'moment:datetime',
+	    			'comment',
+	    			[
+	    				'attribute' => 'creator_id',
+	    				'value' => 'creator.username',
+	    			],
+	    			['class' => 'yii\grid\ActionColumn', 'controller' => 'contact-moment'],
+	    		],
+	    ]); ?>
     </div>
 
 </div>

@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\components\behaviors\AssignRoleBehavior;
 
 /**
  * User model
@@ -90,7 +91,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
         	['username', 'trim'],
+        	['username', 'unique', 'message' => 'Deze klant bestaat al.'],
         	['email', 'email'],
+        	['email', 'unique', 'message' => 'Deze email bestaat al.'],
         	[['password1', 'password2', 'roles'], 'safe'],
 //         	['password2', 'compare', 'compareAttribute' => 'password1'],
             ['status', 'default', 'value' => self::STATUS_AWAITING_REQUEST],
@@ -214,6 +217,11 @@ class User extends ActiveRecord implements IdentityInterface
 				$role = Yii::$app->authManager->getRole($selected_role);
 				Yii::$app->authManager->assign($role, $this->id);
 			}
+		}
+		
+		if ($insert && empty($this->roles)) {
+			$role = Yii::$app->authManager->getRole('client');
+			Yii::$app->authManager->assign($role, $this->id);
 		}
     }
 

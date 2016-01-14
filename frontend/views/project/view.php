@@ -41,7 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [                      
             [
                 'attribute' => 'client_id', //Yii::t('project','Client'),
-                'value' => $model->client->name,
+                'format' => 'raw',
+                'value' => Html::a($model->client->name, ['/customer/view', 'id' => $model->client_id]),
             ],
             // 'projectmanager_id',
             [

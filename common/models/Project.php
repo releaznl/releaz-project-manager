@@ -138,11 +138,7 @@ class Project extends ReleazActiveRecord
      * @param integer $user_id
      */
     public function isAssociated($user_id) {
-    	if ($this->creator->id == $user_id || $this->client->user_id == $user_id || $this->projectmanager_id == $user_id) {
-    		return true;
-    	} else {
-    		return false;
-    	}
+    	return ($this->creator->id == $user_id || $this->client->user_id == $user_id || $this->projectmanager_id == $user_id);
     }
 
     /**

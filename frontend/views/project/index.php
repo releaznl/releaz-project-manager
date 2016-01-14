@@ -16,30 +16,32 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="block">
 	    <?php
 	    
-	    if ($dataProvider2->getTotalCount() !== 0) {
-	    	echo '<h2>Nieuwe projectaanvragen</h2>';
-	    	echo GridView::widget([
-		        'dataProvider' => $dataProvider2,
-		        'columns' => [
-		            //['class' => 'yii\grid\SerialColumn'],
-		
-		            'description',
-		            [
-		                'attribute' => 'client_id',
-		                'value' => 'client.name',
-		            ],
-		            [
-		                'attribute' => 'projectmanager_id',
-		                'value' => 'projectmanager.username',
-		            ],
-		        	[
-		        		'attribute' => 'status',
-		        		'value' => 'statusName',
-		    		],
-		
-		            ['class' => 'yii\grid\ActionColumn'],
-		        ],
-	    	]);
+	    if ($dataProvider2) {
+		    if ($dataProvider2->getTotalCount() !== 0) {
+		    	echo '<h2>Nieuwe projectaanvragen</h2>';
+		    	echo GridView::widget([
+			        'dataProvider' => $dataProvider2,
+			        'columns' => [
+			            //['class' => 'yii\grid\SerialColumn'],
+			
+			            'description',
+			            [
+			                'attribute' => 'client_id',
+			                'value' => 'client.name',
+			            ],
+			            [
+			                'attribute' => 'projectmanager_id',
+			                'value' => 'projectmanager.username',
+			            ],
+			        	[
+			        		'attribute' => 'status',
+			        		'value' => 'statusName',
+			    		],
+			
+			            ['class' => 'yii\grid\ActionColumn'],
+			        ],
+		    	]);
+		    }
 	    }
 	    	
 	    ?>

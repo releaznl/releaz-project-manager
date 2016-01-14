@@ -6,7 +6,6 @@ use yii\helpers\Html;
 use common\models\Customer;
 use common\models\Project;
 use common\models\User;
-use frontend\models\NewProjectForm;
 use yii\helpers\ArrayHelper;
 use yii\web\View;
 use yii\widgets\ActiveForm;
@@ -79,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    <?= $form->field($customer, 'kvk', 				['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
 		    <?= $form->field($customer, 'btw', 				['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
 		    <?= $form->field($customer, 'email_address', 	['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'description', 		['enableClientValidation' => false])->textInput() ?>
+		    <?= $form->field($customer, 'description', 		['enableClientValidation' => false])->textInput()?>
 		    
 	    </fieldset>
     </div>

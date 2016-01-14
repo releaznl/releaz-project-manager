@@ -34,7 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	            'moment:datetime',
 	        	[
 	        		'attribute' => 'customer_id',
-	        		'value' => $model->customer->name,
+	        		'format' => 'raw',
+	        		'value' => Html::a($model->customer->name, ['/customer/view', 'id' => $model->customer_id]),
 	    		],
 	            'comment',
 	        	[

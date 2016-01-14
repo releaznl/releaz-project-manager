@@ -5,15 +5,16 @@ namespace frontend\controllers;
 use Yii;
 use common\models\ContactMoment;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Customer;
+use common\models\User;
+use frontend\components\web\FrontendController;
 
 /**
  * ContactMomentController implements the CRUD actions for ContactMoment model.
  */
-class ContactMomentController extends Controller
+class ContactMomentController extends FrontendController
 {
     public function behaviors()
     {
@@ -62,19 +63,53 @@ class ContactMomentController extends Controller
     public function actionCreate($cid = null)
     {
         $model = new ContactMoment();
+        $customer = new Customer();
         
         if ($cid) {
         	$model->customer_id = $cid;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $customer->load(Yii::$app->request->post()) && $this->saveProject($model, $customer)) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            	'customers' => Customer::find()->all(),
-            ]);
         }
+        
+        return $this->render('create', [
+            'model' => $model,
+          	'customers' => Customer::find()->all(),
+           	'customer' => $customer,
+        ]);
+    }
+    
+    private function saveProject($model, $customer) {
+    	
+    	if (empty($model->customer_id)) {
+    	
+    		if (!empty($customer->name)) {
+    			// Save the project
+    	
+    			$user = new User();
+    			$user->username = $customer->email_address;
+    			$user->email = $user->username;
+    			$user->status = User::STATUS_AWAITING_REQUEST;
+    			 
+    			$user->save(false);
+    			
+    			$customer->user_id = $user->id;
+    			 
+    			if ($customer->save(false)) {
+    				// We can save the contact
+    				$model->customer_id = $customer->customer_id;
+    				$model->creator_id = Yii::$app->user->id;
+    				return $model->save(false);
+    				 
+    			} else {
+    				return false;
+    			}
+    		}
+    	} else {
+    		return $model->save(false);
+    	}
+    	return false;
     }
 
     /**
@@ -86,13 +121,15 @@ class ContactMomentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $customer = new Customer();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $customer->load(Yii::$app->request->post()) && $this->saveProject($model, $customer)) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             	'customers' => Customer::find()->all(),
+            	'customer' => $customer,
             ]);
         }
     }

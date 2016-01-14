@@ -47,10 +47,8 @@ class MeetingController extends Controller
      */
     public function actionMakeBid($mid) {
     	
-    	$meeting = Meeting::find()->where($mid)->one();
+    	$meeting = Meeting::find()->where(['id' => $mid])->one();
     	$customer = $meeting->contactMoment->customer;
-    	
-//     	var_dump($customer); exit;
     	
     	Yii::$app->session->set('customer', $customer);
     	

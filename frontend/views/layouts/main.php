@@ -29,6 +29,51 @@ AppAsset::register($this);
 
 <div class="wrap">
     <div class="container">
+    	<?php 
+    	if (!(Yii::$app->user->isGuest))
+    	{
+    		NavBar::begin([
+    				'brandLabel' => Yii::t('common','/Kees'),
+    				'brandUrl' => Yii::$app->homeUrl,
+    				'options' => [
+    						'class' => 'navbar-inverse navbar-fixed-top',
+    				],
+    		]);
+    		if (Yii::$app->user->can('createProject')) {
+    		
+    		$menuItems = [
+    				['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
+    				['label' => '<span class="glyphicon glyphicon-list"></span>', 'items' => [
+    						['label' => Yii::t('app','Projects'), 'url' => ['/project/index']],
+    						['label' => Yii::t('app','Contact Moments'), 'url' => ['/contact-moment/index']],
+    						['label' => Yii::t('app','Meetings'), 'url' => ['/meeting/index']],
+    						['label' => Yii::t('app','Customers'), 'url' => ['/customer/index']],
+    						['label' => Yii::t('app','Logout'), 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+    				]]
+    		];
+    		
+    		} else {
+    			$menuItems = [
+    				['label' => Yii::t('app','Home'), 'url' => ['/site/index']],
+    				['label' => '<span class="glyphicon glyphicon-list"></span>', 'items' => [
+    						['label' => Yii::t('app','Projects'), 'url' => ['/project/index']],
+    						['label' => Yii::t('app','Logout'), 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+    				]]
+    		];
+    		}
+    		echo Nav::widget([
+    				'options' => [
+    						'class' => 'navbar-nav navbar-right',
+    				],
+    				'items' => $menuItems,
+    				'encodeLabels' => false,
+    		]);
+    		
+    		NavBar::end();
+    	}
+    	
+    	?>
+    	
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

@@ -40,6 +40,6 @@ return [
     'Updater' => 'Wijziger',
     'User ID' => 'Gebruikers ID',
     'Users' => 'Gebruikers',
-    'Website' => 'Webstie',
+    'Website' => 'Website',
     'Zip Code' => 'Postcode',
 ];

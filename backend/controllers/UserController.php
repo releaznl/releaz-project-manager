@@ -56,7 +56,6 @@ class UserController extends BackendController
         if ($model->load(Yii::$app->request->post())) {
         	$model->setPassword($model->password1);
         	if ($model->save()) {
-        		Yii::$app->session->setFlash('danger', 'De gebruiker is toegevoegd, maar kan nog niet inloggen omdat er geen klant aan is gekoppeld. ' . Html::a('Klik hier om een nieuwe klant aan te maken.', ['/customer/create', 'uid' => $model->id, 'email' => $model->email]));
             	return $this->redirect(['view', 'id' => $model->id]);
         	}
         } else {

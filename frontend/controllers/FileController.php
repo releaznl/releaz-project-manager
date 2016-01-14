@@ -6,8 +6,6 @@ use Yii;
 use common\models\Project;
 use common\models\File;
 use common\models\Todo;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use frontend\components\web\FrontendController;
