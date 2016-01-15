@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use common\models\Customer;
 use common\models\User;
 use frontend\components\web\FrontendController;
+use common\models\ContactMomentSearch;
 
 /**
  * ContactMomentController implements the CRUD actions for ContactMoment model.
@@ -34,12 +35,12 @@ class ContactMomentController extends FrontendController
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ContactMoment::find(),
-        ]);
-
+    	$searchProvider = new ContactMomentSearch();
+        $dataProvider = $searchProvider->search(Yii::$app->request->queryParams);
+        
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+        	'searchProvider' => $searchProvider,
         ]);
     }
 

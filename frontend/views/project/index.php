@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    	echo '<h2>Nieuwe projectaanvragen</h2>';
 		    	echo GridView::widget([
 			        'dataProvider' => $dataProvider2,
+		    		'filterModel' => $searchModel2,
 			        'columns' => [
 			            //['class' => 'yii\grid\SerialColumn'],
 			
@@ -36,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			        	[
 			        		'attribute' => 'status',
 			        		'value' => 'statusName',
+			        		'filter' => Html::activeDropDownList($searchModel2, 'status', Project::statusses(), ['prompt' => 'Alles', 'class' => 'form-control']),
 			    		],
 			
 			            ['class' => 'yii\grid\ActionColumn'],
@@ -54,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    
 	    <?= GridView::widget([
 	        'dataProvider' => $dataProvider1,
+        	'filterModel' => $searchModel1,
 	        'columns' => [
 	            //['class' => 'yii\grid\SerialColumn'],
 	
@@ -69,6 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        	[
 	        		'attribute' => 'status',
 	        		'value' => 'statusName',
+			        'filter' => Html::activeDropDownList($searchModel2, 'status', Project::statusses(), ['prompt' => 'Alles', 'class' => 'form-control']),
 	    		],
 	
 	            ['class' => 'yii\grid\ActionColumn'],

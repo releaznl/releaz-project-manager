@@ -19,6 +19,7 @@ use yii\web\ForbiddenHttpException;
 
 use yii\filters\VerbFilter;
 use yii\db\ActiveQuery;
+use common\models\ProjectSearch;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -36,14 +37,12 @@ class ProjectController extends FrontendController
     	$dataProvider2 = null;
 
     	if (Yii::$app->user->can('editProject')) {
-    		
-	    	$dataProvider1 = new ActiveDataProvider([
-	    			'query' => Project::find()->andWhere(['not', ['projectmanager_id' => null]])
-	    	]);
 	    	
-	    	$dataProvider2 = new ActiveDataProvider([
-	    			'query' => Project::find()->andWhere(['projectmanager_id' => null])
-	    	]);
+	    	$searchModel1 = new ProjectSearch();
+	    	$dataProvider1 = $searchModel1->search(Yii::$app->request->queryParams, Project::find()->andWhere(['not', ['projectmanager_id' => null]]));
+	    	
+	    	$searchModel2 = new ProjectSearch();
+	    	$dataProvider2 = $searchModel2->search(Yii::$app->request->queryParams, Project::find()->andWhere(['projectmanager_id' => null]));
 	    	
     	} else {
     		
@@ -52,11 +51,13 @@ class ProjectController extends FrontendController
     				'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => $customer->customer_id], ['projectmanager_id' => Yii::$app->user->id]])->andWhere(['status' => 1])
     				->with('creator', 'client', 'projectmanager', 'updater'),
     	   		]);
+    	   		$searchModel1 = new ProjectSearch();
+    	   		$dataProvider1 = $searchModel1->search(Yii::$app->request->queryParams, Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['client_id' => $customer->customer_id], ['projectmanager_id' => Yii::$app->user->id]])->andWhere(['status' => 1])
+    				->with('creator', 'client', 'projectmanager', 'updater'));
     	   	} else {
-    	   		$dataProvider1 = new ActiveDataProvider([
-    				'query' => Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['projectmanager_id' => Yii::$app->user->id]])
-    				->with('creator', 'client', 'projectmanager', 'updater'),
-    	   		]);
+    	   		$searchModel1 = new ProjectSearch();
+    	   		$dataProvider1 = $searchModel1->search(Yii::$app->request->queryParams, Project::find()->andWhere(['or', ['creator_id' => Yii::$app->user->id], ['projectmanager_id' => Yii::$app->user->id]])
+    				->with('creator', 'client', 'projectmanager', 'updater'));
     	   	}
     	}
 
@@ -64,6 +65,8 @@ class ProjectController extends FrontendController
         return $this->render('index', [
             'dataProvider1' => $dataProvider1,
         	'dataProvider2' => $dataProvider2,
+        	'searchModel1' => $searchModel1,
+        	'searchModel2' => $searchModel2,
         ]);
     }
 

@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\MeetingSearch;
 
 /**
  * MeetingController implements the CRUD actions for Meeting model.
@@ -32,12 +33,12 @@ class MeetingController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Meeting::find(),
-        ]);
+    	$searchProvider = new MeetingSearch();
+    	$dataProvider = $searchProvider->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+        	'searchProvider' => $searchProvider,
         ]);
     }
     

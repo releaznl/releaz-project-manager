@@ -8,6 +8,7 @@ use common\models\Customer;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\CustomerSearch;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -32,14 +33,12 @@ class CustomerController extends FrontendController
      */
     public function actionIndex()
     {
-        //return $this->render('view', ['model' => $this->findModelForCurrentUser()]);
-        
-        $dataProvider = new ActiveDataProvider([
-            'query' => Customer::find(),
-        ]);
+    	$searchProvider = new CustomerSearch();
+    	$dataProvider = $searchProvider->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+        	'searchProvider' => $searchProvider,
         ]);
     }
 
@@ -66,7 +65,6 @@ class CustomerController extends FrontendController
      */
     public function actionCreate()
     {
-        // TODO aanmaken klant + gebruiker hier
         $model = new Customer();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

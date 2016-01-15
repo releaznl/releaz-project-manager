@@ -17,19 +17,21 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	    <?= GridView::widget([
 	        'dataProvider' => $dataProvider,
+	    	'filterModel' => $searchProvider,
 	        'columns' => [
 	            ['class' => 'yii\grid\SerialColumn'],
 	
 // 	            'id',
 // 	            'contact_moment_id',
+	            'moment:datetime',
 	        	[
 	        		'attribute' => 'contact_moment_id',
+	        		'label' => Yii::t('customer', 'Customer'),
 	        		'format' => 'raw',
 	        		'value' => function ($data) {
-	        			return Html::a($data->contact_moment_id, ['/contact-moment/view', 'id' => $data->contact_moment_id]);
+	        			return Html::a($data->contactMoment->customer->name, ['/customer/view', 'id' => $data->contactMoment->customer_id]);
 	        		},
 	        	],
-	            'moment:datetime',
 	            'comment',
 	        	[
 	        		'attribute' => 'creator_id',
