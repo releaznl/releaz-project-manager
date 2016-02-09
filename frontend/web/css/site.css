@@ -3,6 +3,7 @@ body {
     height: 100%;
     background: url(../img/background.png) center center no-repeat;
     background-size: cover;
+    background-color: #C23727;
 }
 
 h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
@@ -44,6 +45,8 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
 .wrap > .container {
     padding: 70px 15px 20px;
 }
+
+.jumbotron { background: #FFF; padding: 30px; }
 
 .steps { list-style: none; margin: 0; padding: 0; }
 .steps li { 
@@ -90,4 +93,9 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
+}
+
+@media ( max-width:500px ) {
+    .wrap > .container { padding: 10px; }
+    .steps { display: none; }
 }
