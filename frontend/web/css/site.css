@@ -3,10 +3,10 @@ body {
     height: 100%;
     background: url(../img/background.png) center center no-repeat;
     background-size: cover;
-    background-color: #C23727;
+    background-color: #de4f4e;
 }
 
-h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
+h1 { color: #FFF; font-family: proxima-nova,sans-serif; text-align: center; }
 
 .summary { display: none; }
 
@@ -22,18 +22,30 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
 }
 
 .info { 
-	background: #92281C url(../img/bg-info.png) no-repeat; 
-	color: #EC6D5F;
+	background: #3f3f3e url(../img/bg-info.png) no-repeat; 
+	color: #FFF;
+    font-weight: 300;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+    font-family: proxima-nova,sans-serif;
+}
+.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: block;
 }
 
 .call { padding: 30px; color: #EC6D5F; }
 .call a { color: #FFF; font-size: 30px; }
 
-.btn-primary { background: #ca3320; border: 0; font-family: proxima-nova,sans-serif; }
+.btn-primary { background: #43C9C3; border: 0; font-family: proxima-nova,sans-serif; }
+.btn-primary:hover { background: #B94040; }
 
 .wrap {
     min-height: 100%;
@@ -43,10 +55,12 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 30px 15px 20px;
 }
 
-.steps { list-style: none; margin: 0; padding: 0; }
+.jumbotron { background: #FFF; padding: 30px; }
+
+.steps { list-style: none; margin: 0; padding: 0; text-align: center; }
 .steps li { 
     display: inline-block;
     text-align: center;
@@ -66,6 +80,8 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
 .steps a { color: #EC6D5F; }
 
 .steps .active a, .steps .active span { color: #FFF !important; border-color: #FFF; }
+
+tfoot { font-weight: 700; }
 
 .footer {
     height: 60px;
@@ -91,4 +107,9 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; }
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
+}
+
+@media ( max-width:500px ) {
+    .wrap > .container { padding: 10px; }
+    .steps { display: none; }
 }
