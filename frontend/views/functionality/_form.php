@@ -110,6 +110,7 @@ JS
 
 <div class="functionality-form">
 
+<div class="block">
     <?php $form = ActiveForm::begin(['enableClientValidation' => false]); $index = 0; ?>
 	<table class="table table-bordered table-striped" id="functionality-lines">
 		<thead>
@@ -138,5 +139,5 @@ JS
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
 </div>

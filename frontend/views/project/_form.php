@@ -6,7 +6,6 @@ use yii\helpers\Html;
 use common\models\Customer;
 use common\models\Project;
 use common\models\User;
-use frontend\models\NewProjectForm;
 use yii\helpers\ArrayHelper;
 use yii\web\View;
 use yii\widgets\ActiveForm;
@@ -45,13 +44,13 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('project', 'Projects'), 'url
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-create">
+	<div class="block">
     
+    <?php $form = ActiveForm::begin(); $projectmanagers = User::getProjectManagers(); $customers = Customer::find()->all(); ?>
 
-	    <?php $form = ActiveForm::begin(); $users = User::getProjectManagers(); $customers = Customer::find()->all(); ?>
-	
-	    <?= $form->field($model, 'description')->textInput() ?>
-	    <?= $form->field($model, 'status')->dropDownList(Project::statusses()) ?>
-	    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project','Select a projectmanager')])  ?>
+    <?= $form->field($model, 'description')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(Project::statusses()) ?>
+    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($projectmanagers, 'id', 'username'), ['prompt' => Yii::t('project','Select a projectmanager')])  ?>
 	    
     <div id="existing-user" style="display:none;">
     	<fieldset>
@@ -69,17 +68,17 @@ $this->params['breadcrumbs'][] = $this->title;
 	    	<legend><?= Yii::t('user', 'New user') ?></legend>
 	    	<?= Html::button(Yii::t('user', 'Existing user'), ['onClick' => 'js:existingContact()', 'class' => 'btn btn-default']) ?>
 	    	
-	    	<?= $form->field($customer, 'name', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'address', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'zip_code', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-	    	<?= $form->field($customer, 'contact_type')->dropDownList(Customer::getContactTypes()) ?>
-		    <?= $form->field($customer, 'location', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'phone_number', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'website', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'kvk', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'btw', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'email_address', ['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
-		    <?= $form->field($customer, 'description', ['enableClientValidation' => false])->textInput() ?>
+	    	<?= $form->field($customer, 'name', 			['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'address', 			['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'zip_code', 		['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+	    	<?= $form->field($customer, 'contact_type',		['enableClientValidation' => false])->dropDownList(Customer::getContactTypes()) ?>
+		    <?= $form->field($customer, 'location', 		['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'phone_number', 	['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'website', 			['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'kvk', 				['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'btw', 				['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'email_address', 	['enableClientValidation' => false])->textInput(['maxlength' => true]) ?>
+		    <?= $form->field($customer, 'description', 		['enableClientValidation' => false])->textInput()?>
 		    
 	    </fieldset>
     </div>
@@ -89,5 +88,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
+    </div>
 
 </div>

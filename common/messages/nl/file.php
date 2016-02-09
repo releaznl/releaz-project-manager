@@ -17,10 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Create file' => '',
     'No project' => '@@Geen project@@',
     'No todo' => '@@Geen todo@@',
-    'Create File' => 'File Aanmaken',
+    'Create File' => 'Bestand Aanmaken',
+    'Create file' => 'Bestand aanmaken',
     'Creator ID' => 'Aanmaker ID',
     'Datetime Added' => 'Moment Toegevoegd',
     'Datetime Updated' => 'Moment Geupdate',

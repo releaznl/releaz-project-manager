@@ -21,7 +21,7 @@ class FrontendController extends \yii\web\Controller
 					],
                 	[
                 		'allow' => true,
-                		'actions' => ['update', 'create'],
+                		'actions' => ['update', 'create', 'accept'],
                 		'roles' => ['projectmanager', 'admin'],
                 	],
                 	[

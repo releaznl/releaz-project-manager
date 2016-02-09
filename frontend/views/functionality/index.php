@@ -13,31 +13,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('functionality','Create Functionality'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'functionality_id',
-            'description',
-        	[
-        		'name' => Yii::t('functionality','Total Price'),
-        		'value' => $data->getTotalPrice(),
-    		],
-            'datetime_added:datetime',
-            'project_id',
-            'name',
-            'creator_id',
-            'datetime_updated:datetime',
-            'updater_id',
-            // 'deleted:boolean',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+	<div class="block">
+	    <p>
+	        <?= Html::a(Yii::t('functionality','Create Functionality'), ['create'], ['class' => 'btn btn-success']) ?>
+	    </p>
+	
+	    <?= GridView::widget([
+	        'dataProvider' => $dataProvider,
+	        'columns' => [
+	            ['class' => 'yii\grid\SerialColumn'],
+	
+	            'functionality_id',
+	            'description',
+	        	[
+	        		'name' => Yii::t('functionality','Total Price'),
+	        		'value' => $data->getTotalPrice(),
+	    		],
+	            'datetime_added:datetime',
+	            'project_id',
+	            'name',
+	            'creator_id',
+	            'datetime_updated:datetime',
+	            'updater_id',
+	            // 'deleted:boolean',
+	
+	            ['class' => 'yii\grid\ActionColumn'],
+	        ],
+	    ]); ?>
+	</div>
 </div>

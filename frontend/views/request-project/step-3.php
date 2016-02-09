@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\DatePicker;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
-use yii\helpers\HTML;
+use yii\helpers\Html;
 
 $this->title = $category->name;
 
@@ -19,7 +19,7 @@ $this->title = $category->name;
 	<li class="active"><span>Stap 3</span><?= Html::a(Yii::t('request-project', 'Planning'), ['/request-project/step-3'])?></li>
 	<li><span>Stap 4</span><?= Html::a(Yii::t('request-project', 'Hosting'), ['/request-project/step-4'])?></li>
 	<li><span>Stap 5</span><?= Html::a(Yii::t('request-project', 'Website promotion'), ['/request-project/step-5']) ?></li>
-	<li><span>Stap 6</span><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/step-5']) ?></li>
+	<li><span>Stap 6</span><?= Html::a(Yii::t('request-project', 'Overview'), ['/request-project/overview']) ?></li>
 </ul>
 
 <div class="col-sm-6">
@@ -27,11 +27,10 @@ $this->title = $category->name;
 		<div class="block">
 		    <?php $form = ActiveForm::begin() ?>
 		    
-		    <?= $form->field($model, 'deadline')->widget(\yii\jui\DatePicker::classname(), [
-		    		'language' => 'nl',
-		    		'dateFormat' => 'dd/MM/yyyy',
-		    		'options' => [
-		    				'class' => 'form-control',
+		    <?= $form->field($model, 'deadline')->widget(\kartik\datetime\DateTimePicker::classname(), [
+		    		'pluginOptions' => [
+		    				'minView' => 'month',
+		    				'format' => 'yyyy-mm-dd',
 		    		],
 		    ]); ?>
 			

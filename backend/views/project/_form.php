@@ -14,13 +14,13 @@ use common\models\Customer;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(); $users = User::find()->all(); $customers = Customer::find()->all(); ?>
+    <?php $form = ActiveForm::begin(); $projectmanagers = User::getProjectmanagers(); $customers = Customer::find()->all(); ?>
     
     <?= $form->field($model, 'description')->textInput() ?>
 
-    <?= $form->field($model, 'client_id')->dropDownList(ArrayHelper::map($customers, 'customer_id', 'name'), [Yii::t('project', 'Select a client')]) ?>
+    <?= $form->field($model, 'client_id')->dropDownList(ArrayHelper::map($customers, 'customer_id', 'name'), ['default' => Yii::t('project', 'Select a client')]) ?>
 
-    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($users, 'id', 'username'), [Yii::t('project', 'Select a projectmanager')])  ?>
+    <?= $form->field($model, 'projectmanager_id')->dropDownList(ArrayHelper::map($projectmanagers, 'id', 'username'), ['default' => Yii::t('project', 'Select a projectmanager')])  ?>
     
     <?= $form->field($model, 'deleted')->checkbox(['label' => 'Deleted'])  ?>
 

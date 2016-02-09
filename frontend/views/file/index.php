@@ -13,28 +13,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create File', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'file_id',
-            'name',
-            'description',
-            'datetime_added',
-            'deleted',
-            // 'creator_id',
-            // 'todo_id',
-            // 'project_id',
-            // 'datetime_updated',
-            // 'updater_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+	<div class="block">
+	    <p>
+	        <?= Html::a('Create File', ['create'], ['class' => 'btn btn-success']) ?>
+	    </p>
+	
+	    <?= GridView::widget([
+	        'dataProvider' => $dataProvider,
+	        'columns' => [
+	            ['class' => 'yii\grid\SerialColumn'],
+	
+	            'file_id',
+	            'name',
+	            'description',
+	            'datetime_added',
+	            'deleted',
+	            // 'creator_id',
+	            // 'todo_id',
+	            // 'project_id',
+	            // 'datetime_updated',
+	            // 'updater_id',
+	
+	            ['class' => 'yii\grid\ActionColumn'],
+	        ],
+	    ]); ?>
+	</div>
 </div>

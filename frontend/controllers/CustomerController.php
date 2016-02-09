@@ -6,10 +6,9 @@ use Yii;
 use frontend\components\web\FrontendController;
 use common\models\Customer;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\behaviours\TimestampBehaviour;
+use common\models\CustomerSearch;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -34,14 +33,12 @@ class CustomerController extends FrontendController
      */
     public function actionIndex()
     {
-        //return $this->render('view', ['model' => $this->findModelForCurrentUser()]);
-        
-        $dataProvider = new ActiveDataProvider([
-            'query' => Customer::find()->where(['user_id' => Yii::$app->user->getId()]),
-        ]);
+    	$searchProvider = new CustomerSearch();
+    	$dataProvider = $searchProvider->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+        	'searchProvider' => $searchProvider,
         ]);
     }
 
@@ -50,19 +47,15 @@ class CustomerController extends FrontendController
      * @param integer $id
      * @return mixed
      */
-    public function actionView()
+    public function actionView($id = null)
     {
-        $customer = Customer::find()->where(['user_id' => Yii::$app->user->id])->one();
-        if ($customer != NULL) {
-            $id = $customer->customer_id;
-            
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-            
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+    	if (Yii::$app->user->can('createProject') && $id) {
+    		$model = $this->findModel($id);
+    	} else {
+    		$model = Customer::find()->where(['user_id' => \Yii::$app->user->id]);
+    	}
+    	
+    	return $this->render('view', ['model' => $model]);
     }
 
     /**

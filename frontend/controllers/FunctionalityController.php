@@ -6,22 +6,12 @@ use Yii;
 
 use common\models\Functionality;
 use common\models\Todo;
-
 use frontend\components\web\FrontendController;
-
-use yii\base\Model;
-
 use yii\data\ActiveDataProvider;
-
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-
 use yii\filters\VerbFilter;
-
 use yii\behaviors\TimestampBehavior;
-
 use yii\db\ActiveRecord;
-
 use yii\db\Expression;
 
 /**
@@ -140,7 +130,7 @@ class FunctionalityController extends FrontendController
     			}
     		}
     	}
-    	return $this->render('create', ['models' => $functionalities]);
+    	return $this->render('create', ['models' => $functionalities, 'pid' => $pid]);
     }
 
     /**

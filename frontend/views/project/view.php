@@ -21,10 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="project-view">
 
     <h1><?= Html::encode($this->title); ?></h1>
+    
+    <div class="block">
 
     <p>
         <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('common','Update'), ['update', 'id' => $model->project_id], ['class' => 'btn btn-primary']) : Html::a('') ?>
-        <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('project','Add functionality'), ['functionality/create', 'pid' => $model->project_id], ['class' => 'btn btn-success']) : Html::a('') ?>
         <?= (Yii::$app->user->can('editProject') && $model->status == Project::STATUS_REQUESTED) ? Html::a(Yii::t('project','Accept project request'), ['project/accept', 'pid' => $model->project_id], ['class' => 'btn btn-warning']) : Html::a('') ?>
         <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->project_id], [
             'class' => 'btn btn-danger',
@@ -40,28 +41,32 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [                      
             [
                 'attribute' => 'client_id', //Yii::t('project','Client'),
-                'value' => $model->client->name,
+                'format' => 'raw',
+                'value' => Html::a($model->client->name, ['/customer/view', 'id' => $model->client_id]),
             ],
             // 'projectmanager_id',
             [
                 'label' => Yii::t('project','Projectmanager'),
-                'value' => $model->projectmanager->username,
+                'value' => (($model->projectmanager_id) ? $model->projectmanager->username : $model->projectmanager_id),
             ],
             [
                 'label' => Yii::t('project','Creator'),
                 'value' => $model->creator->username,
             ],
             'datetime_added:datetime',  
-            'datetime_updated:datetime',
             [
                 'label' => Yii::t('project','Updater'),
                 'value' => $model->updater->username,
             ],
+            'datetime_updated:datetime',
             // 'updater_id',
         ],
     ]) ?>
     
     <h2><?= Yii::t('project','Functionalities for this project') ?></h2>
+    
+    <p>
+        <?= (Yii::$app->user->can('editProject')) ? Html::a(Yii::t('project','Add functionality'), ['functionality/create', 'pid' => $model->project_id], ['class' => 'btn btn-success']) : Html::a('') ?></p>
     
 	<?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([
@@ -73,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'description',
 //             'amount',
-            'price',
+            'price:currency',
 //         	'totalPrice',
         	'todoAmount',
             
@@ -86,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <h2><?= Yii::t('project','Files for this project') ?></h2>
     
-    <?= Html::a(Yii::t('file', 'Create file'), ['/file/create', 'pid' => $model->project_id], ['class' => 'btn btn-success']) ?>
+    <p><?= Html::a(Yii::t('file', 'Create file'), ['/file/create', 'pid' => $model->project_id], ['class' => 'btn btn-success']); ?></p>
     
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider([
@@ -104,5 +109,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     
     ?>
-
+</div>
 </div>

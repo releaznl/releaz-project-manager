@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\components\behaviors\AssignRoleBehavior;
 
 /**
  * User model
@@ -23,6 +24,10 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+	public $password1;
+	public $password2;
+	public $roles;
+	
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
     const STATUS_AWAITING_REQUEST = 11;
@@ -35,6 +40,23 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
     
+    /**
+     * List of statusses sorted by status value
+     * @return string[]
+     */
+    public static function getStatusses() {
+    	return [
+    			self::STATUS_DELETED => 'Verwijdert',
+    			self::STATUS_ACTIVE => 'Actief',
+    			self::STATUS_AWAITING_REQUEST => 'In afwachting',
+    	];
+    }
+    
+    /**
+     * Scenarios
+     * {@inheritDoc}
+     * @see \yii\base\Model::scenarios()
+     */
     public function scenarios() {
     	$scenarios = parent::scenarios();
     	$scenarios['createProject'] = [];
@@ -50,6 +72,17 @@ class User extends ActiveRecord implements IdentityInterface
             TimestampBehavior::className(),
         ];
     }
+    
+    public function attributeLabels() {
+    	return [
+    			'username' => 'Gebruikersnaam',
+    			'status' => 'Status',
+    			'password1' => 'Wachtwoord',
+    			'password2' => 'Wachtwoord',
+    			'roles' => 'Rollen',
+    			'email' => 'Email',
+    	];
+    }
 
     /**
      * @inheritdoc
@@ -57,6 +90,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+        	['username', 'trim'],
+        	['username', 'unique', 'message' => 'Deze klant bestaat al.'],
+        	['email', 'email'],
+        	['email', 'unique', 'message' => 'Deze email bestaat al.'],
+        	[['password1', 'password2', 'roles'], 'safe'],
+//         	['password2', 'compare', 'compareAttribute' => 'password1'],
             ['status', 'default', 'value' => self::STATUS_AWAITING_REQUEST],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
@@ -91,6 +130,21 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+    
+    /**
+     * Checks if the user is a projectmanager
+     * @return boolean
+     */
+    public function isProjectmanager() {
+    	$manager = Yii::$app->authManager;
+    	$assignment = $manager->getAssignment('projectmanager', $this->id);
+    	
+    	if (isset($assignment)) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 
     /**
@@ -153,11 +207,22 @@ class User extends ActiveRecord implements IdentityInterface
     	return array();
     }
     
-    public function afterSave($insert, $changedAttributes) {
-    	if ($insert) {
-	    	$auth = \Yii::$app->authManager;
-    		$auth->assign($auth->getRole('client'), $this->id);
-    	}
+    public function afterSave($insert, $changedAttributes) 
+    {
+    	parent::afterSave($insert, $changedAttributes);
+    	
+    	if (!empty($this->roles)) {
+			\Yii::$app->db->createCommand()->delete('auth_assignment', 'user_id = ' . (int)$this->id)->execute(); //Delete existing value
+			foreach ($this->roles as $selected_role) { //Write new values
+				$role = Yii::$app->authManager->getRole($selected_role);
+				Yii::$app->authManager->assign($role, $this->id);
+			}
+		}
+		
+		if ($insert && empty($this->roles)) {
+			$role = Yii::$app->authManager->getRole('client');
+			Yii::$app->authManager->assign($role, $this->id);
+		}
     }
 
     /**
@@ -232,9 +297,9 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCustomers()
+    public function getCustomer()
     {
-        return $this->hasMany(Customer::className(), ['user_id' => 'id']);
+        return $this->hasOne(Customer::className(), ['user_id' => 'id']);
     }
 
     /**

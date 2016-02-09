@@ -9,11 +9,11 @@ $this->title = Yii::t('site','Backend projectmanager application');
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>/Kees!</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead"></p>
 
-        <p><a class="btn btn-lg btn-success" href="<?= Url::to('http://yiitest.front/')?>">Go to frontend</a></p>
+        <p><a class="btn btn-lg btn-success" href="<?= Url::to('http://yiitest.front/')?>">Frontend</a></p>
     </div>
 
     <div class="body-content">

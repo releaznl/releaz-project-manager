@@ -24,8 +24,8 @@ use yii\base\Model;
 
 class RequestProjectController extends \yii\web\Controller
 {
-	public $tempFileLocation = 'uploads/temp/';
-	public $permFileLocation = 'uploads/projects/';
+	private $tempFileLocation = 'uploads/temp/';
+	private $permFileLocation = 'uploads/projects/';
 	
 	public $defaultAction = 'step-1';
 	
@@ -141,11 +141,7 @@ class RequestProjectController extends \yii\web\Controller
     
     public function actionOverview()
     {
-    	if (Yii::$app->session->has('part1')
-    			&& Yii::$app->session->has('part2')
-    			&& Yii::$app->session->has('part3')
-    			&& Yii::$app->session->has('part4')
-    			&& Yii::$app->session->has('part5')) 
+    	if ($this->hasAllPartsInSession()) 
     	{
     		$overview = $this->getStepsAsBidPartArray();
     		
@@ -165,28 +161,27 @@ class RequestProjectController extends \yii\web\Controller
     
     public function actionGenerateProject($uid) 
     {
-    	if (Yii::$app->session->has('part1')
-    		&& Yii::$app->session->has('part2')
-    		&& Yii::$app->session->has('part3')
-    		&& Yii::$app->session->has('part4')
-    		&& Yii::$app->session->has('part5')) 
+    	if ($this->hasAllPartsInSession()) 
     	{
-    			$mail = $this->setupOverviewMail($uid);
-	    		$this->generateProject($uid);
+	    		$project = $this->generateProject($uid);
+    			$mail = $this->setupOverviewMail($project->client->email_address);
 	    		$mail->send();
+		    	$this->removeAllStepsFromSession();
 	    		return $this->redirect('/request-project/completion');
     	}
     	return $this->redirect('/request-project/overview');
     }
     
-    private function setupOverviewMail($uid) 
+    public function actionClearSteps() {
+    	$this->removeAllStepsFromSession();
+    	$this->redirect(['/site/index']);
+    }
+    
+    private function setupOverviewMail($email)
     {
     	$arrays = $this->getStepsAsBidPartArray();
     	$oneOffDataProvider = new ArrayDataProvider(['allModels' => $arrays['oneoff']]);
     	$monthlyDataProvider = new ArrayDataProvider(['allModels' => $arrays['monthly']]);
-    	
-    	$user = User::findOne(['id' => $uid]);
-    	if ($user === null) return null;
     	
     	$mail = Yii::$app->mailer->compose([
     			'html' => 'overviewMail-html', 
@@ -197,7 +192,7 @@ class RequestProjectController extends \yii\web\Controller
     			'monthlyDataProvider' => $monthlyDataProvider,
     			'arrays' => $arrays,
     	]);
-    	$mail->setTo($user->email);
+    	$mail->setTo($email);
     	$mail->setFrom('noreply@releaz.nl');
     	$mail->setSubject(Yii::t('mail', 'Your request has been noted'));
     	return $mail;
@@ -205,11 +200,7 @@ class RequestProjectController extends \yii\web\Controller
 
     public function actionCreateUser() 
     {
-    	if (Yii::$app->session->has('part1')
-    			&& Yii::$app->session->has('part2')
-    			&& Yii::$app->session->has('part3')
-    			&& Yii::$app->session->has('part4')
-    			&& Yii::$app->session->has('part5'))
+    	if ($this->hasAllPartsInSession())
     	{
 	    	$model = new SignupForm();
 	    	
@@ -241,11 +232,11 @@ class RequestProjectController extends \yii\web\Controller
     	$result['oneoff'][] = BidPart::find()->where(['attribute_name' => 'oneoff_costs'])->one();
     	$result['monthly'][] = BidPart::find()->where(['attribute_name' => 'monthly_costs'])->one();
     	
-    	$steps[0] = Yii::$app->session->get('part1');
-    	$steps[1] = Yii::$app->session->get('part2');
-    	$steps[2] = Yii::$app->session->get('part3');
-    	$steps[3] = Yii::$app->session->get('part4');
-    	$steps[4] = Yii::$app->session->get('part5');
+    	$steps = $this->getSessionPartsAsArray();
+    	
+    	if (!$steps) {
+    		var_dump($steps); exit;
+    	}
     	
     	foreach ($steps as $step) 
     	{
@@ -272,31 +263,74 @@ class RequestProjectController extends \yii\web\Controller
     	return $result;
     }
     
+    private function hasAllPartsInSession() {
+    	return (Yii::$app->session->has('part1')
+    			&& Yii::$app->session->has('part2')
+    			&& Yii::$app->session->has('part3')
+    			&& Yii::$app->session->has('part4')
+    			&& Yii::$app->session->has('part5'));
+    }
+    
+    private function removeAllStepsFromSession() {
+    	Yii::$app->session->remove('part1');
+    	Yii::$app->session->remove('part2');
+    	Yii::$app->session->remove('part3');
+    	Yii::$app->session->remove('part4');
+    	Yii::$app->session->remove('part5');
+    	Yii::$app->session->remove('customer');
+    }
+    
+    private function getSessionPartsAsArray() {
+    	if ($this->hasAllPartsInSession()) {
+    				
+    		$array = array();
+    		
+    		$array[0] = Yii::$app->session->get('part1');
+    		$array[1] = Yii::$app->session->get('part2');
+    		$array[2] = Yii::$app->session->get('part3');
+    		$array[3] = Yii::$app->session->get('part4');
+    		$array[4] = Yii::$app->session->get('part5');
+    		
+    		return $array;
+    	} else {
+    		return null;
+    	}
+    }
+    
     private function generateProject($uid) 
     {
     	// Get the Parts
-    	$steps = array();
-    	
-    	$steps[0] = Yii::$app->session->get('part1');
-    	$steps[1] = Yii::$app->session->get('part2');
-    	$steps[2] = Yii::$app->session->get('part3');
-    	$steps[3] = Yii::$app->session->get('part4');
-    	$steps[4] = Yii::$app->session->get('part5');
+    	$steps = $this->getSessionPartsAsArray();
     	
     	// Create Project
     	$project = new Project();
-    	$user = User::find()->where(['id' => $uid])->one();
-    	$customer = Customer::find()->where($user->id)->one();
+    	
+    	$user;
+    	$customer;
+    	$previousUser = false;
+    	
+    	
+    	
+    	if (Yii::$app->session->has('customer')) {
+    		$customer = Yii::$app->session->get('customer');
+    		$user = $customer->user;
+    	} else {
+    		$user = User::find()->where(['id' => $uid])->one();
+    		$customer = Customer::find()->where(['user_id' => $user->id])->one();
+    	}
     	
     	// Log in the user temporarily so the project and functionalities get the right creator_id and updater_id
-    	Yii::$app->user->login($user);
+    	if (Yii::$app->user->isGuest) {
+	    	Yii::$app->user->login($user);
+    	} else {
+    		$previousUser = true;
+    	}
     	
     	$project->client_id = $customer->customer_id;
-    	$project->projectmanager_id = User::getProjectmanagers()[0]->id;
     	$project->status = 0;
     	$project->name = $customer->name;
     	$project->deleted = 0;
-    	$project->description = Yii::t('project', 'Goal of the website: ') . $steps[1]->goal;
+    	$project->description = 'Doel van de website: ' . $steps[1]->goal;
     	
     	$project->save(false);
     	
@@ -324,26 +358,19 @@ class RequestProjectController extends \yii\web\Controller
     	
     	if ($comments != Yii::t('request-project',' Comments:'))
     	{
-//     		var_dump($comments); exit;
 	    	$project->description .= $comments;
 	    	$project->save(false);
     	}
     	
-    	// Unset all steps in _SESSION
-    	Yii::$app->session->remove('part1');
-    	Yii::$app->session->remove('part2');
-    	Yii::$app->session->remove('part3');
-    	Yii::$app->session->remove('part4');
-    	Yii::$app->session->remove('part5');
-    	
     	// Log the user out
-    	Yii::$app->user->logout();
+    	if (!$previousUser) {
+    		Yii::$app->user->logout();
+    	}
     	
     	// Notify the admin
-    	$user = $project->projectmanager;
     	$mail = Yii::$app->mailer->compose(['html' => 'newProjectRegistered-html', 'text' => 'newProjectRegistered-text'], ['customer' => $customer, 'project' => $project]);
     	$mail->setFrom('noreply@releaz.nl');
-    	$mail->setTo($user->email);
+    	$mail->setTo('info@releaz.nl');
     	$mail->setSubject('Er is een nieuw project aangevraagd door ' . $customer->name);
     	
     	$mail->send();
@@ -401,11 +428,11 @@ class RequestProjectController extends \yii\web\Controller
 			    		$functionality->project_id = $project_id;
 			    		$functionality->deleted = 0;
 			    		$functionality->amount = 1;
-			    		$functionality->price = round($bidpart->price, 2);
+			    		$functionality->price = $bidpart->price;
 			    		$functionality->creator_id = $uid;
 			    		$functionality->updater_id = $uid;
 			    		
-			    		$functionality->save();
+			    		$functionality->save(false);
 		    		}
     			}
     		}

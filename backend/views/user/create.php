@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use common\models\User;
 
 
 /* @var $this yii\web\View */

@@ -15,7 +15,7 @@ $this->title = $model->project_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('project','Projects'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$users = User::find()->all();
+$projectmanagers = User::find()->all();
 ?>
 <div class="project-view">
 
@@ -49,7 +49,7 @@ $users = User::find()->all();
             ],
             [
                 'label' => Yii::t('user','Project manager'),
-                'value' => $model->projectmanager->username,
+                'value' => (($model->projectmanager_id) ? $model->projectmanager->username : $model->projectmanager_id),
             ],
             'datetime_updated:datetime',
             [

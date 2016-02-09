@@ -51,10 +51,18 @@ class CustomerController extends BackendController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($uid = null, $email = null)
     {
     	
         $model = new Customer();
+        
+        if (isset($uid)) {
+        	$model->user_id = $uid;
+        }
+        
+        if (isset($email)) {
+        	$model->email_address = $email;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->customer_id]);

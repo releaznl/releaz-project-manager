@@ -13,30 +13,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app','Create Customer'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            // ['class' => 'yii\grid\SerialColumn'],
-
-            // 'customer_id',
-            // 'user_id',
-            'name',
-            'address',
-            'zip_code',
-            'location',
-            'phone_number',
-            'website',
-            'kvk',
-            'btw',
-            'email_address:email',
-            'description',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+	<div class="block">
+	    <p>
+	        <?= Html::a(Yii::t('app','Create Customer'), ['create'], ['class' => 'btn btn-success']) ?>
+	    </p>
+	
+	    <?= GridView::widget([
+	        'dataProvider' => $dataProvider,
+	    	'filterModel' => $searchProvider,
+	        'columns' => [
+	            // ['class' => 'yii\grid\SerialColumn'],
+	
+	            // 'customer_id',
+	            // 'user_id',
+	            'name',
+	            'address',
+	            'zip_code',
+	            'location',
+	            'phone_number',
+	            'website',
+// 	            'kvk',
+// 	            'btw',
+	            'email_address:email',
+// 	            'description',
+	
+	            ['class' => 'yii\grid\ActionColumn'],
+	        ],
+	    ]); ?>
+	</div>
 </div>
