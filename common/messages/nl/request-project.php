@@ -30,7 +30,7 @@ return [
     'Hosting' => 'Hosting',
     'Monthly costs' => 'Maandelijkse kosten',
     'One-off costs' => 'Eenmalige kosten',
-    'Overview' => 'Overzicht gekozen opties',
+    'Overview' => 'Overzicht',
     'Planning' => 'Planning',
     'Step' => 'Stap',
     'Strategy' => 'Strategie',
@@ -40,5 +40,5 @@ return [
     'Total' => 'Totaal',
     'Total monthly costs: ' => 'Totaal maandelijkse kosten: ',
     'Total one-off costs: ' => 'Totaal eenmalige kosten: ',
-    'Website promotion' => 'Promotie website',
+    'Website promotion' => 'Promotie',
 ];

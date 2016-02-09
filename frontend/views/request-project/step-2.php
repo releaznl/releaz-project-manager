@@ -37,7 +37,7 @@ $this->title = $category->name;
             
             <?php echo $form->field($model, 'current_style')->fileInput() ?>
             
-            <?= '<p>' . \Yii::t('request-project','The design of the website will be based on the information entered.') . '</p>' ?>
+            <?= '<span class="warning">' . \Yii::t('request-project','The design of the website will be based on the information entered.') . '</span>' ?>
 			
 		    <?= $form->field($model, 'comment') ?>
             	

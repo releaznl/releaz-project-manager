@@ -7,7 +7,7 @@ $this->title = $this->title = Yii::t('site', 'Project management application');
 <div class="site-index">
 
    <div class="jumbotron">
-        <h1>/Kees offreert</h1>
+        <h1><img src="http://keesonline.nl/images/logo.png" width="151"> offreert</h1>
 
         <p class="lead">Via 5 stappen kun je een offerteaanvraag plaatsen en zie je direct de eenmalige en maandelijkse kosten op basis van jouw gekozen functionaliteiten en diensten.</p>
         
