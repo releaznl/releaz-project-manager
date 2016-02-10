@@ -15,9 +15,7 @@ $this->title = 'Test';
 				<p>Hier kunnen alle emails getest worden,
 					als je geen informatie wil zien over waar de email heen gaat en wat het onderwerp is dan moet je de info parameter weghalen of in een 0 veranderen.</p>
 
-				<?= \yii\bootstrap\Html::a('Registratie inschrijver', ['test/registration-notify-applicant', 'id' => 1, 'info' => true], ['class' => "btn btn-default"]); ?>
-				<?= \yii\bootstrap\Html::a('Ideal inschrijver', ['test/registration-ideal', 'id' => 1, 'info' => true], ['class' => "btn btn-default"]); ?>
-				<?= \yii\bootstrap\Html::a('Registratie admin', ['test/registration-notify-admin', 'id' => 1, 'info' => true], ['class' => "btn btn-default"]); ?>
+				<?= \yii\bootstrap\Html::a('Bevestiging naar klant', ['test/functionalities', 'id' => 4], ['class' => "btn btn-default"]); ?>
 			</div>
 		</div>
 
