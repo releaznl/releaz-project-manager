@@ -164,7 +164,7 @@ class RequestProjectController extends \yii\web\Controller
     	if ($this->hasAllPartsInSession()) 
     	{
 	    		$project = $this->generateProject($uid);
-    			$mail = $this->setupOverviewMail($project->client->email_address);
+    			$mail = $this->setupOverviewMail($project);
 	    		$mail->send();
 		    	$this->removeAllStepsFromSession();
 	    		return $this->redirect('/request-project/completion');
@@ -177,11 +177,13 @@ class RequestProjectController extends \yii\web\Controller
     	$this->redirect(['/site/index']);
     }
     
-    private function setupOverviewMail($email)
+    private function setupOverviewMail($project)
     {
-    	$arrays = $this->getStepsAsBidPartArray();
-    	$oneOffDataProvider = new ArrayDataProvider(['allModels' => $arrays['oneoff']]);
-    	$monthlyDataProvider = new ArrayDataProvider(['allModels' => $arrays['monthly']]);
+        $monthly = Functionality::findAll(['project_id' => $project->project_id, 'monthly_costs' => 1]);
+        $once = Functionality::findAll(['project_id' => $project->project_id, 'monthly_costs' => 0]);
+                        
+        $oneOffDataProvider = new ArrayDataProvider(['allModels' => $once]);      
+        $monthlyDataProvider = new ArrayDataProvider(['allModels' => $monthly]);
     	
     	$mail = Yii::$app->mailer->compose([
     			'html' => 'overviewMail-html', 
@@ -190,9 +192,9 @@ class RequestProjectController extends \yii\web\Controller
     	[
     			'oneOffDataProvider' => $oneOffDataProvider,
     			'monthlyDataProvider' => $monthlyDataProvider,
-    			'arrays' => $arrays,
+    			'arrays' => ['oneoff' => $once, 'monthly' => $monthly],
     	]);
-    	$mail->setTo($email);
+    	$mail->setTo($project->client->email_address);
     	$mail->setFrom('noreply@releaz.nl');
     	$mail->setSubject(Yii::t('mail', 'Your request has been noted'));
     	return $mail;
@@ -431,6 +433,7 @@ class RequestProjectController extends \yii\web\Controller
 			    		$functionality->price = $bidpart->price;
 			    		$functionality->creator_id = $uid;
 			    		$functionality->updater_id = $uid;
+                                        $functionality->monthly_costs = $bidpart->monthly_costs;
 			    		
 			    		$functionality->save(false);
 		    		}

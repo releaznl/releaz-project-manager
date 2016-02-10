@@ -49,6 +49,7 @@ class Functionality extends ReleazActiveRecord
             [['description'], 'string'],
         	[['price'], 'match', 'pattern' => '/^[0-9]{0,9}(\,|\.)[0-9]{0,4}$/', 'message' => 'Select a price from 0,0001 to 999999999,9999'],
             [['project_id', 'creator_id', 'updater_id', 'amount'], 'integer'],
+            [['monthly_costs'], 'safe'],
             [['name'], 'string', 'max' => 128]
         ];
     }
@@ -70,6 +71,7 @@ class Functionality extends ReleazActiveRecord
             'updater_id' => Yii::t('functionality','Updater ID'),
         	'amount' => Yii::t('functionality','Amount'),
         	'price' => Yii::t('functionality','Price'),
+            'monthly_costs' => Yii::t('functionality','Maandelijkse kosten'),
         ];
     }
     

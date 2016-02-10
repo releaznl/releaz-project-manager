@@ -2,7 +2,9 @@
 namespace backend\controllers;
 
 use common\models\Project;
+use common\models\Functionality;
 use common\models\BidPart;
+use yii\data\ArrayDataProvider;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -68,7 +70,23 @@ class TestController extends Controller
 		]);
 	}
 
-	
+	public function actionFunctionalities($id = 3)
+        {
+            $project = Project::findOne($id);
+            
+            $monthly = Functionality::findAll(['project_id' => $id, 'monthly_costs' => 1]);
+            $once = Functionality::findAll(['project_id' => $id, 'monthly_costs' => 0]);
+                        
+            $oneOffDataProvider = new ArrayDataProvider(['allModels' => $once]);      
+            $monthlyDataProvider = new ArrayDataProvider(['allModels' => $monthly]);
+            
+            $this->layout = '@common/mail/layouts/html';
+            
+            return $this->render('@common/mail/overviewMail-html', [
+			'oneOffDataProvider' => $oneOffDataProvider,
+                        'monthlyDataProvider' => $monthlyDataProvider,
+		]);
+       }
 
 
 }
