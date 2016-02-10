@@ -24,6 +24,7 @@ class PromotionForm extends Model {
 				'socialmedia_service' => 'SocialMedia service',
 				'google_analytics_service' => 'Google Analytics Service',
 				'nieuwsbrief_service' => 'Nieuwsbrief Service',
+                                'comment' => \Yii::t('request-project', 'Comment'),
 		];
 	}
 }
