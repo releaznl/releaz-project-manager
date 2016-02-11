@@ -74,17 +74,31 @@ class TestController extends Controller
         {
             $project = Project::findOne($id);
             
-            $monthly = Functionality::findAll(['project_id' => $id, 'monthly_costs' => 1]);
-            $once = Functionality::findAll(['project_id' => $id, 'monthly_costs' => 0]);
-                        
+            $monthly = Functionality::find()->where("price > 1 AND project_id = " . $id . " AND monthly_costs = 1")->all();//All(['project_id' => $id, 'monthly_costs' => 1],['price','>',1]);
+            $once = Functionality::find()->where("price > 1 AND project_id = " . $id . " AND monthly_costs = 0")->all(); //(['project_id' => $id, 'monthly_costs' => 0],['price','>',1]);                       
+                                    
             $oneOffDataProvider = new ArrayDataProvider(['allModels' => $once]);      
-            $monthlyDataProvider = new ArrayDataProvider(['allModels' => $monthly]);
+            $monthlyDataProvider = new ArrayDataProvider(['allModels' => $monthly]);           
             
             $this->layout = '@common/mail/layouts/html';
+            
+            $totalMonthly = 0;
+            foreach($monthlyDataProvider->allModels as $model)
+            {
+                    $totalMonthly += $model->price; 
+            }
+            
+            $totalOnce = 0;
+            foreach($oneOffDataProvider->allModels as $model)
+            {
+                    $totalOnce += $model->price; 
+            }
             
             return $this->render('@common/mail/overviewMail-html', [
 			'oneOffDataProvider' => $oneOffDataProvider,
                         'monthlyDataProvider' => $monthlyDataProvider,
+                        'totalMonthly' => $totalMonthly,
+                        'totalOnce' => $totalOnce,
 		]);
        }
 
