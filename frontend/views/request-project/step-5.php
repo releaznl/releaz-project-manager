@@ -1,12 +1,19 @@
 <?php
 /* @var $this yii\web\View */
 
+use yii\bootstrap\BootstrapPluginAsset;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 
 $this->title = $category->name;
 
+BootstrapPluginAsset::register($this);
+
+$this->registerJs(<<<JS
+	$('[data-toggle="tooltip"]').tooltip();
+JS
+);
 ?>
 <h1><?php echo $category->name ?></h1>
 
@@ -26,13 +33,11 @@ $this->title = $category->name;
 		    
 		    <?php foreach ($category->bidParts as $part) : ?>
 			
+			<div class="model_tooltip" data-toggle="tooltip" data-placement="right" title="<?= $part->description ?>"></div>
+			
 			<?php echo $form->field($model, $part->attribute_name)->checkBox([
 					'label' => $part->getLabel(),
-					'value' => $part->id,
-					'labelOptions' => [
-						'data-toggle' => 'tooltip',
-						'title' => $part->description,
-					]
+					'value' => $part->id
 			]); ?>
 			
 			<?php endforeach; ?>

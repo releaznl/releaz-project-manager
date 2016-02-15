@@ -109,6 +109,15 @@ tfoot { font-weight: 700; }
     margin: 0 0 15px 0;
 }
 
+.model_tooltip {
+	background: #de4f4e;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	float: right;
+	text-align: center;
+}
+
 @media ( max-width:500px ) {
     .wrap > .container { padding: 10px; }
     .steps { display: none; }
