@@ -7,6 +7,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
 use yii\base\Widget;
 
+
 $this->title = $category->name;
 
 ?>
@@ -29,7 +30,7 @@ $this->title = $category->name;
 			<?php  /* $form->field ($model, 'selection')->radioList(ArrayHelper::map($category->bidParts, 'id', 'description'), ['separator' => '<br>'])->label(false); */ ?>
 			
 			<?php foreach ($category->bidParts as $part) : ?>
-			
+			                    
 			<?= $form->field($model, $part->attribute_name)->checkBox([
 					'label' => $part->getLabel(true),
 					'value' => $part->id,

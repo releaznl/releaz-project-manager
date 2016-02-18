@@ -101,6 +101,13 @@ class TestController extends Controller
                         'totalOnce' => $totalOnce,
 		]);
        }
+       
+       public function actionCompletePage()
+       {
+           $this->layout = '@frontend/views/layouts/main';
+           
+           return $this->render('@frontend/views/request-project/completion');
+       }
 
 
 }

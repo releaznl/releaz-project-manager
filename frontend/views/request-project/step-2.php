@@ -36,9 +36,7 @@ $this->title = $category->name;
             <?php echo $form->field($model, 'target_audience')->textArea() ?>
             
             <?php echo $form->field($model, 'current_style')->fileInput() ?>
-            
-            <?= '<span class="warning">' . \Yii::t('request-project','The design of the website will be based on the information entered.') . '</span>' ?>
-			
+            			
 		    <?= $form->field($model, 'comment') ?>
             	
             <?= Html::a(Yii::t('common','Last step'), ['step-1'], ['class' => 'btn btn-primary']) ?>
