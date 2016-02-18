@@ -30,7 +30,11 @@ $this->title = $category->name;
 		    <?= $form->field($model, 'deadline')->widget(\kartik\datetime\DateTimePicker::classname(), [
 		    		'pluginOptions' => [
 		    				'minView' => 'month',
-		    				'format' => 'yyyy-mm-dd',
+		    				'format' => 'dd-mm-yyyy', //yyyy-mm-dd',
+                                                'weekStart' => 1,
+                                                'daysOfWeekDisabled' => [0,6],
+                                                'todayHighlight' => true,
+                                                'startDate' => '+7d',
 		    		],
 		    ]); ?>
 			
