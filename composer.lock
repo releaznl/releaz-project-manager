@@ -1,11 +1,14 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "0e9f0a32dc9c952270e85f05327ac484",
+<<<<<<< HEAD
+=======
     "content-hash": "fff08b8aeb24e3b8088283feeee3a6b0",
+>>>>>>> cc375066afdb4fe6800a46f9e211ba889f50c600
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -61,6 +64,15 @@
             "version": "2.2.0",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
+                "url": "https://github.com/jquery/jquery.git",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
+=======
                 "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5"
             },
@@ -68,6 +80,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/6fc01e29bdad0964f62ef56d01297039cdcadbe5",
                 "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5",
+>>>>>>> cc375066afdb4fe6800a46f9e211ba889f50c600
                 "shasum": ""
             },
             "type": "bower-asset-library",
