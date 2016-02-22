@@ -21,7 +21,7 @@ class PromotionForm extends Model {
 
 	public function attributeLabels() {
 		return $labels = [
-				'socialmedia_service' => 'SocialMedia service',
+				'socialmedia_service' => 'Social Media service',
 				'google_analytics_service' => 'Google Analytics Service',
 				'nieuwsbrief_service' => 'Nieuwsbrief Service',
                                 'comment' => \Yii::t('request-project', 'Comment'),
