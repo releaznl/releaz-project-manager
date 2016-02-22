@@ -42,7 +42,7 @@ $this->title = $category->name;
 			
 			<?php endforeach; ?>
 			
-		    <?= $form->field($model, 'comment') ?>
+		    <?= $form->field($model, 'comment')->textArea() ?>
 			
 			<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>
 			

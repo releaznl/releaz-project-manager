@@ -30,7 +30,7 @@ $this->title = $category->name;
 			    
 			    <?= $form->field($model, 'informatie')->textInput()->label(BidPart::find()->where(['attribute_name' => 'informatie'])->one()->getLabel()); ?>
 			    
-		   	 	<?= $form->field($model, 'comment') ?>
+		   	 	<?= $form->field($model, 'comment')->textArea() ?>
 				
 		    	<?= Html::a(Yii::t('common','Last step'), ['step-3'], ['class' => 'btn btn-primary']) ?>
 				<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>

@@ -26,18 +26,18 @@ $this->title = $category->name;
         <div class="block">
             <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
             
-            <?php echo $form->field($model, 'website1')->textInput(); ?>
-            <?php echo $form->field($model, 'website2')->textInput()->label(false); ?>
-            <?php echo $form->field($model, 'website3')->textInput()->label(false); ?>
+            <?php echo $form->field($model, 'website1')->textInput(['placeholder' => 'bijvoorbeeld www.keesonline.nl']); ?>
+            <?php echo $form->field($model, 'website2')->textInput(['placeholder' => 'bijvoorbeeld www.keesonline.nl'])->label(false); ?>
+            <?php echo $form->field($model, 'website3')->textInput(['placeholder' => 'bijvoorbeeld www.keesonline.nl'])->label(false); ?>
             
-            <?php echo $form->field($model, 'goal')->textArea() ?>
+            <?php echo $form->field($model, 'goal')->textArea(['placeholder' => 'bijvoorbeeld meer offerte aanvragen']) ?>
             
             <?php // Toevoegen slider ?>
-            <?php echo $form->field($model, 'target_audience')->textArea() ?>
+            <?php echo $form->field($model, 'target_audience')->textArea(['placeholder' => 'bijvoorbeeld werkenden 30 - 50 jaar']) ?>
             
             <?php echo $form->field($model, 'current_style')->fileInput() ?>
             			
-		    <?= $form->field($model, 'comment') ?>
+		    <?= $form->field($model, 'comment')->textArea() ?>
             	
             <?= Html::a(Yii::t('common','Last step'), ['step-1'], ['class' => 'btn btn-primary']) ?>
         	<?= Html::submitButton(Yii::t('common','Next step'), ['class' => 'btn btn-primary']) ?>

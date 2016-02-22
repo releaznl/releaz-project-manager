@@ -24,7 +24,7 @@ return [
     'Step 4' => '@@Stap 4@@',
     'Step 5' => '@@Stap 5@@',
     ' Comments:' => ' Opmerkingen:',
-    'Comment' => 'Opmerking',
+    'Comment' => 'Eventuele opmerkingen/vragen',
     'Completion' => 'Afronding',
     'Design' => 'Ontwerp',
     'Hosting' => 'Hosting',

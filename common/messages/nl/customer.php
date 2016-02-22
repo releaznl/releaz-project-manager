@@ -33,4 +33,5 @@ return [
     'Update Customer: ' => 'Client Wijzigen: ',
     'Website' => 'Website',
     'Zip code' => 'Postcode',
+    'E-mail' => 'E-mail',
 ];

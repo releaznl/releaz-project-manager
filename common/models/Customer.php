@@ -76,16 +76,17 @@ class Customer extends \yii\db\ActiveRecord
         return [
             'customer_id' 	=> Yii::t('user','Customer ID'),
             'user_id' 		=> Yii::t('user','User ID'),
-            'name' 			=> Yii::t('user','Name'),
+            'name' 		=> Yii::t('user','Name'),
             'address' 		=> Yii::t('user','Address'),
             'contact_type' 	=> Yii::t('user','Contact type'),
-        	'contact' 		=> Yii::t('customer', 'contact'),
+            'contact' 		=> Yii::t('customer', 'contact'),
             'zip_code' 		=> Yii::t('user','Zip Code'),
             'location' 		=> Yii::t('user','Location'),
             'phone_number' 	=> Yii::t('user','Phone Number'),
             'website' 		=> Yii::t('user','Website'),
-            'kvk' 			=> Yii::t('user','Kvk'),
-            'btw' 			=> Yii::t('user','Btw'),
+            'kvk' 		=> Yii::t('user','Kvk'),
+            'btw' 		=> Yii::t('user','Btw'),
+            'email' 		=> Yii::t('user','E-mail'),
             'email_address' => Yii::t('user','Email Address'),
         ];
     }
