@@ -183,12 +183,12 @@ class RequestProjectController extends \yii\web\Controller
         $once = Functionality::find()->where("price > 1 AND project_id = " . $project->project_id . " AND monthly_costs = 0")->all(); //(['project_id' => $id, 'monthly_costs' => 0],['price','>',1]);                       
         
         $solidCostsMonthly = new Functionality;
-        $solidCostsMonthly->name = "Vaste Maandelijkse Kosten";
+        $solidCostsMonthly->name = "Vaste maandelijkse kosten";
         $solidCostsMonthly->price = 39.95;
         array_push($monthly, $solidCostsMonthly);
 
         $solidCostOnce = new Functionality;
-        $solidCostOnce->name = "Vaste maandelijkse kosten";
+        $solidCostOnce->name = "Vaste eenmalige kosten";
         $solidCostOnce->price = 250;
         array_push($once, $solidCostOnce);
             
