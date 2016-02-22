@@ -33,7 +33,7 @@ JS
 		    
 		    <?php foreach ($category->bidParts as $part) : ?>
 			
-			<div class="model_tooltip" data-toggle="tooltip" data-placement="right" title="<?= $part->description ?>"></div>
+			<div class="model_tooltip" data-toggle="tooltip" data-placement="right" title="<?= $part->description ?>"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></div>
 			
 			<?php echo $form->field($model, $part->attribute_name)->checkBox([
 					'label' => $part->getLabel(),

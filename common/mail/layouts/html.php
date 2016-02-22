@@ -169,7 +169,7 @@ use yii\helpers\Html;
                                                                                                             <td colspan="4">
                                                                                                               <p style="font-family: 'Lora', serif;color:#333333;font-size:14px;line-height:18px;padding:20px;">
                                                                                                               Met vriendelijke groet,<br /><br /><br />
-                                                                                                              <strong><span style="color:#de4f4e;">/</span>kees</p></strong>
+                                                                                                              <strong style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="color:#de4f4e;">/</span>kees</p></strong>
                                                                                                             </td>
                                                                                                           </tr>
                                                                                                           <tr>

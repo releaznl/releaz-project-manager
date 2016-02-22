@@ -8,7 +8,7 @@ use yii\base\Widget;
 
 	<h3><?= Yii::t('request-project', 'One-off costs')?></h3>
 	
-        <table>
+        <table width="100%" style="color:#4E5860;font-size:15px;" cellpadding="10">
             
             <?php
             foreach($oneOffDataProvider->allModels as $model):
@@ -30,17 +30,17 @@ use yii\base\Widget;
 //					]
 //			]
 //	]) -->
-            <tr><td>Totaal</td><td><?= Yii::$app->formatter->asCurrency($totalOnce)?></td></tr>
+            <tr><td width="80%" style="text-align: right;border-top:1px solid #EFEFEF;"><strong>Totaal</strong>&nbsp;</td><td style="border-top:1px solid #EFEFEF;"><strong><?= Yii::$app->formatter->asCurrency($totalOnce)?></strong></td></tr>
         </table>
 	
 	<h3><?= Yii::t('request-project', 'Monthly costs')?></h3>
 	
-        <table>
+        <table width="100%" style="color:#4E5860;font-size:15px;" cellpadding="10">
             
             <?php
             foreach($monthlyDataProvider->allModels as $model):
             ?>
-            <tr><td><?= $model->name ?></td><td><?= Yii::$app->formatter->asCurrency($model->price) ?></td></tr>
+            <tr><td width="80%"><?= $model->name ?></td><td><?= Yii::$app->formatter->asCurrency($model->price) ?></td></tr>
             <?php endforeach; ?>
 <!--	GridView::widget([
 			'dataProvider' => $monthlyDataProvider,
@@ -56,6 +56,6 @@ use yii\base\Widget;
 					]
 			]
 	]) -->
-            <tr><td>Totaal</td><td><?= Yii::$app->formatter->asCurrency($totalMonthly) ?></td></tr>
+            <tr><td style="text-align: right;border-top:1px solid #EFEFEF;"><strong>Totaal</strong>&nbsp;</td><td style="border-top:1px solid #EFEFEF;"><strong><?= Yii::$app->formatter->asCurrency($totalMonthly) ?></strong></td></tr>
         </table>
 </div>
