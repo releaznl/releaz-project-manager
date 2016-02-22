@@ -28,7 +28,7 @@ class DesignForm extends Model {
 			[['website1'], 'required',
 					'message' => 'Dit is geen valide website'],
 			[['goal', 'target_audience'], 'required'],
-			[['current_style'], 'file', 'skipOnEmpty' => true, 'mimeTypes' => ['application/pdf', 'application/msword', 'application/vnd.oasis.opendocument.text', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']],
+			[['current_style'], 'file', 'skipOnEmpty' => true, 'mimeTypes' => ['application/pdf', 'application/msword', 'application/vnd.oasis.opendocument.text', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/pjpeg', 'image/png']],
 			[['website2', 'website3', 'comment'], 'safe'],
 		];
 	}
