@@ -179,23 +179,45 @@ class RequestProjectController extends \yii\web\Controller
     
     private function setupOverviewMail($project)
     {
-        $monthly = Functionality::findAll(['project_id' => $project->project_id, 'monthly_costs' => 1]);
-        $once = Functionality::findAll(['project_id' => $project->project_id, 'monthly_costs' => 0]);
-                        
+        $monthly = Functionality::find()->where("price > 1 AND project_id = " . $project->project_id . " AND monthly_costs = 1")->all();//All(['project_id' => $id, 'monthly_costs' => 1],['price','>',1]);
+        $once = Functionality::find()->where("price > 1 AND project_id = " . $project->project_id . " AND monthly_costs = 0")->all(); //(['project_id' => $id, 'monthly_costs' => 0],['price','>',1]);                       
+        
+        $solidCostsMonthly = new Functionality;
+        $solidCostsMonthly->name = "Vaste Maandelijkse Kosten";
+        $solidCostsMonthly->price = 39.95;
+        array_push($monthly, $solidCostsMonthly);
+
+        $solidCostOnce = new Functionality;
+        $solidCostOnce->name = "Vaste maandelijkse kosten";
+        $solidCostOnce->price = 250;
+        array_push($once, $solidCostOnce);
+            
         $oneOffDataProvider = new ArrayDataProvider(['allModels' => $once]);      
         $monthlyDataProvider = new ArrayDataProvider(['allModels' => $monthly]);
-    	
-    	$mail = Yii::$app->mailer->compose([
+        
+        $totalMonthly = 0;
+        foreach ($monthlyDataProvider->allModels as $model) {
+            $totalMonthly += $model->price;
+        }
+
+        $totalOnce = 0;
+        foreach ($oneOffDataProvider->allModels as $model) {
+            $totalOnce += $model->price;
+        }
+
+        $mail = Yii::$app->mailer->compose([
     			'html' => 'overviewMail-html', 
     			'text' => 'overviewMail-text',
     	],
     	[
     			'oneOffDataProvider' => $oneOffDataProvider,
     			'monthlyDataProvider' => $monthlyDataProvider,
-    			'arrays' => ['oneoff' => $once, 'monthly' => $monthly],
+                        'totalMonthly' => $totalMonthly,
+                        'totalOnce' => $totalOnce,
     	]);
+        
     	$mail->setTo($project->client->email_address);
-    	$mail->setFrom('noreply@releaz.nl');
+    	$mail->setFrom(['info@keesonline.nl' => 'Kees Online'] );
     	$mail->setSubject(Yii::t('mail', 'Your request has been noted'));
     	return $mail;
     }

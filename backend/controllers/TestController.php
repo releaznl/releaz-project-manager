@@ -76,6 +76,18 @@ class TestController extends Controller
             
             $monthly = Functionality::find()->where("price > 1 AND project_id = " . $id . " AND monthly_costs = 1")->all();//All(['project_id' => $id, 'monthly_costs' => 1],['price','>',1]);
             $once = Functionality::find()->where("price > 1 AND project_id = " . $id . " AND monthly_costs = 0")->all(); //(['project_id' => $id, 'monthly_costs' => 0],['price','>',1]);                       
+            
+            $solidCostsMonthly = new Functionality;
+            $solidCostsMonthly->name = "Vaste Maandelijkse Kosten";
+            $solidCostsMonthly->price = 39.95;
+            array_push($monthly, $solidCostsMonthly);
+            
+            $solidCostOnce = new Functionality;
+            $solidCostOnce->name = "Vaste maandelijkse kosten";
+            $solidCostOnce->price = 250;
+            array_push($once, $solidCostOnce);
+            
+//            var_dump($monthly); exit;
                                     
             $oneOffDataProvider = new ArrayDataProvider(['allModels' => $once]);      
             $monthlyDataProvider = new ArrayDataProvider(['allModels' => $monthly]);           
