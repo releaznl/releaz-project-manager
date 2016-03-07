@@ -55,7 +55,7 @@ $this->title = $category->name;
 		</div>
 		<div class="call">
 			Kom je er niet uit of heb je vragen?<br />
-			<a href="tel:+31503015965">050 30 15 965</a>
+			<a href="tel:+31858769957">085 876 99 57</a>
 		</div>
 	</div>
 </div>

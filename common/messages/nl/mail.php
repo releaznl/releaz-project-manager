@@ -18,7 +18,7 @@
  */
 return [
     'Password reset for ' => '@@Wachtwoord reset voor @@',
-    'Follow the link below to reset your password:' => 'Volg de onderstaande link om je wachtwoort te resetten:',
+    'Follow the link below to reset your password:' => 'Volg de onderstaande link om je wachtwoord te resetten:',
     'Follow the link below to set your password and activate your account:' => 'Volg de onderstaande link om je wachtwoord in te stellen en je account te activeren:',
     'Hello' => 'Hallo',
     'Open the following URL to see it' => 'Open de volgende URL om het te bekijken',
