@@ -77,6 +77,8 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; text-align: center; }
 
 tfoot { font-weight: 700; }
 
+form div.required label.control-label:after { content: " * "; color: #de4f4e; }
+
 .footer {
     height: 60px;
     background-color: #f5f5f5;
