@@ -41,7 +41,7 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; text-align: center; }
     display: block;
 }
 
-.call { padding: 30px; color: #EC6D5F; }
+.call { padding: 30px; color: #FFF; }
 .call a { color: #FFF; font-size: 30px; }
 
 .btn-primary { background: #43C9C3; border: 0; font-family: proxima-nova,sans-serif; }
@@ -54,18 +54,12 @@ h1 { color: #FFF; font-family: proxima-nova,sans-serif; text-align: center; }
     padding: 0 0 60px;
 }
 
-.wrap > .container {
-    padding: 30px 15px 20px;
-}
+.wrap > .container { padding: 30px 15px 20px; }
 
 .jumbotron { background: #FFF; padding: 30px; }
 
 .steps { list-style: none; margin: 0; padding: 0; text-align: center; }
-.steps li { 
-    display: inline-block;
-    text-align: center;
-    margin: 15px;
-}
+.steps li { display: inline-block; text-align: center; margin: 15px; }
 .steps span {
     color: #EC6D5F;
     border: 3px solid #EC6D5F;
@@ -90,32 +84,20 @@ tfoot { font-weight: 700; }
     padding-top: 20px;
 }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
-}
-
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
-}
+.not-set { color: #c55; font-style: italic; }
+.hint-block { display: block; margin-top: 5px; color: #999; }
 
 .error-summary {
     color: #a94442;
     background: #fdf7f7;
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
-    margin: 0 0 15px 0;
+    margin: 0 0 15px;
 }
 
-.model_tooltip {
-	color: #de4f4e;
-	float: right;
-	text-align: center;
-}
+.model_tooltip { color: #de4f4e; float: right; text-align: center; }
 
-@media ( max-width:500px ) {
+@media ( max-width: 500px ) {
     .wrap > .container { padding: 10px; }
     .steps { display: none; }
 }
